@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gerador de QR Code Online | NexoTools</title>
+
+  <meta
+    name="description"
+    content="Crie QR Codes gratuitamente para textos, links e outras informações usando o NexoTools."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        Nexo<span>Tools</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          aria-label="Alternar modo escuro"
+        >
+          🌙
+        </button>
+
+        <button
+          class="menu-button"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- CONTEÚDO -->
+  <main class="tool-page">
+
+    <div class="container">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+
+        <a href="index.html">
+          NexoTools
+        </a>
+
+        /
+
+        Gerador de QR Code
+
+      </div>
+
+
+      <!-- TÍTULO -->
+      <div class="tool-page-header">
+
+        <h1>📱 Gerador de QR Code</h1>
+
+        <p>
+          Crie um QR Code gratuitamente a partir de um
+          texto ou link.
+        </p>
+
+      </div>
+
+
+      <!-- FERRAMENTA -->
+      <div class="tool-container">
+
+        <div class="tool-panel">
+
+          <div class="form-group">
+
+            <label for="qrText">
+              Texto ou link
+            </label>
+
+            <input
+              type="text"
+              id="qrText"
+              placeholder="Ex: https://www.google.com"
+            >
+
+          </div>
+
+
+          <button
+            id="generateQR"
+            class="btn btn-primary"
+          >
+            📱 Gerar QR Code
+          </button>
+
+
+          <div
+            id="qrResult"
+            class="qr-result"
+          >
+          </div>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+        <div class="info-box">
+
+          <h2>O que é um QR Code?</h2>
+
+          <p>
+            QR Code é um código que pode ser escaneado pela
+            câmera de um celular para acessar informações.
+          </p>
+
+          <p>
+            Você pode usar esta ferramenta para transformar
+            links ou textos em QR Codes.
+          </p>
+
+        </div>
+
+
+        <!-- OUTRAS FERRAMENTAS -->
+        <div class="related-tools">
+
+          <h2>Outras ferramentas</h2>
+
+          <div class="tools-grid">
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🧮
+              </div>
+
+              <h3>Calculadora</h3>
+
+              <p>
+                Faça cálculos matemáticos rapidamente.
+              </p>
+
+              <a
+                href="calculadora.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🔐
+              </div>
+
+              <h3>Gerador de Senhas</h3>
+
+              <p>
+                Gere uma senha aleatória.
+              </p>
+
+              <a
+                href="gerador-senha.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-content">
+
+      <p>
+        © <span class="current-year"></span> NexoTools.
+        Todos os direitos reservados.
+      </p>
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Início
+        </a>
+
+        <a href="index.html#sobre">
+          Sobre
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT PRINCIPAL -->
+  <script src="script.js"></script>
+
+
+  <!-- QR CODE -->
+  <script>
+
+    const qrButton =
+      document.querySelector("#generateQR");
+
+    if (qrButton) {
+
+      qrButton.addEventListener("click", () => {
+
+        const text =
+          document.querySelector("#qrText").value.trim();
+
+        const result =
+          document.querySelector("#qrResult");
+
+
+        if (!text) {
+
+          result.innerHTML = `
+            <div class="result error">
+              Digite um texto ou link.
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        const encodedText =
+          encodeURIComponent(text);
+
+
+        const qrUrl =
+          `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodedText}`;
+
+
+        result.innerHTML = `
+
+          <h3>Seu QR Code</h3>
+
+          <img
+            src="${qrUrl}"
+            alt="QR Code gerado"
+          >
+
+          <a
+            href="${qrUrl}"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            Abrir QR Code
+          </a>
+
+        `;
+
+      });
+
+    }
+
+  </script>
+
+</body>
+
+</html>
