@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora Online Grátis | NexoTools</title>
+
+  <meta
+    name="description"
+    content="Use a calculadora online gratuita do NexoTools para fazer cálculos de forma rápida e fácil."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        Nexo<span>Tools</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          aria-label="Alternar modo escuro"
+        >
+          🌙
+        </button>
+
+        <button
+          class="menu-button"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- CONTEÚDO -->
+  <main class="tool-page">
+
+    <div class="container">
+
+      <!-- CAMINHO -->
+      <div class="breadcrumb">
+        <a href="index.html">NexoTools</a>
+        /
+        Calculadora
+      </div>
+
+
+      <!-- TÍTULO -->
+      <div class="tool-page-header">
+
+        <h1>🧮 Calculadora Online</h1>
+
+        <p>
+          Faça cálculos de forma rápida, simples e gratuita.
+        </p>
+
+      </div>
+
+
+      <!-- CALCULADORA -->
+      <div class="tool-container">
+
+        <div class="tool-panel">
+
+          <div class="calculator">
+
+            <input
+              id="calculatorDisplay"
+              class="calculator-display"
+              type="text"
+              readonly
+              placeholder="0"
+            >
+
+            <button data-calculator="clear">
+              C
+            </button>
+
+            <button data-calculator="delete">
+              ⌫
+            </button>
+
+            <button data-calculator="/">
+              ÷
+            </button>
+
+            <button data-calculator="*">
+              ×
+            </button>
+
+
+            <button data-calculator="7">
+              7
+            </button>
+
+            <button data-calculator="8">
+              8
+            </button>
+
+            <button data-calculator="9">
+              9
+            </button>
+
+            <button
+              data-calculator="-"
+              class="operator"
+            >
+              −
+            </button>
+
+
+            <button data-calculator="4">
+              4
+            </button>
+
+            <button data-calculator="5">
+              5
+            </button>
+
+            <button data-calculator="6">
+              6
+            </button>
+
+            <button
+              data-calculator="+"
+              class="operator"
+            >
+              +
+            </button>
+
+
+            <button data-calculator="1">
+              1
+            </button>
+
+            <button data-calculator="2">
+              2
+            </button>
+
+            <button data-calculator="3">
+              3
+            </button>
+
+            <button
+              data-calculator="="
+              class="operator"
+            >
+              =
+            </button>
+
+
+            <button data-calculator="0">
+              0
+            </button>
+
+            <button data-calculator=".">
+              .
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+        <div class="info-box">
+
+          <h2>Como usar a calculadora?</h2>
+
+          <p>
+            Digite os números e escolha a operação que deseja
+            realizar.
+          </p>
+
+          <p>
+            Você pode fazer operações de adição, subtração,
+            multiplicação e divisão.
+          </p>
+
+          <p>
+            O resultado aparece diretamente na tela da
+            calculadora.
+          </p>
+
+        </div>
+
+
+        <!-- FERRAMENTAS RELACIONADAS -->
+        <div class="related-tools">
+
+          <h2>Outras ferramentas</h2>
+
+          <div class="tools-grid">
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                %
+              </div>
+
+              <h3>Calculadora de Porcentagem</h3>
+
+              <p>
+                Calcule porcentagens rapidamente.
+              </p>
+
+              <a
+                href="porcentagem.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                📐
+              </div>
+
+              <h3>Regra de Três</h3>
+
+              <p>
+                Resolva problemas de regra de três.
+              </p>
+
+              <a
+                href="regra-de-tres.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-content">
+
+      <p>
+        © <span class="current-year"></span> NexoTools.
+        Todos os direitos reservados.
+      </p>
+
+      <div class="footer-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#sobre">Sobre</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="script.js"></script>
+
+</body>
+</html>
