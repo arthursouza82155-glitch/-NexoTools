@@ -1,371 +1,1207 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+:root {
+  --primary: #635bff;
+  --primary-dark: #5147e6;
+  --secondary: #8b5cf6;
 
-  <title>NexoTools — Ferramentas Online</title>
+  --background: #f6f7fb;
+  --surface: #ffffff;
 
-  <meta
-    name="description"
-    content="NexoTools: ferramentas online gratuitas para cálculos, textos, conversões, geradores e muito mais."
-  >
+  --text: #171725;
+  --muted: #6b7280;
 
-  <meta name="theme-color" content="#635bff">
+  --border: #e5e7eb;
 
-  <link rel="stylesheet" href="style.css">
-</head>
+  --success: #22c55e;
+  --danger: #ef4444;
 
-<body>
+  --radius: 18px;
 
-<header class="header">
+  --shadow:
+    0 10px 30px rgba(0, 0, 0, 0.07);
+}
 
-  <nav class="navbar">
 
-    <a href="#" class="logo">
-      <span class="logo-icon">N</span>
-      <span>NexoTools</span>
-    </a>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <div class="nav-links" id="navLinks">
-      <a href="#ferramentas">Ferramentas</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
-      <button id="themeButton" class="icon-button">🌙</button>
-    </div>
 
-    <button id="menuButton" class="menu-button">☰</button>
+html {
+  scroll-behavior: smooth;
+}
 
-  </nav>
 
-</header>
+body {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
+  background: var(--background);
+  color: var(--text);
 
-<main>
+  line-height: 1.6;
 
-<section class="hero">
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
 
-  <div class="hero-badge">
-    ⚡ Mais de 30 ferramentas online
-  </div>
 
-  <h1>
-    Suas ferramentas.
-    <span>Em um só lugar.</span>
-  </h1>
+a {
+  color: inherit;
+}
 
-  <p>
-    Calculadoras, conversores, geradores e ferramentas
-    úteis para o seu dia a dia.
-  </p>
 
-  <div class="hero-buttons">
+button,
+input,
+textarea {
+  font-family: inherit;
+}
 
-    <a href="#ferramentas" class="btn btn-primary">
-      Explorar ferramentas
-    </a>
 
-    <a href="#sobre" class="btn btn-secondary">
-      Saiba mais
-    </a>
+/* HEADER */
 
-  </div>
+.header {
+  position: sticky;
+  top: 0;
 
-</section>
+  z-index: 1000;
 
+  background: rgba(255,255,255,0.92);
 
-<section class="section" id="ferramentas">
+  backdrop-filter: blur(12px);
 
-  <div class="section-header">
+  border-bottom:
+    1px solid var(--border);
+}
 
-    <span class="section-label">
-      NEXOTOOLS
-    </span>
 
-    <h2>Todas as ferramentas</h2>
+.navbar {
+  max-width: 1200px;
 
-    <p>
-      Escolha uma ferramenta ou pesquise pelo que você precisa.
-    </p>
+  height: 72px;
 
-  </div>
+  margin: auto;
 
+  padding: 0 24px;
 
-  <div class="search-wrapper">
+  display: flex;
 
-    <input
-      id="searchInput"
-      class="search-input"
-      type="text"
-      placeholder="🔍 Pesquisar ferramenta..."
-    >
+  align-items: center;
 
-  </div>
+  justify-content: space-between;
+}
 
 
-  <div class="categories">
+.logo {
+  text-decoration: none;
 
-    <button class="category active" data-category="todos">
-      Todas
-    </button>
+  display: flex;
 
-    <button class="category" data-category="matematica">
-      🧮 Matemática
-    </button>
+  align-items: center;
 
-    <button class="category" data-category="texto">
-      📝 Texto
-    </button>
+  gap: 10px;
 
-    <button class="category" data-category="conversores">
-      🔄 Conversores
-    </button>
+  font-size: 22px;
 
-    <button class="category" data-category="geradores">
-      ⚡ Geradores
-    </button>
+  font-weight: 800;
+}
 
-    <button class="category" data-category="tempo">
-      ⏱️ Tempo
-    </button>
 
-    <button class="category" data-category="utilidades">
-      🛠️ Utilidades
-    </button>
+.logo-icon {
+  width: 40px;
+  height: 40px;
 
-  </div>
+  border-radius: 12px;
 
+  display: flex;
 
-  <div id="toolsGrid" class="tools-grid"></div>
+  align-items: center;
+  justify-content: center;
 
-  <div id="noResults" class="no-results hidden">
-    Nenhuma ferramenta encontrada.
-  </div>
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
 
-</section>
+  color: white;
 
+  font-weight: 900;
+}
 
-<section id="toolSection" class="section tool-section hidden">
 
-  <div class="tool-box">
+.nav-links {
+  display: flex;
 
-    <div class="tool-header">
+  align-items: center;
 
-      <button id="backButton" class="back-button">
-        ← Voltar
-      </button>
+  gap: 26px;
+}
 
-      <div id="toolIcon" class="large-tool-icon">
-        🛠️
-      </div>
 
-      <h2 id="toolTitle">
-        Ferramenta
-      </h2>
+.nav-links a {
+  text-decoration: none;
 
-      <p id="toolDescription">
-        Utilize a ferramenta.
-      </p>
+  font-size: 14px;
 
-    </div>
+  font-weight: 700;
 
+  color: #444;
 
-    <div id="toolContent"></div>
+  transition: 0.2s;
+}
 
-  </div>
 
-</section>
+.nav-links a:hover {
+  color: var(--primary);
+}
 
 
-<section class="section">
+.icon-button {
+  width: 40px;
+  height: 40px;
 
-  <div class="stats">
+  border:
+    1px solid var(--border);
 
-    <div class="stat-card">
-      <strong>30+</strong>
-      <span>Ferramentas</span>
-    </div>
+  border-radius: 10px;
 
-    <div class="stat-card">
-      <strong>100%</strong>
-      <span>Gratuito</span>
-    </div>
+  background: var(--surface);
 
-    <div class="stat-card">
-      <strong>24/7</strong>
-      <span>Disponível</span>
-    </div>
+  cursor: pointer;
 
-  </div>
+  font-size: 17px;
+}
 
-</section>
 
+.menu-button {
+  display: none;
 
-<section id="sobre" class="section">
+  border: none;
 
-  <div class="about-box">
+  background: transparent;
 
-    <div>
+  font-size: 26px;
 
-      <span class="section-label">
-        SOBRE O NEXOTOOLS
-      </span>
+  cursor: pointer;
+}
 
-      <h2>
-        Tudo que você precisa,
-        sem complicação.
-      </h2>
 
-      <p>
-        O NexoTools reúne diversas ferramentas úteis
-        em uma única plataforma. A ideia é tornar tarefas
-        comuns mais rápidas e simples.
-      </p>
+/* HERO */
 
-    </div>
+.hero {
+  max-width: 1000px;
 
-    <div class="about-icon">
-      N
-    </div>
+  margin: auto;
 
-  </div>
+  text-align: center;
 
-</section>
+  padding:
+    100px 24px 90px;
+}
 
 
-<section id="contato" class="section">
+.hero-badge {
+  display: inline-block;
 
-  <div class="section-header">
+  padding: 8px 15px;
 
-    <span class="section-label">
-      CONTATO
-    </span>
+  border-radius: 999px;
 
-    <h2>Envie uma sugestão</h2>
+  background: #eeecff;
 
-    <p>
-      Tem uma ideia para uma nova ferramenta?
-    </p>
+  color: var(--primary);
 
-  </div>
+  font-size: 13px;
 
+  font-weight: 800;
 
-  <div class="contact-box">
+  margin-bottom: 22px;
+}
 
-    <form id="contactForm">
 
-      <div class="form-row">
+.hero h1 {
+  font-size:
+    clamp(42px, 7vw, 72px);
 
-        <div class="form-group">
+  line-height: 1.03;
 
-          <label>Nome</label>
+  letter-spacing: -3px;
+}
 
-          <input
-            id="contactName"
-            class="input"
-            type="text"
-            placeholder="Seu nome"
-            required
-          >
 
-        </div>
+.hero h1 span {
+  display: block;
 
+  color: var(--primary);
+}
 
-        <div class="form-group">
 
-          <label>E-mail</label>
+.hero p {
+  max-width: 680px;
 
-          <input
-            id="contactEmail"
-            class="input"
-            type="email"
-            placeholder="seu@email.com"
-            required
-          >
+  margin: 24px auto;
 
-        </div>
+  color: var(--muted);
 
-      </div>
+  font-size: 18px;
+}
 
 
-      <div class="form-group">
+.hero-buttons {
+  display: flex;
 
-        <label>Mensagem</label>
+  justify-content: center;
 
-        <textarea
-          id="contactMessage"
-          class="input textarea"
-          placeholder="Sua sugestão..."
-          required
-        ></textarea>
+  gap: 12px;
 
-      </div>
+  flex-wrap: wrap;
 
+  margin-top: 30px;
+}
 
-      <button class="btn btn-primary" type="submit">
-        Enviar sugestão
-      </button>
 
-    </form>
+/* BUTTONS */
 
-    <div id="contactResult"></div>
+.btn {
+  border: none;
 
-  </div>
+  border-radius: 12px;
 
-</section>
+  padding:
+    13px 21px;
 
-</main>
+  font-size: 14px;
 
+  font-weight: 800;
 
-<footer>
+  cursor: pointer;
 
-  <div class="footer-container">
+  text-decoration: none;
 
-    <div class="footer-brand">
+  display: inline-flex;
 
-      <a href="#" class="logo">
-        <span class="logo-icon">N</span>
-        NexoTools
-      </a>
+  justify-content: center;
 
-      <p>
-        Ferramentas online simples, rápidas e gratuitas.
-      </p>
+  align-items: center;
 
-    </div>
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
 
 
-    <div class="footer-column">
+.btn:hover {
+  transform: translateY(-2px);
+}
 
-      <h4>Ferramentas</h4>
 
-      <a href="#ferramentas">Todas</a>
-      <a href="#ferramentas">Matemática</a>
-      <a href="#ferramentas">Texto</a>
+.btn-primary {
+  background: var(--primary);
 
-    </div>
+  color: white;
+}
 
 
-    <div class="footer-column">
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
 
-      <h4>NexoTools</h4>
 
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
+.btn-secondary {
+  background: var(--surface);
 
-    </div>
+  color: var(--text);
 
-  </div>
+  border:
+    1px solid var(--border);
+}
 
 
-  <div class="footer-bottom">
-    © 2026 NexoTools. Todos os direitos reservados.
-  </div>
+/* SECTIONS */
 
-</footer>
+.section {
+  max-width: 1200px;
 
+  margin: auto;
 
-<script src="script.js"></script>
+  padding:
+    70px 24px;
+}
 
-</body>
-</html>
+
+.section-header {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+
+.section-header h2 {
+  font-size: 38px;
+
+  margin-top: 7px;
+}
+
+
+.section-header p {
+  color: var(--muted);
+
+  margin-top: 8px;
+}
+
+
+.section-label {
+  color: var(--primary);
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* SEARCH */
+
+.search-wrapper {
+  max-width: 700px;
+
+  margin:
+    0 auto 25px;
+}
+
+
+.search-input {
+  width: 100%;
+
+  height: 54px;
+
+  padding:
+    0 18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  outline: none;
+
+  font-size: 15px;
+
+  box-shadow: var(--shadow);
+}
+
+
+.search-input:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99,91,255,0.1);
+}
+
+
+/* CATEGORIES */
+
+.categories {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-bottom: 35px;
+}
+
+
+.category {
+  border:
+    1px solid var(--border);
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  border-radius: 999px;
+
+  padding:
+    9px 15px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+
+.category:hover,
+.category.active {
+  background: var(--primary);
+
+  color: white;
+
+  border-color: var(--primary);
+}
+
+
+/* TOOLS */
+
+.tools-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+
+.tool-card {
+  background: var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  padding: 22px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.25s,
+    border 0.25s;
+}
+
+
+.tool-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(99,91,255,0.35);
+}
+
+
+.tool-card-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #eeecff;
+
+  font-size: 23px;
+
+  margin-bottom: 16px;
+}
+
+
+.tool-card h3 {
+  font-size: 17px;
+
+  margin-bottom: 7px;
+}
+
+
+.tool-card p {
+  color: var(--muted);
+
+  font-size: 13px;
+
+  min-height: 42px;
+
+  margin-bottom: 17px;
+}
+
+
+.tool-card .btn {
+  width: 100%;
+}
+
+
+/* TOOL */
+
+.tool-section {
+  scroll-margin-top: 90px;
+}
+
+
+.tool-box {
+  max-width: 850px;
+
+  margin: auto;
+
+  padding: 30px;
+
+  background: var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 22px;
+
+  box-shadow: var(--shadow);
+}
+
+
+.tool-header {
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+
+.back-button {
+  display: block;
+
+  margin-bottom: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--primary);
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.large-tool-icon {
+  width: 65px;
+  height: 65px;
+
+  margin: auto;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 18px;
+
+  background: #eeecff;
+
+  font-size: 30px;
+}
+
+
+.tool-header h2 {
+  font-size: 30px;
+
+  margin-top: 15px;
+}
+
+
+.tool-header p {
+  color: var(--muted);
+}
+
+
+/* FORMS */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+
+.input {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 11px;
+
+  outline: none;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  font-size: 14px;
+}
+
+
+.input:focus {
+  border-color: var(--primary);
+}
+
+
+.textarea {
+  min-height: 150px;
+
+  resize: vertical;
+}
+
+
+.form-row {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 15px;
+}
+
+
+/* RESULT */
+
+.result {
+  margin-top: 22px;
+
+  padding: 20px;
+
+  background:
+    rgba(99,91,255,0.07);
+
+  border:
+    1px solid rgba(99,91,255,0.2);
+
+  border-radius: 14px;
+
+  text-align: center;
+}
+
+
+.result-value {
+  font-size: 27px;
+
+  font-weight: 900;
+
+  color: var(--primary);
+
+  word-break: break-word;
+}
+
+
+/* STATS */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+.stat-card {
+  background: var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: var(--shadow);
+}
+
+
+.stat-card strong {
+  display: block;
+
+  color: var(--primary);
+
+  font-size: 30px;
+}
+
+
+.stat-card span {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+
+/* ABOUT */
+
+.about-box {
+  display: grid;
+
+  grid-template-columns:
+    1fr 180px;
+
+  align-items: center;
+
+  gap: 40px;
+
+  padding: 50px;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #635bff,
+      #8b5cf6
+    );
+
+  color: white;
+}
+
+
+.about-box h2 {
+  font-size: 40px;
+
+  line-height: 1.1;
+
+  margin:
+    10px 0 15px;
+}
+
+
+.about-box p {
+  max-width: 650px;
+
+  opacity: 0.9;
+}
+
+
+.about-icon {
+  width: 150px;
+  height: 150px;
+
+  border-radius: 35px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 70px;
+
+  font-weight: 900;
+
+  background:
+    rgba(255,255,255,0.15);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.25);
+}
+
+
+/* CONTACT */
+
+.contact-box {
+  max-width: 800px;
+
+  margin: auto;
+
+  padding: 30px;
+
+  background: var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--shadow);
+}
+
+
+/* QR */
+
+.qr-result {
+  text-align: center;
+
+  margin-top: 25px;
+}
+
+
+.qr-result img {
+  max-width: 230px;
+
+  padding: 12px;
+
+  background: white;
+
+  border-radius: 14px;
+}
+
+
+/* CALCULATOR */
+
+.calculator {
+  max-width: 400px;
+
+  margin: auto;
+
+  padding: 20px;
+
+  background: #171725;
+
+  border-radius: 20px;
+}
+
+
+.calc-display {
+  width: 100%;
+
+  height: 70px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  margin-bottom: 12px;
+
+  padding: 12px;
+
+  background: #29293a;
+
+  color: white;
+
+  text-align: right;
+
+  font-size: 28px;
+}
+
+
+.calc-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+
+.calc-button {
+  height: 55px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #333346;
+
+  color: white;
+
+  font-size: 17px;
+
+  cursor: pointer;
+}
+
+
+.calc-button:hover {
+  background: #45455d;
+}
+
+
+.calc-button.operator {
+  background: var(--primary);
+}
+
+
+.calc-button.equal {
+  background: var(--success);
+}
+
+
+/* TIMER */
+
+.timer-display {
+  text-align: center;
+
+  font-size: 60px;
+
+  font-weight: 900;
+
+  color: var(--primary);
+
+  margin: 25px 0;
+}
+
+
+/* NO RESULTS */
+
+.no-results {
+  text-align: center;
+
+  padding: 40px;
+
+  color: var(--muted);
+}
+
+
+/* FOOTER */
+
+footer {
+  margin-top: 60px;
+
+  background: #111118;
+
+  color: white;
+}
+
+
+.footer-container {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding:
+    55px 24px 35px;
+
+  display: grid;
+
+  grid-template-columns:
+    2fr 1fr 1fr;
+
+  gap: 40px;
+}
+
+
+.footer-brand p {
+  color: #999;
+
+  max-width: 350px;
+
+  margin-top: 12px;
+}
+
+
+.footer-column h4 {
+  margin-bottom: 14px;
+}
+
+
+.footer-column a {
+  display: block;
+
+  color: #999;
+
+  text-decoration: none;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+}
+
+
+.footer-column a:hover {
+  color: white;
+}
+
+
+.footer-bottom {
+  text-align: center;
+
+  border-top:
+    1px solid #292933;
+
+  padding: 20px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* UTIL */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* DARK */
+
+body.dark {
+  --background: #0d0e14;
+  --surface: #171821;
+  --text: #f5f5f7;
+  --muted: #a1a1aa;
+  --border: #292a36;
+}
+
+
+body.dark .header {
+  background:
+    rgba(20,21,29,0.92);
+}
+
+
+body.dark .nav-links a {
+  color: #ddd;
+}
+
+
+body.dark .hero-badge,
+body.dark .tool-card-icon,
+body.dark .large-tool-icon {
+  background: #27253d;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+  .tools-grid {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  .nav-links {
+    display: none;
+
+    position: absolute;
+
+    top: 72px;
+
+    left: 15px;
+    right: 15px;
+
+    padding: 20px;
+
+    flex-direction: column;
+
+    background: var(--surface);
+
+    border:
+      1px solid var(--border);
+
+    border-radius: 15px;
+
+    box-shadow: var(--shadow);
+  }
+
+
+  .nav-links.open {
+    display: flex;
+  }
+
+
+  .menu-button {
+    display: block;
+  }
+
+
+  .tools-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .about-box {
+    grid-template-columns: 1fr;
+
+    padding: 35px;
+  }
+
+
+  .about-icon {
+    display: none;
+  }
+
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .hero {
+    padding:
+      70px 18px;
+  }
+
+
+  .hero h1 {
+    font-size: 42px;
+
+    letter-spacing: -1.5px;
+  }
+
+
+  .section {
+    padding:
+      50px 16px;
+  }
+
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+
+  .tool-box {
+    padding: 20px;
+  }
+
+}
