@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NexoTools - Ferramentas Online</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #4f8cff;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 50px;
+            background: linear-gradient(135deg, #111827, #263b70);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #dbe4ff;
+            margin-bottom: 30px;
+        }
+
+        .search {
+            width: min(600px, 90%);
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        .container h2 {
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .tool {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.2s;
+        }
+
+        .tool:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .tool h3 {
+            margin-bottom: 10px;
+        }
+
+        .tool p {
+            color: #667085;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #4f8cff;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #3975e8;
+        }
+
+        .calculator {
+            display: none;
+            background: white;
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .calculator input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #111827;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 70px;
+        }
+
+        @media(max-width:600px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Nexo<span>Tools</span></div>
+
+    <nav>
+        <a href="#ferramentas">Ferramentas</a>
+        <a href="#sobre">Sobre</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+
+    <h1>Ferramentas simples. Tudo em um só lugar.</h1>
+
+    <p>
+        Calculadoras, conversores e ferramentas gratuitas para facilitar seu dia.
+    </p>
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="🔎 Procurar uma ferramenta..."
+        onkeyup="buscarFerramenta()"
+    >
+
+</section>
+
+
+<main class="container" id="ferramentas">
+
+    <h2>🛠️ Ferramentas</h2>
+
+    <div class="tools">
+
+        <div class="tool">
+            <div class="icon">🧮</div>
+
+            <h3>Calculadora</h3>
+
+            <p>
+                Faça cálculos rapidamente.
+            </p>
+
+            <button onclick="abrirCalculadora()">
+                Abrir
+            </button>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">📊</div>
+
+            <h3>Calculadora de Porcentagem</h3>
+
+            <p>
+                Descubra porcentagens de forma rápida.
+            </p>
+
+            <button onclick="porcentagem()">
+                Usar
+            </button>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">🔢</div>
+
+            <h3>Gerador de Números</h3>
+
+            <p>
+                Gere um número aleatório.
+            </p>
+
+            <button onclick="gerarNumero()">
+                Gerar
+            </button>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">🔐</div>
+
+            <h3>Gerador de Senhas</h3>
+
+            <p>
+                Crie uma senha aleatória.
+            </p>
+
+            <button onclick="gerarSenha()">
+                Gerar
+            </button>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">📝</div>
+
+            <h3>Contador de Texto</h3>
+
+            <p>
+                Conte palavras e caracteres.
+            </p>
+
+            <button onclick="contadorTexto()">
+                Usar
+            </button>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">🎲</div>
+
+            <h3>Rolador de Dados</h3>
+
+            <p>
+                Role um dado virtual.
+            </p>
+
+            <button onclick="rolarDado()">
+                Rolar
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="calculator" id="calculator">
+
+        <h2>🧮 Calculadora</h2>
+
+        <input
+            type="number"
+            id="num1"
+            placeholder="Primeiro número"
+        >
+
+        <input
+            type="number"
+            id="num2"
+            placeholder="Segundo número"
+        >
+
+        <button onclick="calcular('+')">+</button>
+        <button onclick="calcular('-')">−</button>
+        <button onclick="calcular('*')">×</button>
+        <button onclick="calcular('/')">÷</button>
+
+        <div class="result" id="resultado"></div>
+
+    </div>
+
+</main>
+
+
+<section class="container" id="sobre">
+
+    <h2>Sobre o NexoTools</h2>
+
+    <p>
+        O NexoTools é um projeto criado para reunir ferramentas
+        úteis, rápidas e gratuitas em um único lugar.
+    </p>
+
+</section>
+
+
+<footer>
+
+    <p>© 2026 NexoTools — Todos os direitos reservados.</p>
+
+</footer>
+
+
+<script>
+
+function abrirCalculadora() {
+
+    const calculadora =
+        document.getElementById("calculator");
+
+    calculadora.style.display = "block";
+
+    calculadora.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+
+function calcular(operacao) {
+
+    const n1 =
+        Number(document.getElementById("num1").value);
+
+    const n2 =
+        Number(document.getElementById("num2").value);
+
+    let resultado;
+
+    if (operacao === "+") {
+        resultado = n1 + n2;
+    }
+
+    if (operacao === "-") {
+        resultado = n1 - n2;
+    }
+
+    if (operacao === "*") {
+        resultado = n1 * n2;
+    }
+
+    if (operacao === "/") {
+
+        if (n2 === 0) {
+            resultado = "Não é possível dividir por zero.";
+        } else {
+            resultado = n1 / n2;
+        }
+    }
+
+    document.getElementById("resultado").innerText =
+        "Resultado: " + resultado;
+}
+
+
+function porcentagem() {
+
+    const numero =
+        prompt("Digite o número:");
+
+    const porcentagem =
+        prompt("Digite a porcentagem:");
+
+    if (numero !== null && porcentagem !== null) {
+
+        const resultado =
+            Number(numero) * Number(porcentagem) / 100;
+
+        alert(
+            porcentagem +
+            "% de " +
+            numero +
+            " = " +
+            resultado
+        );
+    }
+}
+
+
+function gerarNumero() {
+
+    const minimo =
+        Number(prompt("Número mínimo:"));
+
+    const maximo =
+        Number(prompt("Número máximo:"));
+
+    if (minimo <= maximo) {
+
+        const numero =
+            Math.floor(
+                Math.random() *
+                (maximo - minimo + 1)
+            ) + minimo;
+
+        alert("Número gerado: " + numero);
+
+    } else {
+
+        alert("O mínimo precisa ser menor que o máximo.");
+
+    }
+}
+
+
+function gerarSenha() {
+
+    const caracteres =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
+
+    let senha = "";
+
+    for (let i = 0; i < 12; i++) {
+
+        const indice =
+            Math.floor(
+                Math.random() * caracteres.length
+            );
+
+        senha += caracteres[indice];
+    }
+
+    alert("Sua senha:\n\n" + senha);
+}
+
+
+function contadorTexto() {
+
+    const texto =
+        prompt("Digite ou cole seu texto:");
+
+    if (texto !== null) {
+
+        const caracteres =
+            texto.length;
+
+        const palavras =
+            texto.trim() === ""
+            ? 0
+            : texto.trim().split(/\s+/).length;
+
+        alert(
+            "Palavras: " + palavras +
+            "\nCaracteres: " + caracteres
+        );
+    }
+}
+
+
+function rolarDado() {
+
+    const numero =
+        Math.floor(Math.random() * 6) + 1;
+
+    alert("🎲 Você tirou: " + numero);
+}
+
+
+function buscarFerramenta() {
+
+    const pesquisa =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const ferramentas =
+        document.querySelectorAll(".tool");
+
+    ferramentas.forEach(function(tool) {
+
+        const texto =
+            tool.innerText.toLowerCase();
+
+        if (texto.includes(pesquisa)) {
+
+            tool.style.display = "block";
+
+        } else {
+
+            tool.style.display = "none";
+
+        }
+
+    });
+}
+
+</script>
+
+</body>
+</html>
