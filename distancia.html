@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conversor de Distância | NexoTools</title>
+
+    <meta
+        name="description"
+        content="Converta quilômetros, milhas, metros e pés com o conversor de distância do NexoTools."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button
+                id="themeButton"
+                class="icon-button"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">Início</a>
+
+            <span>›</span>
+
+            <span>Conversor de Distância</span>
+
+        </div>
+
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+
+                <span class="hero-badge">
+                    📏 Conversor
+                </span>
+
+                <h1>Conversor de Distância</h1>
+
+                <p>
+                    Converta diferentes unidades de distância rapidamente.
+                </p>
+
+            </div>
+
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div class="form-group">
+
+                        <label for="distanceValue">
+                            Valor
+                        </label>
+
+                        <input
+                            type="number"
+                            id="distanceValue"
+                            placeholder="Digite um valor"
+                            step="any"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="distanceUnit">
+                            Converter de
+                        </label>
+
+                        <select id="distanceUnit">
+
+                            <option value="km">
+                                Quilômetros (km)
+                            </option>
+
+                            <option value="miles">
+                                Milhas (mi)
+                            </option>
+
+                            <option value="meters">
+                                Metros (m)
+                            </option>
+
+                            <option value="feet">
+                                Pés (ft)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="distanceTarget">
+                            Converter para
+                        </label>
+
+                        <select id="distanceTarget">
+
+                            <option value="miles">
+                                Milhas (mi)
+                            </option>
+
+                            <option value="km">
+                                Quilômetros (km)
+                            </option>
+
+                            <option value="feet">
+                                Pés (ft)
+                            </option>
+
+                            <option value="meters">
+                                Metros (m)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        id="convertDistance"
+                        class="btn btn-primary tool-button"
+                    >
+                        Converter
+                    </button>
+
+
+                    <div
+                        id="distanceResult"
+                        class="result"
+                    >
+                        Digite um valor para começar.
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary copy-result"
+                        data-target="distanceResult"
+                    >
+                        📋 Copiar resultado
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-section">
+
+            <h2>Conversões disponíveis</h2>
+
+            <p>
+                <strong>1 km</strong> = 0,621371 milhas
+            </p>
+
+            <p>
+                <strong>1 milha</strong> = 1,60934 km
+            </p>
+
+            <p>
+                <strong>1 metro</strong> = 3,28084 pés
+            </p>
+
+            <p>
+                <strong>1 pé</strong> = 0,3048 metro
+            </p>
+
+        </section>
+
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a
+                    href="peso.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">⚖️</div>
+
+                    <h3>Conversor de Peso</h3>
+
+                    <p>
+                        Converta kg e libras.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="temperatura.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">🌡️</div>
+
+                    <h3>Temperatura</h3>
+
+                    <p>
+                        Converta Celsius e Fahrenheit.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="calculadora.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>NexoTools</h3>
+
+                <p>
+                    Ferramentas simples, rápidas e gratuitas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span class="current-year"></span>
+                NexoTools.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+const convertDistance =
+    document.getElementById("convertDistance");
+
+
+function toMeters(value, unit) {
+
+    if (unit === "km") {
+        return value * 1000;
+    }
+
+    if (unit === "miles") {
+        return value * 1609.344;
+    }
+
+    if (unit === "feet") {
+        return value * 0.3048;
+    }
+
+    return value;
+}
+
+
+function fromMeters(value, unit) {
+
+    if (unit === "km") {
+        return value / 1000;
+    }
+
+    if (unit === "miles") {
+        return value / 1609.344;
+    }
+
+    if (unit === "feet") {
+        return value / 0.3048;
+    }
+
+    return value;
+}
+
+
+function unitName(unit) {
+
+    if (unit === "km") return "km";
+    if (unit === "miles") return "mi";
+    if (unit === "meters") return "m";
+    if (unit === "feet") return "ft";
+
+}
+
+
+convertDistance.addEventListener("click", function () {
+
+    const value =
+        parseFloat(
+            document.getElementById("distanceValue").value
+        );
+
+    const from =
+        document.getElementById("distanceUnit").value;
+
+    const to =
+        document.getElementById("distanceTarget").value;
+
+    const result =
+        document.getElementById("distanceResult");
+
+
+    if (isNaN(value)) {
+
+        result.textContent =
+            "Digite um valor válido.";
+
+        result.className =
+            "result error";
+
+        return;
+    }
+
+
+    const meters =
+        toMeters(value, from);
+
+
+    const converted =
+        fromMeters(meters, to);
+
+
+    result.innerHTML = `
+        <strong>
+            ${value} ${unitName(from)}
+            = ${converted.toFixed(4)} ${unitName(to)}
+        </strong>
+    `;
+
+    result.className =
+        "result success";
+
+});
+
+</script>
+
+</body>
+</html>
