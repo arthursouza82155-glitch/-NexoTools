@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gerador de Senhas | NexoTools</title>
+
+  <meta
+    name="description"
+    content="Gere senhas aleatórias para usar em suas contas com o Gerador de Senhas do NexoTools."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        Nexo<span>Tools</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          aria-label="Alternar modo escuro"
+        >
+          🌙
+        </button>
+
+        <button
+          class="menu-button"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- CONTEÚDO -->
+  <main class="tool-page">
+
+    <div class="container">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+
+        <a href="index.html">
+          NexoTools
+        </a>
+
+        /
+
+        Gerador de Senhas
+
+      </div>
+
+
+      <!-- TÍTULO -->
+      <div class="tool-page-header">
+
+        <h1>🔐 Gerador de Senhas</h1>
+
+        <p>
+          Crie uma senha aleatória de forma rápida.
+        </p>
+
+      </div>
+
+
+      <!-- FERRAMENTA -->
+      <div class="tool-container">
+
+        <div class="tool-panel">
+
+          <div class="form-group">
+
+            <label for="passwordLength">
+              Tamanho da senha
+            </label>
+
+            <input
+              type="number"
+              id="passwordLength"
+              value="16"
+              min="4"
+              max="100"
+            >
+
+          </div>
+
+
+          <button
+            id="generatePassword"
+            class="btn btn-primary"
+          >
+            🔑 Gerar senha
+          </button>
+
+
+          <div
+            id="passwordResult"
+            class="result"
+          >
+            Clique em "Gerar senha".
+          </div>
+
+
+          <button
+            class="btn btn-secondary copy-result mt-20"
+            data-target="#passwordResult"
+          >
+            📋 Copiar senha
+          </button>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+        <div class="info-box">
+
+          <h2>Sobre o gerador</h2>
+
+          <p>
+            O NexoTools cria uma combinação aleatória de
+            letras maiúsculas, letras minúsculas, números
+            e símbolos.
+          </p>
+
+          <p>
+            Você pode escolher um tamanho entre 4 e 100
+            caracteres.
+          </p>
+
+          <p>
+            Para contas importantes, prefira senhas longas
+            e únicas e não compartilhe suas senhas com outras
+            pessoas.
+          </p>
+
+        </div>
+
+
+        <!-- OUTRAS FERRAMENTAS -->
+        <div class="related-tools">
+
+          <h2>Outras ferramentas</h2>
+
+          <div class="tools-grid">
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🧮
+              </div>
+
+              <h3>Calculadora</h3>
+
+              <p>
+                Faça cálculos matemáticos rapidamente.
+              </p>
+
+              <a
+                href="calculadora.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                %
+              </div>
+
+              <h3>Porcentagem</h3>
+
+              <p>
+                Calcule porcentagens rapidamente.
+              </p>
+
+              <a
+                href="porcentagem.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🎲
+              </div>
+
+              <h3>Número Aleatório</h3>
+
+              <p>
+                Gere números aleatórios rapidamente.
+              </p>
+
+              <a
+                href="index.html#ferramentas"
+                class="tool-open"
+              >
+                Ver ferramentas
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-content">
+
+      <p>
+        © <span class="current-year"></span> NexoTools.
+        Todos os direitos reservados.
+      </p>
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Início
+        </a>
+
+        <a href="index.html#sobre">
+          Sobre
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT PRINCIPAL -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
