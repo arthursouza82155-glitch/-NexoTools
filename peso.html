@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conversor de Peso | NexoTools</title>
+    <meta name="description" content="Converta quilogramas para libras e libras para quilogramas gratuitamente com o NexoTools.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+            <button id="themeButton" class="icon-button" aria-label="Alternar tema">
+                🌙
+            </button>
+
+            <button class="menu-button" aria-label="Abrir menu">
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="index.html">Início</a>
+            <span>›</span>
+            <span>Conversor de Peso</span>
+        </div>
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+                <span class="hero-badge">⚖️ Conversor</span>
+
+                <h1>Conversor de Peso</h1>
+
+                <p>
+                    Converta quilogramas para libras e libras para quilogramas
+                    de forma rápida e gratuita.
+                </p>
+            </div>
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div class="form-group">
+                        <label for="weightValue">
+                            Valor
+                        </label>
+
+                        <input
+                            type="number"
+                            id="weightValue"
+                            placeholder="Digite um valor"
+                            step="any"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightUnit">
+                            Unidade
+                        </label>
+
+                        <select id="weightUnit">
+                            <option value="kg">Quilogramas (kg)</option>
+                            <option value="lb">Libras (lb)</option>
+                        </select>
+                    </div>
+
+                    <button id="convertWeight" class="btn btn-primary tool-button">
+                        Converter
+                    </button>
+
+                    <div id="weightResult" class="result">
+                        Digite um valor para começar.
+                    </div>
+
+                    <button
+                        class="btn btn-secondary copy-result"
+                        data-target="weightResult"
+                    >
+                        📋 Copiar resultado
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="info-section">
+
+            <h2>Como funciona?</h2>
+
+            <p>
+                O NexoTools converte automaticamente entre quilogramas e libras.
+            </p>
+
+            <p>
+                <strong>1 kg = 2,20462 lb</strong>
+            </p>
+
+            <p>
+                <strong>1 lb = 0,453592 kg</strong>
+            </p>
+
+        </section>
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a href="temperatura.html" class="tool-card">
+                    <div class="tool-icon">🌡️</div>
+                    <h3>Temperatura</h3>
+                    <p>Converta Celsius e Fahrenheit.</p>
+                </a>
+
+                <a href="calculadora.html" class="tool-card">
+                    <div class="tool-icon">🧮</div>
+                    <h3>Calculadora</h3>
+                    <p>Faça cálculos rapidamente.</p>
+                </a>
+
+                <a href="porcentagem.html" class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <h3>Porcentagem</h3>
+                    <p>Calcule porcentagens facilmente.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+                <h3>NexoTools</h3>
+                <p>Ferramentas simples, rápidas e gratuitas.</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                © <span class="current-year"></span> NexoTools.
+                Todos os direitos reservados.
+            </p>
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+const convertWeight = document.getElementById("convertWeight");
+
+convertWeight.addEventListener("click", function () {
+
+    const value = parseFloat(
+        document.getElementById("weightValue").value
+    );
+
+    const unit = document.getElementById("weightUnit").value;
+
+    const result = document.getElementById("weightResult");
+
+    if (isNaN(value)) {
+        result.textContent = "Digite um valor válido.";
+        result.className = "result error";
+        return;
+    }
+
+    if (unit === "kg") {
+
+        const pounds = value * 2.20462;
+
+        result.textContent =
+            `${value} kg = ${pounds.toFixed(2)} lb`;
+
+    } else {
+
+        const kilograms = value * 0.453592;
+
+        result.textContent =
+            `${value} lb = ${kilograms.toFixed(2)} kg`;
+
+    }
+
+    result.className = "result success";
+});
+</script>
+
+</body>
+</html>
