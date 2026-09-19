@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cronômetro | NexoTools</title>
+
+    <meta
+        name="description"
+        content="Use o cronômetro online gratuito do NexoTools."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button
+                id="themeButton"
+                class="icon-button"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">Início</a>
+
+            <span>›</span>
+
+            <span>Cronômetro</span>
+
+        </div>
+
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+
+                <span class="hero-badge">
+                    ⏱️ Ferramenta
+                </span>
+
+                <h1>Cronômetro Online</h1>
+
+                <p>
+                    Cronometre o tempo de forma simples e precisa.
+                </p>
+
+            </div>
+
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div
+                        id="timerDisplay"
+                        class="timer-display"
+                    >
+                        00:00:00
+                    </div>
+
+
+                    <div class="tool-actions">
+
+                        <button
+                            id="startTimer"
+                            class="btn btn-primary"
+                        >
+                            ▶️ Iniciar
+                        </button>
+
+                        <button
+                            id="pauseTimer"
+                            class="btn btn-secondary"
+                        >
+                            ⏸️ Pausar
+                        </button>
+
+                        <button
+                            id="resetTimer"
+                            class="btn btn-secondary"
+                        >
+                            🔄 Zerar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-section">
+
+            <h2>Como usar?</h2>
+
+            <p>
+                Clique em <strong>Iniciar</strong> para começar a contagem.
+            </p>
+
+            <p>
+                Clique em <strong>Pausar</strong> para interromper
+                temporariamente.
+            </p>
+
+            <p>
+                Clique em <strong>Zerar</strong> para voltar o cronômetro
+                para zero.
+            </p>
+
+        </section>
+
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a
+                    href="calculadora.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+                </a>
+
+
+                <a
+                    href="idade.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">🎂</div>
+
+                    <h3>Calculadora de Idade</h3>
+
+                    <p>
+                        Calcule sua idade.
+                    </p>
+                </a>
+
+
+                <a
+                    href="temperatura.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">🌡️</div>
+
+                    <h3>Temperatura</h3>
+
+                    <p>
+                        Converta Celsius e Fahrenheit.
+                    </p>
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>NexoTools</h3>
+
+                <p>
+                    Ferramentas simples, rápidas e gratuitas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span class="current-year"></span>
+                NexoTools.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+let startTime = 0;
+let elapsedTime = 0;
+let timerInterval = null;
+
+
+const display =
+    document.getElementById("timerDisplay");
+
+const startButton =
+    document.getElementById("startTimer");
+
+const pauseButton =
+    document.getElementById("pauseTimer");
+
+const resetButton =
+    document.getElementById("resetTimer");
+
+
+function updateDisplay() {
+
+    const totalMilliseconds =
+        elapsedTime +
+        (timerInterval
+            ? Date.now() - startTime
+            : 0);
+
+
+    const milliseconds =
+        Math.floor(totalMilliseconds / 10) % 100;
+
+    const seconds =
+        Math.floor(totalMilliseconds / 1000) % 60;
+
+    const minutes =
+        Math.floor(totalMilliseconds / 60000) % 60;
+
+    const hours =
+        Math.floor(totalMilliseconds / 3600000);
+
+
+    display.textContent =
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+}
+
+
+startButton.addEventListener("click", function () {
+
+    if (timerInterval) {
+        return;
+    }
+
+    startTime = Date.now();
+
+    timerInterval =
+        setInterval(updateDisplay, 10);
+
+});
+
+
+pauseButton.addEventListener("click", function () {
+
+    if (!timerInterval) {
+        return;
+    }
+
+    elapsedTime +=
+        Date.now() - startTime;
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+    updateDisplay();
+
+});
+
+
+resetButton.addEventListener("click", function () {
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+    startTime = 0;
+
+    elapsedTime = 0;
+
+    display.textContent =
+        "00:00:00";
+
+});
+
+</script>
+
+</body>
+</html>
