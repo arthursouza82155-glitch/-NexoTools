@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Regra de Três Online | NexoTools</title>
+
+  <meta
+    name="description"
+    content="Resolva cálculos de regra de três simples online e gratuitamente com o NexoTools."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        Nexo<span>Tools</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          aria-label="Alternar modo escuro"
+        >
+          🌙
+        </button>
+
+        <button
+          class="menu-button"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- CONTEÚDO -->
+  <main class="tool-page">
+
+    <div class="container">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+
+        <a href="index.html">
+          NexoTools
+        </a>
+
+        /
+
+        Regra de Três
+
+      </div>
+
+
+      <!-- TÍTULO -->
+      <div class="tool-page-header">
+
+        <h1>📐 Regra de Três</h1>
+
+        <p>
+          Resolva uma regra de três simples de forma rápida.
+        </p>
+
+      </div>
+
+
+      <!-- FERRAMENTA -->
+      <div class="tool-container">
+
+        <div class="tool-panel">
+
+          <div class="form-group">
+
+            <label for="valueA">
+              Primeiro valor (A)
+            </label>
+
+            <input
+              type="number"
+              id="valueA"
+              placeholder="Ex: 5"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="valueB">
+              Segundo valor (B)
+            </label>
+
+            <input
+              type="number"
+              id="valueB"
+              placeholder="Ex: 10"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="valueC">
+              Terceiro valor (C)
+            </label>
+
+            <input
+              type="number"
+              id="valueC"
+              placeholder="Ex: 20"
+            >
+
+          </div>
+
+
+          <div class="info-box">
+
+            <p>
+              A relação será:
+            </p>
+
+            <strong>
+              A → B
+            </strong>
+
+            <br>
+
+            <strong>
+              C → X
+            </strong>
+
+            <p class="mt-20">
+              O NexoTools calculará o valor de X.
+            </p>
+
+          </div>
+
+
+          <button
+            id="calculateRule"
+            class="btn btn-primary"
+          >
+            Calcular
+          </button>
+
+
+          <div
+            id="ruleResult"
+            class="result"
+          >
+            O resultado aparecerá aqui.
+          </div>
+
+
+          <button
+            class="btn btn-secondary copy-result mt-20"
+            data-target="#ruleResult"
+          >
+            📋 Copiar resultado
+          </button>
+
+        </div>
+
+
+        <!-- EXPLICAÇÃO -->
+        <div class="info-box">
+
+          <h2>Como funciona?</h2>
+
+          <p>
+            Na regra de três simples, usamos três valores
+            conhecidos para descobrir um quarto valor.
+          </p>
+
+          <p>
+            A fórmula utilizada é:
+          </p>
+
+          <p>
+            <strong>
+              X = (B × C) ÷ A
+            </strong>
+          </p>
+
+          <p>
+            Exemplo:
+          </p>
+
+          <p>
+            Se 5 produtos custam R$ 10, quanto custam
+            20 produtos?
+          </p>
+
+          <p>
+            X = (10 × 20) ÷ 5 = 40
+          </p>
+
+        </div>
+
+
+        <!-- OUTRAS FERRAMENTAS -->
+        <div class="related-tools">
+
+          <h2>Outras ferramentas</h2>
+
+          <div class="tools-grid">
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🧮
+              </div>
+
+              <h3>Calculadora</h3>
+
+              <p>
+                Faça cálculos matemáticos rapidamente.
+              </p>
+
+              <a
+                href="calculadora.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                %
+              </div>
+
+              <h3>Porcentagem</h3>
+
+              <p>
+                Calcule porcentagens rapidamente.
+              </p>
+
+              <a
+                href="porcentagem.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-content">
+
+      <p>
+        © <span class="current-year"></span> NexoTools.
+        Todos os direitos reservados.
+      </p>
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Início
+        </a>
+
+        <a href="index.html#sobre">
+          Sobre
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT PRINCIPAL -->
+  <script src="script.js"></script>
+
+
+  <!-- JAVASCRIPT DA REGRA DE TRÊS -->
+  <script>
+
+    const ruleButton =
+      document.querySelector("#calculateRule");
+
+    if (ruleButton) {
+
+      ruleButton.addEventListener("click", () => {
+
+        const a =
+          Number(
+            document.querySelector("#valueA").value
+          );
+
+        const b =
+          Number(
+            document.querySelector("#valueB").value
+          );
+
+        const c =
+          Number(
+            document.querySelector("#valueC").value
+          );
+
+        const result =
+          document.querySelector("#ruleResult");
+
+
+        if (
+          Number.isNaN(a) ||
+          Number.isNaN(b) ||
+          Number.isNaN(c)
+        ) {
+
+          result.textContent =
+            "Digite os três valores.";
+
+          result.className =
+            "result error";
+
+          return;
+
+        }
+
+
+        if (a === 0) {
+
+          result.textContent =
+            "O primeiro valor não pode ser zero.";
+
+          result.className =
+            "result error";
+
+          return;
+
+        }
+
+
+        const x =
+          (b * c) / a;
+
+
+        result.textContent =
+          `X = ${x}`;
+
+
+        result.className =
+          "result success";
+
+      });
+
+    }
+
+  </script>
+
+</body>
+
+</html>
