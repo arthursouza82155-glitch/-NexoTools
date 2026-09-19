@@ -1,871 +1,461 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NexoTools — Ferramentas Online</title>
+  <title>NexoTools — Ferramentas online grátis</title>
 
-    <meta
-        name="description"
-        content="NexoTools: ferramentas online gratuitas, rápidas e fáceis de usar para o seu dia a dia."
-    >
+  <meta
+    name="description"
+    content="NexoTools reúne ferramentas online rápidas, simples e gratuitas em um só lugar."
+  >
 
-    <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#635bff">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         CABEÇALHO
-    ========================== -->
+<header>
+  <nav class="navbar">
 
-    <header>
+    <a href="#" class="logo">
+      <span class="logo-icon">N</span>
+      NexoTools
+    </a>
 
-        <div class="container navbar">
+    <div class="nav-links">
+      <a href="#ferramentas">Ferramentas</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
 
-            <a href="index.html" class="logo">
+    <button class="menu-button" id="menuButton">☰</button>
 
-                <span class="logo-icon">N</span>
+  </nav>
+</header>
 
-                <span class="logo-text">
-                    Nexo<span>Tools</span>
-                </span>
+<main>
 
-            </a>
+<section class="hero">
 
-            <nav>
+  <div class="hero-badge">
+    ⚡ Ferramentas rápidas e gratuitas
+  </div>
 
-                <ul class="nav-links">
+  <h1>
+    Tudo o que você precisa,
+    <span>em um só lugar.</span>
+  </h1>
 
-                    <li>
-                        <a href="#inicio">Início</a>
-                    </li>
+  <p>
+    Ferramentas online simples, rápidas e gratuitas para facilitar
+    seu dia a dia.
+  </p>
 
-                    <li>
-                        <a href="#ferramentas">Ferramentas</a>
-                    </li>
+  <div class="hero-buttons">
+    <a href="#ferramentas" class="btn btn-primary">
+      Explorar ferramentas
+    </a>
 
-                    <li>
-                        <a href="#sobre">Sobre</a>
-                    </li>
+    <a href="#sobre" class="btn btn-secondary">
+      Conhecer o NexoTools
+    </a>
+  </div>
 
-                </ul>
+</section>
 
-            </nav>
 
-            <div class="header-actions">
+<section class="section" id="ferramentas">
 
-                <button
-                    class="icon-button"
-                    id="themeButton"
-                    aria-label="Alternar modo escuro"
-                >
-                    🌙
-                </button>
+  <div class="section-header">
+    <h2>Ferramentas</h2>
 
-            </div>
+    <p>
+      Encontre rapidamente a ferramenta que você precisa.
+    </p>
+  </div>
 
-        </div>
 
-    </header>
+  <div class="search-container">
 
-
-    <main>
-
-        <!-- =========================
-             HERO
-        ========================== -->
-
-        <section class="hero" id="inicio">
-
-            <div class="container">
-
-                <h1>
-                    Ferramentas online
-                    <span>para o seu dia a dia</span>
-                </h1>
-
-                <p>
-                    Mais praticidade, menos complicação.
-                    Use ferramentas gratuitas, rápidas e fáceis
-                    diretamente pelo navegador.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a
-                        href="#ferramentas"
-                        class="btn btn-primary"
-                    >
-                        Explorar ferramentas
-                    </a>
-
-                    <a
-                        href="#sobre"
-                        class="btn btn-secondary"
-                    >
-                        Conheça o NexoTools
-                    </a>
-
-                </div>
-
-
-                <!-- DESTAQUES -->
-
-                <div class="hero-highlights">
-
-                    <div class="hero-highlight">
-
-                        <div class="hero-highlight-icon">
-                            ⚡
-                        </div>
-
-                        <strong>Rápido</strong>
-
-                        <span>
-                            Resultados em poucos segundos.
-                        </span>
-
-                    </div>
-
-
-                    <div class="hero-highlight">
-
-                        <div class="hero-highlight-icon">
-                            🛠️
-                        </div>
-
-                        <strong>Várias ferramentas</strong>
-
-                        <span>
-                            Tudo em um só lugar.
-                        </span>
-
-                    </div>
-
-
-                    <div class="hero-highlight">
-
-                        <div class="hero-highlight-icon">
-                            🆓
-                        </div>
-
-                        <strong>Gratuito</strong>
-
-                        <span>
-                            Use quando quiser.
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ESTATÍSTICAS
-        ========================== -->
-
-        <section class="stats">
-
-            <div class="container">
-
-                <div class="stats">
-
-                    <div class="stat">
-
-                        <strong>16+</strong>
-
-                        <span>
-                            Ferramentas
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <strong>100%</strong>
-
-                        <span>
-                            Gratuito
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <strong>24/7</strong>
-
-                        <span>
-                            Disponível
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             FERRAMENTAS
-        ========================== -->
-
-        <section id="ferramentas">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>
-                        Explorar ferramentas
-                    </h2>
-
-                    <p>
-                        Escolha uma ferramenta e comece agora.
-                    </p>
-
-                </div>
-
-
-                <!-- BUSCA -->
-
-                <div class="search-box">
-
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="🔎 Buscar ferramenta..."
-                        autocomplete="off"
-                    >
-
-                </div>
-
-
-                <!-- CATEGORIAS -->
-
-                <div class="categories">
-
-                    <button
-                        class="category-button active"
-                        data-category="all"
-                    >
-                        Todas
-                    </button>
-
-                    <button
-                        class="category-button"
-                        data-category="matematica"
-                    >
-                        Matemática
-                    </button>
-
-                    <button
-                        class="category-button"
-                        data-category="utilidades"
-                    >
-                        Utilidades
-                    </button>
-
-                    <button
-                        class="category-button"
-                        data-category="conversores"
-                    >
-                        Conversores
-                    </button>
-
-                    <button
-                        class="category-button"
-                        data-category="geradores"
-                    >
-                        Geradores
-                    </button>
-
-                </div>
-
-
-                <!-- =========================
-                     GRID
-                ========================== -->
-
-                <div class="tools-grid">
-
-
-                    <!-- 1 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="matematica"
-                    >
-
-                        <div class="tool-icon">
-                            🧮
-                        </div>
-
-                        <h3>
-                            Calculadora
-                        </h3>
-
-                        <p>
-                            Faça cálculos de forma rápida e simples.
-                        </p>
-
-                        <a
-                            href="calculadora.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 2 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="matematica"
-                    >
-
-                        <div class="tool-icon">
-                            📊
-                        </div>
-
-                        <h3>
-                            Porcentagem
-                        </h3>
-
-                        <p>
-                            Calcule porcentagens rapidamente.
-                        </p>
-
-                        <a
-                            href="porcentagem.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 3 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="matematica"
-                    >
-
-                        <div class="tool-icon">
-                            📐
-                        </div>
-
-                        <h3>
-                            Regra de Três
-                        </h3>
-
-                        <p>
-                            Resolva problemas de regra de três.
-                        </p>
-
-                        <a
-                            href="regra-de-tres.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 4 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="geradores"
-                    >
-
-                        <div class="tool-icon">
-                            🔐
-                        </div>
-
-                        <h3>
-                            Gerador de Senha
-                        </h3>
-
-                        <p>
-                            Gere senhas aleatórias e seguras.
-                        </p>
-
-                        <a
-                            href="gerador-senha.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 5 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="utilidades"
-                    >
-
-                        <div class="tool-icon">
-                            📱
-                        </div>
-
-                        <h3>
-                            Gerador de QR Code
-                        </h3>
-
-                        <p>
-                            Transforme textos e links em QR Codes.
-                        </p>
-
-                        <a
-                            href="qr-code.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 6 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="conversores"
-                    >
-
-                        <div class="tool-icon">
-                            🌡️
-                        </div>
-
-                        <h3>
-                            Temperatura
-                        </h3>
-
-                        <p>
-                            Converta diferentes unidades de temperatura.
-                        </p>
-
-                        <a
-                            href="temperatura.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 7 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="conversores"
-                    >
-
-                        <div class="tool-icon">
-                            ⚖️
-                        </div>
-
-                        <h3>
-                            Conversor de Peso
-                        </h3>
-
-                        <p>
-                            Converta valores entre unidades de peso.
-                        </p>
-
-                        <a
-                            href="peso.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 8 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="utilidades"
-                    >
-
-                        <div class="tool-icon">
-                            🎂
-                        </div>
-
-                        <h3>
-                            Calculadora de Idade
-                        </h3>
-
-                        <p>
-                            Descubra sua idade com precisão.
-                        </p>
-
-                        <a
-                            href="idade.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 9 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="matematica"
-                    >
-
-                        <div class="tool-icon">
-                            💰
-                        </div>
-
-                        <h3>
-                            Juros
-                        </h3>
-
-                        <p>
-                            Calcule juros de forma simples.
-                        </p>
-
-                        <a
-                            href="juros.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 10 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="utilidades"
-                    >
-
-                        <div class="tool-icon">
-                            📝
-                        </div>
-
-                        <h3>
-                            Contador de Palavras
-                        </h3>
-
-                        <p>
-                            Conte palavras e caracteres de um texto.
-                        </p>
-
-                        <a
-                            href="palavras.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 11 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="utilidades"
-                    >
-
-                        <div class="tool-icon">
-                            ⏱️
-                        </div>
-
-                        <h3>
-                            Cronômetro
-                        </h3>
-
-                        <p>
-                            Cronometre seu tempo facilmente.
-                        </p>
-
-                        <a
-                            href="cronometro.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 12 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="geradores"
-                    >
-
-                        <div class="tool-icon">
-                            🎲
-                        </div>
-
-                        <h3>
-                            Número Aleatório
-                        </h3>
-
-                        <p>
-                            Gere números aleatórios rapidamente.
-                        </p>
-
-                        <a
-                            href="aleatorio.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 13 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="utilidades"
-                    >
-
-                        <div class="tool-icon">
-                            ⛽
-                        </div>
-
-                        <h3>
-                            Combustível
-                        </h3>
-
-                        <p>
-                            Calcule gastos e consumo de combustível.
-                        </p>
-
-                        <a
-                            href="combustivel.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 14 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="conversores"
-                    >
-
-                        <div class="tool-icon">
-                            📍
-                        </div>
-
-                        <h3>
-                            Distância
-                        </h3>
-
-                        <p>
-                            Converta unidades de distância.
-                        </p>
-
-                        <a
-                            href="distancia.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 15 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="geradores"
-                    >
-
-                        <div class="tool-icon">
-                            🪙
-                        </div>
-
-                        <h3>
-                            Cara ou Coroa
-                        </h3>
-
-                        <p>
-                            Faça um sorteio rápido entre cara e coroa.
-                        </p>
-
-                        <a
-                            href="cara-coroa.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                    <!-- 16 -->
-
-                    <article
-                        class="tool-card"
-                        data-category="conversores"
-                    >
-
-                        <div class="tool-icon">
-                            🚗
-                        </div>
-
-                        <h3>
-                            Velocidade
-                        </h3>
-
-                        <p>
-                            Converta diferentes unidades de velocidade.
-                        </p>
-
-                        <a
-                            href="velocidade.html"
-                            class="btn btn-primary"
-                        >
-                            Abrir ferramenta
-                        </a>
-
-                    </article>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SOBRE
-        ========================== -->
-
-        <section id="sobre">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>
-                        Sobre o NexoTools
-                    </h2>
-
-                </div>
-
-                <div class="about">
-
-                    <p>
-                        O NexoTools reúne ferramentas online
-                        simples, rápidas e gratuitas para facilitar
-                        tarefas do dia a dia.
-                    </p>
-
-                    <p>
-                        A ideia é colocar várias ferramentas úteis
-                        em um único lugar, sem complicação.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="container footer-content">
-
-            <div>
-
-                <div class="footer-logo">
-                    NexoTools
-                </div>
-
-                <div class="footer-copy">
-                    © <span id="currentYear"></span>
-                    NexoTools. Todos os direitos reservados.
-                </div>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <a href="#inicio">
-                    Início
-                </a>
-
-                <a href="#ferramentas">
-                    Ferramentas
-                </a>
-
-                <a href="#sobre">
-                    Sobre
-                </a>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- VOLTAR AO TOPO -->
-
-    <button
-        class="back-to-top"
-        id="backToTop"
-        aria-label="Voltar ao topo"
+    <input
+      type="text"
+      id="searchInput"
+      class="search-box"
+      placeholder="🔍 Pesquisar ferramenta..."
     >
-        ↑
+
+  </div>
+
+
+  <div class="categories">
+
+    <button class="category active" data-category="all">
+      Todas
     </button>
 
+    <button class="category" data-category="calculadora">
+      Calculadoras
+    </button>
 
-    <script src="script.js"></script>
+    <button class="category" data-category="texto">
+      Texto
+    </button>
+
+    <button class="category" data-category="geradores">
+      Geradores
+    </button>
+
+    <button class="category" data-category="utilidades">
+      Utilidades
+    </button>
+
+  </div>
+
+
+  <div class="tools-grid" id="toolsGrid">
+
+    <article class="tool-card" data-category="calculadora" data-name="calculadora">
+
+      <div class="tool-icon">🧮</div>
+
+      <h3>Calculadora</h3>
+
+      <p>
+        Faça cálculos rapidamente.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="calculator">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+
+    <article class="tool-card" data-category="texto" data-name="contador de palavras">
+
+      <div class="tool-icon">📝</div>
+
+      <h3>Contador de palavras</h3>
+
+      <p>
+        Conte palavras e caracteres de qualquer texto.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="counter">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+
+    <article class="tool-card" data-category="geradores" data-name="gerador de qr code">
+
+      <div class="tool-icon">🔳</div>
+
+      <h3>Gerador de QR Code</h3>
+
+      <p>
+        Transforme textos e links em QR Codes.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="qr">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+
+    <article class="tool-card" data-category="geradores" data-name="gerador de senha">
+
+      <div class="tool-icon">🔐</div>
+
+      <h3>Gerador de senha</h3>
+
+      <p>
+        Crie senhas aleatórias rapidamente.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="password">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+
+    <article class="tool-card" data-category="texto" data-name="contador de caracteres">
+
+      <div class="tool-icon">🔤</div>
+
+      <h3>Contador de caracteres</h3>
+
+      <p>
+        Veja quantos caracteres existem em um texto.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="counter">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+
+    <article class="tool-card" data-category="utilidades" data-name="gerador de cpf">
+
+      <div class="tool-icon">🪪</div>
+
+      <h3>Gerador de CPF</h3>
+
+      <p>
+        Gere um número de CPF para testes.
+      </p>
+
+      <button class="btn btn-primary open-tool" data-tool="cpf">
+        Abrir ferramenta
+      </button>
+
+    </article>
+
+  </div>
+
+
+  <div id="noResults" class="no-results hidden">
+    Nenhuma ferramenta encontrada.
+  </div>
+
+</section>
+
+
+<section class="section tool-section hidden" id="toolSection">
+
+  <div class="tool-box">
+
+    <div class="tool-box-header">
+
+      <h2 id="toolTitle">
+        Ferramenta
+      </h2>
+
+      <p id="toolDescription">
+        Utilize a ferramenta abaixo.
+      </p>
+
+    </div>
+
+
+    <div id="toolContent"></div>
+
+
+    <div class="tool-actions">
+
+      <button class="btn btn-secondary" id="closeTool">
+        ← Voltar
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <strong>100%</strong>
+      <span>Gratuito</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>24/7</strong>
+      <span>Disponível</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>⚡</strong>
+      <span>Rápido e simples</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="sobre">
+
+  <div class="feature-box">
+
+    <h2>Por que NexoTools?</h2>
+
+    <p>
+      O NexoTools foi criado para reunir ferramentas úteis em uma
+      plataforma simples, rápida e fácil de usar.
+    </p>
+
+    <a href="#ferramentas" class="btn">
+      Começar agora
+    </a>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="contato">
+
+  <div class="section-header">
+
+    <h2>Contato</h2>
+
+    <p>
+      Tem uma sugestão de ferramenta? Envie sua ideia.
+    </p>
+
+  </div>
+
+  <div class="tool-box">
+
+    <form id="contactForm">
+
+      <div class="form-group">
+
+        <label for="contactName">
+          Nome
+        </label>
+
+        <input
+          id="contactName"
+          class="form-control"
+          type="text"
+          required
+          placeholder="Seu nome"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="contactEmail">
+          E-mail
+        </label>
+
+        <input
+          id="contactEmail"
+          class="form-control"
+          type="email"
+          required
+          placeholder="seu@email.com"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="contactMessage">
+          Mensagem
+        </label>
+
+        <textarea
+          id="contactMessage"
+          class="form-control"
+          required
+          placeholder="Digite sua mensagem..."
+        ></textarea>
+
+      </div>
+
+
+      <button class="btn btn-primary" type="submit">
+        Enviar mensagem
+      </button>
+
+    </form>
+
+    <div id="contactResult"></div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-content">
+
+    <div class="footer-brand">
+
+      <a href="#" class="logo">
+        <span class="logo-icon">N</span>
+        NexoTools
+      </a>
+
+      <p>
+        Ferramentas online simples, rápidas e gratuitas.
+      </p>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h4>Ferramentas</h4>
+
+      <a href="#ferramentas">Todas</a>
+      <a href="#ferramentas">Calculadoras</a>
+      <a href="#ferramentas">Geradores</a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h4>Empresa</h4>
+
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h4>NexoTools</h4>
+
+      <a href="#">Início</a>
+      <a href="#ferramentas">Ferramentas</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 NexoTools. Todos os direitos reservados.
+    </span>
+
+    <span>
+      Feito para facilitar seu dia.
+    </span>
+
+  </div>
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
