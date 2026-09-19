@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escolhedor Aleatório | NexoTools</title>
+
+    <meta
+        name="description"
+        content="Escolha uma opção aleatoriamente com o Escolhedor Aleatório do NexoTools."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button
+                id="themeButton"
+                class="icon-button"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">Início</a>
+
+            <span>›</span>
+
+            <span>Escolhedor Aleatório</span>
+
+        </div>
+
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+
+                <span class="hero-badge">
+                    🎲 Aleatório
+                </span>
+
+                <h1>Escolhedor Aleatório</h1>
+
+                <p>
+                    Coloque suas opções e deixe o NexoTools escolher uma delas.
+                </p>
+
+            </div>
+
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div class="form-group">
+
+                        <label for="optionsInput">
+                            Suas opções
+                        </label>
+
+                        <textarea
+                            id="optionsInput"
+                            rows="10"
+                            placeholder="Digite uma opção por linha..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        id="chooseRandom"
+                        class="btn btn-primary tool-button"
+                    >
+                        🎲 Escolher
+                    </button>
+
+
+                    <div
+                        id="randomResult"
+                        class="result"
+                    >
+                        Adicione algumas opções para começar.
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary copy-result"
+                        data-target="randomResult"
+                    >
+                        📋 Copiar resultado
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-section">
+
+            <h2>Como usar?</h2>
+
+            <p>
+                Digite uma opção em cada linha.
+            </p>
+
+            <p>
+                Depois clique em <strong>Escolher</strong>.
+            </p>
+
+            <p>
+                O NexoTools selecionará uma das opções aleatoriamente.
+            </p>
+
+        </section>
+
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a
+                    href="cronometro.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">⏱️</div>
+
+                    <h3>Cronômetro</h3>
+
+                    <p>
+                        Cronometre o tempo.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="calculadora.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="palavras.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">📝</div>
+
+                    <h3>Contador de Palavras</h3>
+
+                    <p>
+                        Conte palavras e caracteres.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>NexoTools</h3>
+
+                <p>
+                    Ferramentas simples, rápidas e gratuitas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span class="current-year"></span>
+                NexoTools.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+const chooseRandom =
+    document.getElementById("chooseRandom");
+
+
+chooseRandom.addEventListener("click", function () {
+
+    const input =
+        document.getElementById("optionsInput").value;
+
+    const result =
+        document.getElementById("randomResult");
+
+
+    const options =
+        input
+            .split(/\r?\n/)
+            .map(option => option.trim())
+            .filter(option => option !== "");
+
+
+    if (options.length === 0) {
+
+        result.textContent =
+            "Digite pelo menos uma opção.";
+
+        result.className =
+            "result error";
+
+        return;
+    }
+
+
+    const randomIndex =
+        Math.floor(
+            Math.random() * options.length
+        );
+
+
+    const selected =
+        options[randomIndex];
+
+
+    result.innerHTML = `
+        <strong>🎉 Resultado:</strong><br>
+        ${selected}
+    `;
+
+    result.className =
+        "result success";
+
+});
+
+</script>
+
+</body>
+</html>
