@@ -1,2372 +1,801 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NexoTools — Ferramentas Online Grátis</title>
+    <meta charset="UTF-8">
 
-<meta name="description" content="NexoTools: ferramentas online grátis para cálculos, conversões, geração de senhas, QR Code e muito mais.">
-<meta name="keywords" content="ferramentas online, calculadora, conversor, gerador de senha, qr code, NexoTools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <meta
+        name="description"
+        content="NexoTools - ferramentas online gratuitas, rápidas e fáceis de usar."
+    >
 
-:root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --text:#101828;
-    --muted:#667085;
-    --primary:#635bff;
-    --primary2:#8b5cf6;
-    --border:#e4e7ec;
-    --shadow:0 10px 30px rgba(16,24,40,.08);
-}
+    <meta
+        name="keywords"
+        content="ferramentas online, calculadora, porcentagem, QR code, conversor"
+    >
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-    scroll-behavior:smooth;
-}
+    <title>NexoTools | Ferramentas Online Gratuitas</title>
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    transition:.3s;
-}
+    <link rel="stylesheet" href="style.css">
 
-body.dark{
-    --bg:#0b1020;
-    --card:#12182a;
-    --text:#f5f7ff;
-    --muted:#a7b0c0;
-    --border:#27304a;
-    --shadow:0 10px 30px rgba(0,0,0,.3);
-}
+    <script src="script.js" defer></script>
 
-/* HEADER */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.88);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid var(--border);
-}
-
-.dark header{
-    background:rgba(11,16,32,.88);
-}
-
-.nav{
-    max-width:1200px;
-    margin:auto;
-    padding:18px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    font-size:25px;
-    font-weight:800;
-    color:var(--text);
-}
-
-.logo span{
-    color:var(--primary);
-}
-
-nav{
-    display:flex;
-    gap:28px;
-    align-items:center;
-}
-
-nav a{
-    text-decoration:none;
-    color:var(--text);
-    font-weight:600;
-}
-
-nav a:hover{
-    color:var(--primary);
-}
-
-.header-buttons{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.icon-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:18px;
-}
-
-.menu-btn{
-    display:none;
-}
-
-/* HERO */
-
-.hero{
-    max-width:1200px;
-    margin:auto;
-    padding:90px 20px 60px;
-    text-align:center;
-}
-
-.badge{
-    display:inline-block;
-    background:rgba(99,91,255,.1);
-    color:var(--primary);
-    padding:8px 14px;
-    border-radius:30px;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-size:clamp(38px,7vw,72px);
-    line-height:1.05;
-    max-width:850px;
-    margin:auto;
-    letter-spacing:-2px;
-}
-
-.hero h1 span{
-    color:var(--primary);
-}
-
-.hero p{
-    max-width:650px;
-    margin:22px auto;
-    color:var(--muted);
-    font-size:18px;
-    line-height:1.6;
-}
-
-.search{
-    max-width:650px;
-    margin:30px auto 0;
-    position:relative;
-}
-
-.search input{
-    width:100%;
-    padding:18px 22px;
-    border-radius:16px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    font-size:16px;
-    outline:none;
-    box-shadow:var(--shadow);
-}
-
-.search input:focus{
-    border-color:var(--primary);
-}
-
-/* STATS */
-
-.stats{
-    max-width:900px;
-    margin:10px auto 70px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    padding:0 20px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-    text-align:center;
-}
-
-.stat strong{
-    display:block;
-    font-size:30px;
-    color:var(--primary);
-    margin-bottom:6px;
-}
-
-.stat span{
-    color:var(--muted);
-}
-
-/* MAIN */
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:0 20px 80px;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.section-title h2{
-    font-size:34px;
-    margin-bottom:10px;
-}
-
-.section-title p{
-    color:var(--muted);
-}
-
-/* CATEGORIES */
-
-.categories{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:35px;
-}
-
-.category{
-    padding:10px 16px;
-    border-radius:30px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    cursor:pointer;
-    transition:.2s;
-}
-
-.category:hover,
-.category.active{
-    background:var(--primary);
-    color:white;
-    border-color:var(--primary);
-}
-
-/* TOOLS */
-
-.tools{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.tool{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:23px;
-    box-shadow:var(--shadow);
-    transition:.25s;
-    position:relative;
-}
-
-.tool:hover{
-    transform:translateY(-5px);
-}
-
-.tool-icon{
-    width:48px;
-    height:48px;
-    border-radius:14px;
-    background:rgba(99,91,255,.1);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:23px;
-    margin-bottom:18px;
-}
-
-.tool h3{
-    margin-bottom:8px;
-}
-
-.tool p{
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.5;
-    min-height:42px;
-}
-
-.tool-buttons{
-    display:flex;
-    gap:8px;
-    margin-top:18px;
-}
-
-.open-btn{
-    flex:1;
-    border:0;
-    padding:11px;
-    border-radius:10px;
-    background:var(--primary);
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.favorite{
-    width:42px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:var(--card);
-    color:var(--text);
-    cursor:pointer;
-    font-size:18px;
-}
-
-/* TOOL AREA */
-
-#toolArea{
-    margin-top:45px;
-    display:none;
-}
-
-.tool-panel{
-    max-width:700px;
-    margin:auto;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:30px;
-    box-shadow:var(--shadow);
-}
-
-.tool-panel h2{
-    margin-bottom:20px;
-}
-
-.tool-panel input,
-.tool-panel select,
-.tool-panel textarea{
-    width:100%;
-    padding:13px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:var(--bg);
-    color:var(--text);
-    margin:7px 0;
-    outline:none;
-}
-
-.tool-panel textarea{
-    min-height:130px;
-    resize:vertical;
-}
-
-.tool-panel button{
-    padding:12px 16px;
-    border:0;
-    border-radius:10px;
-    background:var(--primary);
-    color:white;
-    cursor:pointer;
-    margin:5px 3px;
-    font-weight:bold;
-}
-
-.result{
-    margin-top:18px;
-    padding:18px;
-    border-radius:12px;
-    background:rgba(99,91,255,.08);
-    font-size:18px;
-    word-break:break-word;
-}
-
-.close{
-    float:right;
-    background:#ef4444 !important;
-}
-
-/* ABOUT */
-
-.about{
-    margin-top:90px;
-    padding:70px 20px;
-    background:var(--card);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-}
-
-.about-inner{
-    max-width:900px;
-    margin:auto;
-    text-align:center;
-}
-
-.about h2{
-    font-size:36px;
-    margin-bottom:18px;
-}
-
-.about p{
-    color:var(--muted);
-    line-height:1.8;
-}
-
-/* FOOTER */
-
-footer{
-    padding:40px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
-footer strong{
-    color:var(--text);
-}
-
-/* TOP BUTTON */
-
-#topBtn{
-    position:fixed;
-    right:22px;
-    bottom:22px;
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    border:0;
-    background:var(--primary);
-    color:white;
-    cursor:pointer;
-    display:none;
-    font-size:20px;
-    z-index:999;
-}
-
-/* HIDDEN */
-
-.hidden{
-    display:none !important;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-    .tools{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:650px){
-
-    nav{
-        position:absolute;
-        top:75px;
-        left:0;
-        right:0;
-        background:var(--card);
-        border-bottom:1px solid var(--border);
-        display:none;
-        flex-direction:column;
-        padding:20px;
-    }
-
-    nav.show{
-        display:flex;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .tools{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding-top:60px;
-    }
-
-    .hero h1{
-        letter-spacing:-1px;
-    }
-
-    .tool-panel{
-        padding:20px;
-    }
-
-}
-
-</style>
 </head>
+
 
 <body>
 
-<header>
 
-<div class="nav">
+<header class="site-header">
 
-<div class="logo">Nexo<span>Tools</span></div>
+    <div class="container navbar">
 
-<nav id="nav">
-<a href="#inicio" onclick="fecharMenu()">Início</a>
-<a href="#ferramentas" onclick="fecharMenu()">Ferramentas</a>
-<a href="#sobre" onclick="fecharMenu()">Sobre</a>
-</nav>
 
-<div class="header-buttons">
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
 
-<button class="icon-btn" onclick="modoEscuro()" title="Modo escuro">🌙</button>
 
-<button class="icon-btn menu-btn" onclick="menu()" title="Menu">☰</button>
+        <nav class="nav-links">
 
-</div>
+            <a href="index.html">
+                Início
+            </a>
 
-</div>
+            <a href="#ferramentas">
+                Ferramentas
+            </a>
+
+            <a href="#sobre">
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-button"
+                id="themeButton"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
 
 </header>
 
 
-<section class="hero" id="inicio">
 
-<div class="badge">⚡ Ferramentas rápidas e gratuitas</div>
+<main>
 
-<h1>
-Tudo o que você precisa,
-<span>em um só lugar.</span>
-</h1>
 
-<p>
-Calculadoras, conversores, geradores e várias outras ferramentas
-úteis para o seu dia a dia.
-</p>
+<!-- HERO -->
 
-<div class="search">
+<section class="hero">
 
-<input
-type="text"
-id="searchInput"
-placeholder="🔎 Pesquisar ferramenta..."
-oninput="buscar()"
->
+    <div class="container">
 
-</div>
+        <div class="hero-badge">
+            ⚡ Simples • Rápido • Gratuito
+        </div>
+
+
+        <h1>
+            Ferramentas úteis,
+            <span>em um só lugar.</span>
+        </h1>
+
+
+        <p>
+            O NexoTools reúne ferramentas online gratuitas
+            para facilitar suas tarefas do dia a dia.
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="#ferramentas"
+                class="btn btn-primary"
+            >
+                🚀 Explorar ferramentas
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<div class="stats">
 
-<div class="stat">
-<strong id="toolCount">20+</strong>
-<span>Ferramentas</span>
-</div>
+<!-- ESTATÍSTICAS -->
 
-<div class="stat">
-<strong>100%</strong>
-<span>Grátis</span>
-</div>
+<section class="stats">
 
-<div class="stat">
-<strong>24/7</strong>
-<span>Disponível</span>
-</div>
+    <div class="container">
 
-</div>
+        <div class="stats">
 
 
-<main class="container" id="ferramentas">
+            <div class="stat">
 
-<div class="section-title">
+                <strong>20+</strong>
 
-<h2>Ferramentas</h2>
+                <span>
+                    Ferramentas
+                </span>
 
-<p>Escolha uma ferramenta e comece agora.</p>
+            </div>
 
-</div>
 
+            <div class="stat">
 
-<div class="categories">
+                <strong>100%</strong>
 
-<button class="category active" onclick="filtrar('todos',this)">Todas</button>
+                <span>
+                    Gratuito
+                </span>
 
-<button class="category" onclick="filtrar('calculo',this)">Cálculos</button>
+            </div>
 
-<button class="category" onclick="filtrar('gerador',this)">Geradores</button>
 
-<button class="category" onclick="filtrar('conversor',this)">Conversores</button>
+            <div class="stat">
 
-<button class="category" onclick="filtrar('texto',this)">Texto</button>
+                <strong>24/7</strong>
 
-</div>
+                <span>
+                    Disponível
+                </span>
 
+            </div>
 
-<div class="tools" id="toolsGrid">
 
+        </div>
 
-<div class="tool" data-category="calculo" data-name="calculadora">
+    </div>
 
-<div class="tool-icon">🧮</div>
+</section>
 
-<h3>Calculadora</h3>
 
-<p>Faça operações matemáticas rapidamente.</p>
 
-<div class="tool-buttons">
+<!-- FERRAMENTAS -->
 
-<button class="open-btn" onclick="abrir('calculadora')">Abrir</button>
+<section
+    class="section"
+    id="ferramentas"
+>
 
-<button class="favorite" onclick="favoritar(this,'Calculadora')">☆</button>
+    <div class="container">
 
-</div>
 
-</div>
+        <div class="section-header">
 
+            <div>
 
-<div class="tool" data-category="calculo" data-name="porcentagem">
+                <div class="hero-badge">
+                    🛠️ Ferramentas
+                </div>
 
-<div class="tool-icon">📊</div>
+                <h2>
+                    Escolha uma ferramenta
+                </h2>
 
-<h3>Porcentagem</h3>
+                <p>
+                    Clique em qualquer ferramenta para começar.
+                </p>
 
-<p>Calcule porcentagens de forma rápida.</p>
+            </div>
 
-<div class="tool-buttons">
+        </div>
 
-<button class="open-btn" onclick="abrir('porcentagem')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'Porcentagem')">☆</button>
 
-</div>
+        <!-- PESQUISA -->
 
-</div>
+        <div class="search-box">
 
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="🔎 Procurar ferramenta..."
+            >
 
-<div class="tool" data-category="calculo" data-name="regra de tres">
+        </div>
 
-<div class="tool-icon">📐</div>
 
-<h3>Regra de três</h3>
 
-<p>Resolva regras de três simples.</p>
+        <!-- CATEGORIAS -->
 
-<div class="tool-buttons">
+        <div class="categories">
 
-<button class="open-btn" onclick="abrir('regra')">Abrir</button>
+            <button
+                class="category-button active"
+                data-category="all"
+            >
+                Todas
+            </button>
 
-<button class="favorite" onclick="favoritar(this,'Regra de três')">☆</button>
 
-</div>
+            <button
+                class="category-button"
+                data-category="matematica"
+            >
+                Matemática
+            </button>
 
-</div>
 
+            <button
+                class="category-button"
+                data-category="conversores"
+            >
+                Conversores
+            </button>
 
-<div class="tool" data-category="calculo" data-name="media">
 
-<div class="tool-icon">🎓</div>
+            <button
+                class="category-button"
+                data-category="utilidades"
+            >
+                Utilidades
+            </button>
 
-<h3>Média</h3>
 
-<p>Calcule a média de vários números.</p>
+            <button
+                class="category-button"
+                data-category="texto"
+            >
+                Texto
+            </button>
 
-<div class="tool-buttons">
+        </div>
 
-<button class="open-btn" onclick="abrir('media')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'Média')">☆</button>
 
-</div>
+        <!-- GRID -->
 
-</div>
+        <div class="tools-grid">
 
 
-<div class="tool" data-category="gerador" data-name="gerador de senha">
 
-<div class="tool-icon">🔐</div>
+            <!-- 1 -->
 
-<h3>Gerador de senha</h3>
+            <a
+                href="calculadora.html"
+                class="tool-card fade-in"
+                data-category="matematica"
+            >
 
-<p>Crie senhas aleatórias.</p>
+                <div class="tool-icon">
+                    🧮
+                </div>
 
-<div class="tool-buttons">
+                <h3>
+                    Calculadora
+                </h3>
 
-<button class="open-btn" onclick="abrir('senha')">Abrir</button>
+                <p>
+                    Faça cálculos matemáticos rapidamente.
+                </p>
 
-<button class="favorite" onclick="favoritar(this,'Gerador de senha')">☆</button>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-</div>
+            </a>
 
-</div>
 
 
-<div class="tool" data-category="gerador" data-name="numero aleatorio">
+            <!-- 2 -->
 
-<div class="tool-icon">🎲</div>
+            <a
+                href="porcentagem.html"
+                class="tool-card fade-in"
+                data-category="matematica"
+            >
 
-<h3>Número aleatório</h3>
+                <div class="tool-icon">
+                    %
+                </div>
 
-<p>Gere um número dentro de um intervalo.</p>
+                <h3>
+                    Porcentagem
+                </h3>
 
-<div class="tool-buttons">
+                <p>
+                    Calcule porcentagens de forma simples.
+                </p>
 
-<button class="open-btn" onclick="abrir('numero')">Abrir</button>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<button class="favorite" onclick="favoritar(this,'Número aleatório')">☆</button>
+            </a>
 
-</div>
 
-</div>
 
+            <!-- 3 -->
 
-<div class="tool" data-category="gerador" data-name="dado">
+            <a
+                href="regra-de-tres.html"
+                class="tool-card fade-in"
+                data-category="matematica"
+            >
 
-<div class="tool-icon">🎲</div>
+                <div class="tool-icon">
+                    📐
+                </div>
 
-<h3>Dados</h3>
+                <h3>
+                    Regra de Três
+                </h3>
 
-<p>Jogue dados virtuais.</p>
+                <p>
+                    Resolva regras de três rapidamente.
+                </p>
 
-<div class="tool-buttons">
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<button class="open-btn" onclick="abrir('dado')">Abrir</button>
+            </a>
 
-<button class="favorite" onclick="favoritar(this,'Dados')">☆</button>
 
-</div>
 
-</div>
+            <!-- 4 -->
 
+            <a
+                href="gerador-senha.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-<div class="tool" data-category="gerador" data-name="qr code">
+                <div class="tool-icon">
+                    🔐
+                </div>
 
-<div class="tool-icon">📱</div>
+                <h3>
+                    Gerador de Senha
+                </h3>
 
-<h3>QR Code</h3>
+                <p>
+                    Gere senhas aleatórias.
+                </p>
 
-<p>Gere QR Codes para links e textos.</p>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<div class="tool-buttons">
+            </a>
 
-<button class="open-btn" onclick="abrir('qrcode')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'QR Code')">☆</button>
 
-</div>
+            <!-- 5 -->
 
-</div>
+            <a
+                href="qr-code.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
+                <div class="tool-icon">
+                    📱
+                </div>
 
-<div class="tool" data-category="conversor" data-name="peso">
+                <h3>
+                    QR Code
+                </h3>
 
-<div class="tool-icon">⚖️</div>
+                <p>
+                    Crie QR Codes rapidamente.
+                </p>
 
-<h3>Peso</h3>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<p>Converta quilogramas e libras.</p>
+            </a>
 
-<div class="tool-buttons">
 
-<button class="open-btn" onclick="abrir('peso')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'Conversor de peso')">☆</button>
+            <!-- 6 -->
 
-</div>
+            <a
+                href="temperatura.html"
+                class="tool-card fade-in"
+                data-category="conversores"
+            >
 
-</div>
+                <div class="tool-icon">
+                    🌡️
+                </div>
 
+                <h3>
+                    Temperatura
+                </h3>
 
-<div class="tool" data-category="conversor" data-name="temperatura">
+                <p>
+                    Converta Celsius e Fahrenheit.
+                </p>
 
-<div class="tool-icon">🌡️</div>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<h3>Temperatura</h3>
+            </a>
 
-<p>Converta Celsius e Fahrenheit.</p>
 
-<div class="tool-buttons">
 
-<button class="open-btn" onclick="abrir('temperatura')">Abrir</button>
+            <!-- 7 -->
 
-<button class="favorite" onclick="favoritar(this,'Temperatura')">☆</button>
+            <a
+                href="peso.html"
+                class="tool-card fade-in"
+                data-category="conversores"
+            >
 
-</div>
+                <div class="tool-icon">
+                    ⚖️
+                </div>
 
-</div>
+                <h3>
+                    Conversor de Peso
+                </h3>
 
+                <p>
+                    Converta kg e libras.
+                </p>
 
-<div class="tool" data-category="texto" data-name="contador de texto">
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<div class="tool-icon">📝</div>
+            </a>
 
-<h3>Contador de texto</h3>
 
-<p>Conte caracteres, palavras e linhas.</p>
 
-<div class="tool-buttons">
+            <!-- 8 -->
 
-<button class="open-btn" onclick="abrir('texto')">Abrir</button>
+            <a
+                href="idade.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-<button class="favorite" onclick="favoritar(this,'Contador de texto')">☆</button>
+                <div class="tool-icon">
+                    🎂
+                </div>
 
-</div>
+                <h3>
+                    Calculadora de Idade
+                </h3>
 
-</div>
+                <p>
+                    Descubra sua idade exata.
+                </p>
 
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<div class="tool" data-category="calculo" data-name="idade">
+            </a>
 
-<div class="tool-icon">🎂</div>
 
-<h3>Calculadora de idade</h3>
 
-<p>Descubra sua idade em anos.</p>
+            <!-- 9 -->
 
-<div class="tool-buttons">
+            <a
+                href="juros.html"
+                class="tool-card fade-in"
+                data-category="matematica"
+            >
 
-<button class="open-btn" onclick="abrir('idade')">Abrir</button>
+                <div class="tool-icon">
+                    💰
+                </div>
 
-<button class="favorite" onclick="favoritar(this,'Calculadora de idade')">☆</button>
+                <h3>
+                    Juros Simples
+                </h3>
 
-</div>
+                <p>
+                    Calcule juros simples e montante.
+                </p>
 
-</div>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
+            </a>
 
-<div class="tool" data-category="calculo" data-name="juros">
 
-<div class="tool-icon">💰</div>
 
-<h3>Juros simples</h3>
+            <!-- 10 -->
 
-<p>Calcule juros simples.</p>
+            <a
+                href="palavras.html"
+                class="tool-card fade-in"
+                data-category="texto"
+            >
 
-<div class="tool-buttons">
+                <div class="tool-icon">
+                    📝
+                </div>
 
-<button class="open-btn" onclick="abrir('juros')">Abrir</button>
+                <h3>
+                    Contador de Texto
+                </h3>
 
-<button class="favorite" onclick="favoritar(this,'Juros simples')">☆</button>
+                <p>
+                    Conte palavras, caracteres e linhas.
+                </p>
 
-</div>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-</div>
+            </a>
 
 
-<div class="tool" data-category="texto" data-name="palavras">
 
-<div class="tool-icon">🔤</div>
+            <!-- 11 -->
 
-<h3>Contador de palavras</h3>
+            <a
+                href="cronometro.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-<p>Conte as palavras de um texto.</p>
+                <div class="tool-icon">
+                    ⏱️
+                </div>
 
-<div class="tool-buttons">
+                <h3>
+                    Cronômetro
+                </h3>
 
-<button class="open-btn" onclick="abrir('palavras')">Abrir</button>
+                <p>
+                    Cronometre seu tempo facilmente.
+                </p>
 
-<button class="favorite" onclick="favoritar(this,'Contador de palavras')">☆</button>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-</div>
+            </a>
 
-</div>
 
 
-<div class="tool" data-category="calculo" data-name="cronometro">
+            <!-- 12 -->
 
-<div class="tool-icon">⏱️</div>
+            <a
+                href="aleatorio.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-<h3>Cronômetro</h3>
+                <div class="tool-icon">
+                    🎲
+                </div>
 
-<p>Controle o tempo com precisão.</p>
+                <h3>
+                    Escolha Aleatória
+                </h3>
 
-<div class="tool-buttons">
+                <p>
+                    Escolha uma opção aleatoriamente.
+                </p>
 
-<button class="open-btn" onclick="abrir('cronometro')">Abrir</button>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<button class="favorite" onclick="favoritar(this,'Cronômetro')">☆</button>
+            </a>
 
-</div>
 
-</div>
 
+            <!-- 13 -->
 
-<div class="tool" data-category="gerador" data-name="sorteador">
+            <a
+                href="combustivel.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-<div class="tool-icon">🎯</div>
+                <div class="tool-icon">
+                    ⛽
+                </div>
 
-<h3>Sorteador</h3>
+                <h3>
+                    Consumo de Combustível
+                </h3>
 
-<p>Sorteie um item de uma lista.</p>
+                <p>
+                    Calcule o consumo médio do veículo.
+                </p>
 
-<div class="tool-buttons">
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<button class="open-btn" onclick="abrir('sorteador')">Abrir</button>
+            </a>
 
-<button class="favorite" onclick="favoritar(this,'Sorteador')">☆</button>
 
-</div>
 
-</div>
+            <!-- 14 -->
 
+            <a
+                href="distancia.html"
+                class="tool-card fade-in"
+                data-category="conversores"
+            >
 
-<div class="tool" data-category="calculo" data-name="combustivel">
+                <div class="tool-icon">
+                    📏
+                </div>
 
-<div class="tool-icon">⛽</div>
+                <h3>
+                    Distância
+                </h3>
 
-<h3>Combustível</h3>
+                <p>
+                    Converta quilômetros, milhas e outras unidades.
+                </p>
 
-<p>Calcule o consumo médio de um veículo.</p>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<div class="tool-buttons">
+            </a>
 
-<button class="open-btn" onclick="abrir('combustivel')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'Combustível')">☆</button>
 
-</div>
+            <!-- 15 -->
 
-</div>
+            <a
+                href="cara-coroa.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
+                <div class="tool-icon">
+                    🪙
+                </div>
 
-<div class="tool" data-category="conversor" data-name="distancia">
+                <h3>
+                    Cara ou Coroa
+                </h3>
 
-<div class="tool-icon">📏</div>
+                <p>
+                    Jogue uma moeda virtual.
+                </p>
 
-<h3>Distância</h3>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<p>Converta quilômetros e metros.</p>
+            </a>
 
-<div class="tool-buttons">
 
-<button class="open-btn" onclick="abrir('distancia')">Abrir</button>
 
-<button class="favorite" onclick="favoritar(this,'Distância')">☆</button>
+            <!-- 16 -->
 
-</div>
+            <a
+                href="velocidade.html"
+                class="tool-card fade-in"
+                data-category="utilidades"
+            >
 
-</div>
+                <div class="tool-icon">
+                    🚗
+                </div>
 
+                <h3>
+                    Velocidade Média
+                </h3>
 
-<div class="tool" data-category="gerador" data-name="cara ou coroa">
+                <p>
+                    Calcule a velocidade média.
+                </p>
 
-<div class="tool-icon">🪙</div>
+                <span class="tool-open">
+                    Abrir →
+                </span>
 
-<h3>Cara ou coroa</h3>
+            </a>
 
-<p>Faça um sorteio rápido.</p>
 
-<div class="tool-buttons">
 
-<button class="open-btn" onclick="abrir('moeda')">Abrir</button>
+        </div>
 
-<button class="favorite" onclick="favoritar(this,'Cara ou coroa')">☆</button>
+    </div>
 
-</div>
+</section>
 
-</div>
 
 
-<div class="tool" data-category="calculo" data-name="velocidade">
+<!-- SOBRE -->
 
-<div class="tool-icon">🚗</div>
+<section
+    class="section"
+    id="sobre"
+>
 
-<h3>Velocidade média</h3>
+    <div class="container">
 
-<p>Calcule distância, tempo e velocidade.</p>
+        <div class="section-header">
 
-<div class="tool-buttons">
+            <div>
 
-<button class="open-btn" onclick="abrir('velocidade')">Abrir</button>
+                <div class="hero-badge">
+                    💡 Sobre o NexoTools
+                </div>
 
-<button class="favorite" onclick="favoritar(this,'Velocidade média')">☆</button>
+                <h2>
+                    Ferramentas simples para o dia a dia
+                </h2>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
 
-</div>
+        <div class="info-box">
 
+            <p>
+                O <strong>NexoTools</strong> é um projeto criado
+                para reunir ferramentas online úteis em um único lugar.
+            </p>
 
-<div id="toolArea"></div>
+            <p>
+                A ideia é oferecer ferramentas rápidas, simples
+                e fáceis de usar, sem complicação.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
 
 </main>
 
 
-<section class="about" id="sobre">
 
-<div class="about-inner">
+<footer class="site-footer">
 
-<h2>Sobre o NexoTools</h2>
+    <div class="container">
 
-<p>
-O NexoTools é uma plataforma de ferramentas online criada para
-tornar tarefas do dia a dia mais simples, rápidas e acessíveis.
-A ideia é reunir diversas ferramentas úteis em um único lugar,
-com uma interface moderna e fácil de usar.
-</p>
+        <p>
+            © <span class="current-year"></span>
+            NexoTools.
+            Todas as ferramentas são gratuitas.
+        </p>
 
-</div>
-
-</section>
-
-
-<footer>
-
-<p>© 2026 <strong>NexoTools</strong>. Todos os direitos reservados.</p>
-
-<p style="margin-top:10px;">Ferramentas simples. Resultados rápidos.</p>
+    </div>
 
 </footer>
 
 
-<button id="topBtn" onclick="topo()">↑</button>
-
-
-<script>
-
-/* MENU */
-
-function menu(){
-
-    document.getElementById("nav").classList.toggle("show");
-
-}
-
-function fecharMenu(){
-
-    document.getElementById("nav").classList.remove("show");
-
-}
-
-
-/* DARK MODE */
-
-function modoEscuro(){
-
-    document.body.classList.toggle("dark");
-
-    const dark = document.body.classList.contains("dark");
-
-    localStorage.setItem("darkMode",dark);
-
-}
-
-if(localStorage.getItem("darkMode")==="true"){
-
-    document.body.classList.add("dark");
-
-}
-
-
-/* FAVORITOS */
-
-function favoritar(btn,nome){
-
-    let favoritos =
-        JSON.parse(localStorage.getItem("favoritosNexo") || "[]");
-
-    if(favoritos.includes(nome)){
-
-        favoritos = favoritos.filter(x => x !== nome);
-
-        btn.textContent="☆";
-
-    }else{
-
-        favoritos.push(nome);
-
-        btn.textContent="★";
-
-    }
-
-    localStorage.setItem("favoritosNexo",
-        JSON.stringify(favoritos));
-
-}
-
-
-/* CARREGAR FAVORITOS */
-
-function carregarFavoritos(){
-
-    let favoritos =
-        JSON.parse(localStorage.getItem("favoritosNexo") || "[]");
-
-    document.querySelectorAll(".favorite").forEach(btn=>{
-
-        const nome = btn.parentElement.parentElement.querySelector("h3").textContent;
-
-        if(favoritos.includes(nome)){
-
-            btn.textContent="★";
-
-        }
-
-    });
-
-}
-
-carregarFavoritos();
-
-
-/* BUSCA */
-
-function buscar(){
-
-    const texto =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    document.querySelectorAll(".tool").forEach(tool=>{
-
-        const nome =
-            tool.dataset.name.toLowerCase();
-
-        if(nome.includes(texto)){
-
-            tool.classList.remove("hidden");
-
-        }else{
-
-            tool.classList.add("hidden");
-
-        }
-
-    });
-
-}
-
-
-/* FILTRO */
-
-function filtrar(categoria,botao){
-
-    document.querySelectorAll(".category")
-        .forEach(x=>x.classList.remove("active"));
-
-    botao.classList.add("active");
-
-    document.querySelectorAll(".tool").forEach(tool=>{
-
-        if(categoria==="todos" ||
-           tool.dataset.category===categoria){
-
-            tool.classList.remove("hidden");
-
-        }else{
-
-            tool.classList.add("hidden");
-
-        }
-
-    });
-
-}
-
-
-/* ABRIR FERRAMENTA */
-
-function abrir(tipo){
-
-    const area =
-        document.getElementById("toolArea");
-
-    area.style.display="block";
-
-    let html="";
-
-    if(tipo==="calculadora"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🧮 Calculadora</h2>
-
-        <input id="a" type="number" placeholder="Primeiro número">
-
-        <input id="b" type="number" placeholder="Segundo número">
-
-        <button onclick="calc('+')">+</button>
-        <button onclick="calc('-')">−</button>
-        <button onclick="calc('*')">×</button>
-        <button onclick="calc('/')">÷</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="porcentagem"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>📊 Porcentagem</h2>
-
-        <input id="valorPor" type="number" placeholder="Valor">
-
-        <input id="porcentagem" type="number" placeholder="Porcentagem">
-
-        <button onclick="porcentagem()">Calcular</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="regra"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>📐 Regra de três</h2>
-
-        <p>Se A está para B assim como C está para X.</p>
-
-        <input id="ra" type="number" placeholder="A">
-
-        <input id="rb" type="number" placeholder="B">
-
-        <input id="rc" type="number" placeholder="C">
-
-        <button onclick="regra()">Calcular X</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="media"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🎓 Média</h2>
-
-        <input id="numerosMedia" placeholder="Ex: 8, 7.5, 9, 10">
-
-        <button onclick="media()">Calcular média</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="senha"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🔐 Gerador de senha</h2>
-
-        <input id="tamanhoSenha" type="number" min="4" max="50" value="12">
-
-        <button onclick="gerarSenha()">Gerar senha</button>
-
-        <div class="result" id="resultado">Sua senha aparecerá aqui.</div>
-
-        <button onclick="copiar()">📋 Copiar</button>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="numero"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🎲 Número aleatório</h2>
-
-        <input id="min" type="number" placeholder="Mínimo">
-
-        <input id="max" type="number" placeholder="Máximo">
-
-        <button onclick="numero()">Gerar</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="dado"){
-
-        html=`
-
-        <div class="tool-panel" style="text-align:center">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🎲 Dados</h2>
-
-        <button onclick="dado()">Jogar dado</button>
-
-        <div class="result" id="resultado">🎲</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="qrcode"){
-
-        html=`
-
-        <div class="tool-panel" style="text-align:center">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>📱 Gerador de QR Code</h2>
-
-        <input id="qrText" placeholder="Digite um link ou texto">
-
-        <button onclick="qrcode()">Gerar QR Code</button>
-
-        <div id="qrResult" style="margin-top:20px"></div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="peso"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>⚖️ Conversor de peso</h2>
-
-        <input id="pesoValor" type="number" placeholder="Valor">
-
-        <select id="pesoTipo">
-
-        <option value="kg-lb">Kg → Libras</option>
-
-        <option value="lb-kg">Libras → Kg</option>
-
-        </select>
-
-        <button onclick="peso()">Converter</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="temperatura"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🌡️ Temperatura</h2>
-
-        <input id="temp" type="number" placeholder="Temperatura">
-
-        <select id="tempTipo">
-
-        <option value="cf">Celsius → Fahrenheit</option>
-
-        <option value="fc">Fahrenheit → Celsius</option>
-
-        </select>
-
-        <button onclick="temperatura()">Converter</button>
-
-        <div class="result" id="resultado">Resultado aparecerá aqui.</div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="texto"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>📝 Contador de texto</h2>
-
-        <textarea id="textoInput"
-        oninput="contarTexto()"
-        placeholder="Digite seu texto..."></textarea>
-
-        <div class="result" id="resultado">
-        0 caracteres · 0 palavras · 0 linhas
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="palavras"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🔤 Contador de palavras</h2>
-
-        <textarea id="palavrasInput"
-        placeholder="Digite seu texto..."></textarea>
-
-        <button onclick="contarPalavras()">Contar</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="idade"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🎂 Calculadora de idade</h2>
-
-        <input id="dataNascimento" type="date">
-
-        <button onclick="idade()">Calcular idade</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="juros"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>💰 Juros simples</h2>
-
-        <input id="capital" type="number" placeholder="Capital">
-
-        <input id="taxa" type="number" placeholder="Taxa (%)">
-
-        <input id="tempo" type="number" placeholder="Tempo">
-
-        <button onclick="juros()">Calcular</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="cronometro"){
-
-        html=`
-
-        <div class="tool-panel" style="text-align:center">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>⏱️ Cronômetro</h2>
-
-        <div class="result" id="cronometro">
-        00:00:00
-        </div>
-
-        <button onclick="iniciarCronometro()">Iniciar</button>
-
-        <button onclick="pararCronometro()">Parar</button>
-
-        <button onclick="zerarCronometro()">Zerar</button>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="sorteador"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🎯 Sorteador</h2>
-
-        <textarea id="lista"
-        placeholder="Digite um item por linha"></textarea>
-
-        <button onclick="sortear()">Sortear</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="combustivel"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>⛽ Consumo de combustível</h2>
-
-        <input id="km" type="number" placeholder="Quilômetros percorridos">
-
-        <input id="litros" type="number" placeholder="Litros consumidos">
-
-        <button onclick="combustivel()">Calcular</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="distancia"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>📏 Conversor de distância</h2>
-
-        <input id="dist" type="number" placeholder="Valor">
-
-        <select id="distTipo">
-
-        <option value="km-m">Km → Metros</option>
-
-        <option value="m-km">Metros → Km</option>
-
-        </select>
-
-        <button onclick="distancia()">Converter</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="moeda"){
-
-        html=`
-
-        <div class="tool-panel" style="text-align:center">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🪙 Cara ou coroa</h2>
-
-        <button onclick="moeda()">Lançar moeda</button>
-
-        <div class="result" id="resultado">
-        🪙
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    else if(tipo==="velocidade"){
-
-        html=`
-
-        <div class="tool-panel">
-
-        <button class="close" onclick="fechar()">✕</button>
-
-        <h2>🚗 Velocidade média</h2>
-
-        <input id="distVel" type="number" placeholder="Distância">
-
-        <input id="tempoVel" type="number" placeholder="Tempo">
-
-        <button onclick="velocidade()">Calcular</button>
-
-        <div class="result" id="resultado">
-        Resultado aparecerá aqui.
-        </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    area.innerHTML=html;
-
-    area.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
-
-}
-
-
-/* CALCULADORA */
-
-function calc(op){
-
-    const a=parseFloat(document.getElementById("a").value);
-    const b=parseFloat(document.getElementById("b").value);
-
-    let r;
-
-    if(isNaN(a)||isNaN(b)){
-
-        r="Digite os dois números.";
-
-    }else if(op==="+"){
-
-        r=a+b;
-
-    }else if(op==="-"){
-
-        r=a-b;
-
-    }else if(op==="*"){
-
-        r=a*b;
-
-    }else{
-
-        r=b===0 ? "Não é possível dividir por zero." : a/b;
-
-    }
-
-    document.getElementById("resultado").textContent=r;
-
-}
-
-
-/* PORCENTAGEM */
-
-function porcentagem(){
-
-    const v=parseFloat(document.getElementById("valorPor").value);
-    const p=parseFloat(document.getElementById("porcentagem").value);
-
-    if(isNaN(v)||isNaN(p)){
-
-        document.getElementById("resultado").textContent="Preencha os campos.";
-
-        return;
-
-    }
-
-    document.getElementById("resultado").textContent=
-        (v*p/100).toFixed(2);
-
-}
-
-
-/* REGRA DE TRÊS */
-
-function regra(){
-
-    const a=parseFloat(document.getElementById("ra").value);
-    const b=parseFloat(document.getElementById("rb").value);
-    const c=parseFloat(document.getElementById("rc").value);
-
-    if(!a){
-
-        document.getElementById("resultado").textContent=
-            "A não pode ser zero.";
-
-        return;
-
-    }
-
-    document.getElementById("resultado").textContent=
-        "X = "+((b*c)/a).toFixed(2);
-
-}
-
-
-/* MÉDIA */
-
-function media(){
-
-    const valores=
-        document.getElementById("numerosMedia").value
-        .split(",")
-        .map(Number)
-        .filter(x=>!isNaN(x));
-
-    if(!valores.length){
-
-        document.getElementById("resultado").textContent=
-            "Digite os números.";
-
-        return;
-
-    }
-
-    const soma=valores.reduce((a,b)=>a+b,0);
-
-    document.getElementById("resultado").textContent=
-        "Média = "+(soma/valores.length).toFixed(2);
-
-}
-
-
-/* SENHA */
-
-function gerarSenha(){
-
-    const tamanho=
-        parseInt(document.getElementById("tamanhoSenha").value);
-
-    const caracteres=
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
-
-    let senha="";
-
-    for(let i=0;i<tamanho;i++){
-
-        senha += caracteres[
-            Math.floor(Math.random()*caracteres.length)
-        ];
-
-    }
-
-    document.getElementById("resultado").textContent=senha;
-
-}
-
-
-/* NÚMERO */
-
-function numero(){
-
-    const min=parseInt(document.getElementById("min").value);
-    const max=parseInt(document.getElementById("max").value);
-
-    if(isNaN(min)||isNaN(max)||min>max){
-
-        document.getElementById("resultado").textContent=
-            "Digite um intervalo válido.";
-
-        return;
-
-    }
-
-    const r=Math.floor(
-        Math.random()*(max-min+1)
-    )+min;
-
-    document.getElementById("resultado").textContent=r;
-
-}
-
-
-/* DADO */
-
-function dado(){
-
-    const r=Math.floor(Math.random()*6)+1;
-
-    document.getElementById("resultado").textContent=
-        "🎲 "+r;
-
-}
-
-
-/* QR CODE */
-
-function qrcode(){
-
-    const texto=
-        document.getElementById("qrText").value.trim();
-
-    if(!texto){
-
-        document.getElementById("qrResult").innerHTML=
-            "<p>Digite algo primeiro.</p>";
-
-        return;
-
-    }
-
-    const url=
-        "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="
-        +encodeURIComponent(texto);
-
-    document.getElementById("qrResult").innerHTML=
-        `<img src="${url}" alt="QR Code" style="max-width:220px;border-radius:12px;">`;
-
-}
-
-
-/* PESO */
-
-function peso(){
-
-    const valor=
-        parseFloat(document.getElementById("pesoValor").value);
-
-    const tipo=
-        document.getElementById("pesoTipo").value;
-
-    if(isNaN(valor)){
-
-        document.getElementById("resultado").textContent=
-            "Digite um valor.";
-
-        return;
-
-    }
-
-    let resultado;
-
-    if(tipo==="kg-lb"){
-
-        resultado=valor*2.20462;
-
-        document.getElementById("resultado").textContent=
-            resultado.toFixed(2)+" lb";
-
-    }else{
-
-        resultado=valor/2.20462;
-
-        document.getElementById("resultado").textContent=
-            resultado.toFixed(2)+" kg";
-
-    }
-
-}
-
-
-/* TEMPERATURA */
-
-function temperatura(){
-
-    const valor=
-        parseFloat(document.getElementById("temp").value);
-
-    const tipo=
-        document.getElementById("tempTipo").value;
-
-    if(isNaN(valor)){
-
-        document.getElementById("resultado").textContent=
-            "Digite uma temperatura.";
-
-        return;
-
-    }
-
-    let resultado;
-
-    if(tipo==="cf"){
-
-        resultado=(valor*9/5)+32;
-
-        document.getElementById("resultado").textContent=
-            resultado.toFixed(2)+" °F";
-
-    }else{
-
-        resultado=(valor-32)*5/9;
-
-        document.getElementById("resultado").textContent=
-            resultado.toFixed(2)+" °C";
-
-    }
-
-}
-
-
-/* TEXTO */
-
-function contarTexto(){
-
-    const texto=
-        document.getElementById("textoInput").value;
-
-    const caracteres=texto.length;
-
-    const palavras=
-        texto.trim()
-        ? texto.trim().split(/\s+/).length
-        : 0;
-
-    const linhas=
-        texto
-        ? texto.split("\n").length
-        : 0;
-
-    document.getElementById("resultado").textContent=
-        `${caracteres} caracteres · ${palavras} palavras · ${linhas} linhas`;
-
-}
-
-
-/* PALAVRAS */
-
-function contarPalavras(){
-
-    const texto=
-        document.getElementById("palavrasInput").value.trim();
-
-    const total=
-        texto ? texto.split(/\s+/).length : 0;
-
-    document.getElementById("resultado").textContent=
-        total+" palavras";
-
-}
-
-
-/* IDADE */
-
-function idade(){
-
-    const nascimento=
-        new Date(document.getElementById("dataNascimento").value);
-
-    if(isNaN(nascimento.getTime())){
-
-        document.getElementById("resultado").textContent=
-            "Escolha uma data.";
-
-        return;
-
-    }
-
-    const hoje=new Date();
-
-    let anos=
-        hoje.getFullYear()-nascimento.getFullYear();
-
-    const mes=
-        hoje.getMonth()-nascimento.getMonth();
-
-    if(
-        mes<0 ||
-        (mes===0 && hoje.getDate()<nascimento.getDate())
-    ){
-
-        anos--;
-
-    }
-
-    document.getElementById("resultado").textContent=
-        "Você tem aproximadamente "+anos+" anos.";
-
-}
-
-
-/* JUROS */
-
-function juros(){
-
-    const c=parseFloat(document.getElementById("capital").value);
-    const i=parseFloat(document.getElementById("taxa").value);
-    const t=parseFloat(document.getElementById("tempo").value);
-
-    if(isNaN(c)||isNaN(i)||isNaN(t)){
-
-        document.getElementById("resultado").textContent=
-            "Preencha todos os campos.";
-
-        return;
-
-    }
-
-    const juros=c*(i/100)*t;
-
-    const montante=c+juros;
-
-    document.getElementById("resultado").innerHTML=
-        "Juros: R$ "+juros.toFixed(2)+
-        "<br>Montante: R$ "+montante.toFixed(2);
-
-}
-
-
-/* CRONÔMETRO */
-
-let cronometroInterval=null;
-
-let segundos=0;
-
-function atualizarCronometro(){
-
-    segundos++;
-
-    const h=
-        String(Math.floor(segundos/3600)).padStart(2,"0");
-
-    const m=
-        String(Math.floor((segundos%3600)/60)).padStart(2,"0");
-
-    const s=
-        String(segundos%60).padStart(2,"0");
-
-    const elemento=
-        document.getElementById("cronometro");
-
-    if(elemento){
-
-        elemento.textContent=
-            `${h}:${m}:${s}`;
-
-    }
-
-}
-
-function iniciarCronometro(){
-
-    if(!cronometroInterval){
-
-        cronometroInterval=
-            setInterval(atualizarCronometro,1000);
-
-    }
-
-}
-
-function pararCronometro(){
-
-    clearInterval(cronometroInterval);
-
-    cronometroInterval=null;
-
-}
-
-function zerarCronometro(){
-
-    pararCronometro();
-
-    segundos=0;
-
-    const elemento=
-        document.getElementById("cronometro");
-
-    if(elemento){
-
-        elemento.textContent="00:00:00";
-
-    }
-
-}
-
-
-/* SORTEADOR */
-
-function sortear(){
-
-    const lista=
-        document.getElementById("lista")
-        .value
-        .split("\n")
-        .map(x=>x.trim())
-        .filter(Boolean);
-
-    if(!lista.length){
-
-        document.getElementById("resultado").textContent=
-            "Digite pelo menos um item.";
-
-        return;
-
-    }
-
-    const escolhido=
-        lista[Math.floor(Math.random()*lista.length)];
-
-    document.getElementById("resultado").textContent=
-        "🎯 "+escolhido;
-
-}
-
-
-/* COMBUSTÍVEL */
-
-function combustivel(){
-
-    const km=parseFloat(
-        document.getElementById("km").value
-    );
-
-    const litros=parseFloat(
-        document.getElementById("litros").value
-    );
-
-    if(isNaN(km)||isNaN(litros)||litros<=0){
-
-        document.getElementById("resultado").textContent=
-            "Preencha os campos corretamente.";
-
-        return;
-
-    }
-
-    document.getElementById("resultado").textContent=
-        (km/litros).toFixed(2)+" km/L";
-
-}
-
-
-/* DISTÂNCIA */
-
-function distancia(){
-
-    const valor=parseFloat(
-        document.getElementById("dist").value
-    );
-
-    const tipo=
-        document.getElementById("distTipo").value;
-
-    if(isNaN(valor)){
-
-        document.getElementById("resultado").textContent=
-            "Digite um valor.";
-
-        return;
-
-    }
-
-    if(tipo==="km-m"){
-
-        document.getElementById("resultado").textContent=
-            (valor*1000)+" metros";
-
-    }else{
-
-        document.getElementById("resultado").textContent=
-            (valor/1000)+" km";
-
-    }
-
-}
-
-
-/* MOEDA */
-
-function moeda(){
-
-    const resultado=
-        Math.random()<0.5
-        ? "🪙 Cara"
-        : "🪙 Coroa";
-
-    document.getElementById("resultado").textContent=
-        resultado;
-
-}
-
-
-/* VELOCIDADE */
-
-function velocidade(){
-
-    const distancia=
-        parseFloat(document.getElementById("distVel").value);
-
-    const tempo=
-        parseFloat(document.getElementById("tempoVel").value);
-
-    if(isNaN(distancia)||isNaN(tempo)||tempo<=0){
-
-        document.getElementById("resultado").textContent=
-            "Preencha os campos corretamente.";
-
-        return;
-
-    }
-
-    document.getElementById("resultado").textContent=
-        (distancia/tempo).toFixed(2)+" unidades de distância/hora";
-
-}
-
-
-/* COPIAR */
-
-function copiar(){
-
-    const texto=
-        document.getElementById("resultado").textContent;
-
-    navigator.clipboard.writeText(texto);
-
-    alert("Resultado copiado!");
-
-}
-
-
-/* FECHAR */
-
-function fechar(){
-
-    const area=
-        document.getElementById("toolArea");
-
-    area.style.display="none";
-
-    area.innerHTML="";
-
-}
-
-
-/* TOPO */
-
-window.addEventListener("scroll",()=>{
-
-    const btn=document.getElementById("topBtn");
-
-    if(window.scrollY>500){
-
-        btn.style.display="block";
-
-    }else{
-
-        btn.style.display="none";
-
-    }
-
-});
-
-
-function topo(){
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-</script>
 
 </body>
+
 </html>
