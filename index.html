@@ -1,349 +1,556 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NexoTools - Ferramentas Online</title>
+<title>NexoTools — Ferramentas Online</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
 
-        body {
-            background: #f5f7fb;
-            color: #172033;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-        }
+/* HEADER */
 
-        .logo span {
-            color: #4f8cff;
-        }
+header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e7eaf0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-        }
+.navbar {
+    max-width: 1200px;
+    margin: auto;
+    height: 72px;
+    padding: 0 25px;
 
-        .hero {
-            text-align: center;
-            padding: 70px 20px 50px;
-            background: linear-gradient(135deg, #111827, #263b70);
-            color: white;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #111827;
+}
 
-        .hero p {
-            font-size: 19px;
-            color: #dbe4ff;
-            margin-bottom: 30px;
-        }
+.logo span {
+    color: #4f46e5;
+}
 
-        .search {
-            width: min(600px, 90%);
-            padding: 15px 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-        }
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 45px auto;
-        }
+.nav-links a {
+    text-decoration: none;
+    color: #667085;
+    font-weight: 600;
+}
 
-        .container h2 {
-            margin-bottom: 25px;
-            font-size: 28px;
-        }
+.nav-links a:hover {
+    color: #4f46e5;
+}
 
-        .tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+/* HERO */
 
-        .tool {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-            transition: 0.2s;
-        }
+.hero {
+    background:
+        radial-gradient(circle at top right, #6366f1, transparent 35%),
+        linear-gradient(135deg, #111827, #1e293b);
 
-        .tool:hover {
-            transform: translateY(-5px);
-        }
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
 
-        .tool .icon {
-            font-size: 35px;
-            margin-bottom: 15px;
-        }
+.hero h1 {
+    font-size: clamp(40px, 7vw, 68px);
+    line-height: 1.05;
+    max-width: 850px;
+    margin: auto;
+}
 
-        .tool h3 {
-            margin-bottom: 10px;
-        }
+.hero h1 span {
+    color: #818cf8;
+}
 
-        .tool p {
-            color: #667085;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
+.hero p {
+    max-width: 650px;
+    margin: 25px auto;
+    color: #d1d5db;
+    font-size: 18px;
+    line-height: 1.6;
+}
 
-        button {
-            background: #4f8cff;
-            color: white;
-            border: none;
-            padding: 11px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-        }
+.search-box {
+    max-width: 650px;
+    margin: 35px auto 0;
+    position: relative;
+}
 
-        button:hover {
-            background: #3975e8;
-        }
+.search-box input {
+    width: 100%;
+    padding: 19px 22px;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
 
-        .calculator {
-            display: none;
-            background: white;
-            padding: 25px;
-            margin-top: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-        }
+/* MAIN */
 
-        .calculator input {
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 25px;
+}
 
-        .result {
-            margin-top: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
 
-        footer {
-            background: #111827;
-            color: #aaa;
-            text-align: center;
-            padding: 30px;
-            margin-top: 70px;
-        }
+.section-title h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
 
-        @media(max-width:600px) {
-            .hero h1 {
-                font-size: 36px;
-            }
+.section-title p {
+    color: #667085;
+}
 
-            nav {
-                display: none;
-            }
-        }
-    </style>
+/* CARDS */
+
+.tools {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 22px;
+}
+
+.tool {
+    background: white;
+    border: 1px solid #e7eaf0;
+    border-radius: 20px;
+    padding: 28px;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border .25s;
+}
+
+.tool:hover {
+    transform: translateY(-7px);
+    border-color: #c7d2fe;
+    box-shadow: 0 20px 45px rgba(15,23,42,.10);
+}
+
+.icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef2ff;
+    border-radius: 15px;
+
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.tool h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.tool p {
+    color: #667085;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.tool button {
+    border: none;
+    background: #4f46e5;
+    color: white;
+
+    padding: 11px 17px;
+
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.tool button:hover {
+    background: #4338ca;
+    transform: scale(1.03);
+}
+
+/* CALCULATOR */
+
+.calculator {
+    display: none;
+
+    max-width: 600px;
+    margin: 0 auto 70px;
+
+    background: white;
+    border: 1px solid #e7eaf0;
+    border-radius: 20px;
+    padding: 30px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.07);
+}
+
+.calculator h2 {
+    margin-bottom: 20px;
+}
+
+.calculator input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+
+    font-size: 16px;
+}
+
+.calc-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.calc-buttons button {
+    flex: 1;
+    min-width: 55px;
+
+    border: none;
+    padding: 12px;
+
+    background: #4f46e5;
+    color: white;
+
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ABOUT */
+
+.about {
+    background: white;
+    text-align: center;
+}
+
+.about p {
+    max-width: 700px;
+    margin: auto;
+    color: #667085;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+
+footer {
+    background: #111827;
+    color: #9ca3af;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+footer strong {
+    color: white;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 75px 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 50px 20px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Nexo<span>Tools</span></div>
 
-    <nav>
-        <a href="#ferramentas">Ferramentas</a>
-        <a href="#sobre">Sobre</a>
-    </nav>
+    <div class="navbar">
+
+        <div class="logo">
+            Nexo<span>Tools</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#ferramentas">Ferramentas</a>
+            <a href="#sobre">Sobre</a>
+        </nav>
+
+    </div>
+
 </header>
 
 
 <section class="hero">
 
-    <h1>Ferramentas simples. Tudo em um só lugar.</h1>
+    <h1>
+        Tudo o que você precisa,
+        <span>em um só lugar.</span>
+    </h1>
 
     <p>
-        Calculadoras, conversores e ferramentas gratuitas para facilitar seu dia.
+        Ferramentas online rápidas, simples e gratuitas
+        para facilitar o seu dia.
     </p>
 
-    <input
-        type="text"
-        id="search"
-        class="search"
-        placeholder="🔎 Procurar uma ferramenta..."
-        onkeyup="buscarFerramenta()"
-    >
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 Procurar uma ferramenta..."
+            onkeyup="buscarFerramenta()"
+        >
+
+    </div>
 
 </section>
 
 
-<main class="container" id="ferramentas">
+<main id="ferramentas" class="container">
 
-    <h2>🛠️ Ferramentas</h2>
+    <div class="section-title">
+
+        <h2>Ferramentas</h2>
+
+        <p>
+            Escolha uma ferramenta e comece agora.
+        </p>
+
+    </div>
+
 
     <div class="tools">
 
+
         <div class="tool">
+
             <div class="icon">🧮</div>
 
             <h3>Calculadora</h3>
 
             <p>
-                Faça cálculos rapidamente.
+                Faça cálculos de forma rápida e simples.
             </p>
 
             <button onclick="abrirCalculadora()">
-                Abrir
+                Abrir ferramenta
             </button>
+
         </div>
 
 
         <div class="tool">
+
             <div class="icon">📊</div>
 
-            <h3>Calculadora de Porcentagem</h3>
+            <h3>Porcentagem</h3>
 
             <p>
-                Descubra porcentagens de forma rápida.
+                Calcule porcentagens rapidamente.
             </p>
 
             <button onclick="porcentagem()">
-                Usar
+                Usar ferramenta
             </button>
+
         </div>
 
 
         <div class="tool">
+
             <div class="icon">🔢</div>
 
-            <h3>Gerador de Números</h3>
+            <h3>Número aleatório</h3>
 
             <p>
-                Gere um número aleatório.
+                Gere números aleatórios em segundos.
             </p>
 
             <button onclick="gerarNumero()">
-                Gerar
+                Gerar número
             </button>
+
         </div>
 
 
         <div class="tool">
+
             <div class="icon">🔐</div>
 
-            <h3>Gerador de Senhas</h3>
+            <h3>Gerador de senha</h3>
 
             <p>
-                Crie uma senha aleatória.
+                Gere uma senha aleatória.
             </p>
 
             <button onclick="gerarSenha()">
-                Gerar
+                Gerar senha
             </button>
+
         </div>
 
 
         <div class="tool">
+
             <div class="icon">📝</div>
 
-            <h3>Contador de Texto</h3>
+            <h3>Contador de texto</h3>
 
             <p>
                 Conte palavras e caracteres.
             </p>
 
             <button onclick="contadorTexto()">
-                Usar
+                Contar texto
             </button>
+
         </div>
 
 
         <div class="tool">
+
             <div class="icon">🎲</div>
 
-            <h3>Rolador de Dados</h3>
+            <h3>Rolador de dados</h3>
 
             <p>
                 Role um dado virtual.
             </p>
 
             <button onclick="rolarDado()">
-                Rolar
+                Rolar dado
             </button>
+
         </div>
 
-    </div>
-
-
-    <div class="calculator" id="calculator">
-
-        <h2>🧮 Calculadora</h2>
-
-        <input
-            type="number"
-            id="num1"
-            placeholder="Primeiro número"
-        >
-
-        <input
-            type="number"
-            id="num2"
-            placeholder="Segundo número"
-        >
-
-        <button onclick="calcular('+')">+</button>
-        <button onclick="calcular('-')">−</button>
-        <button onclick="calcular('*')">×</button>
-        <button onclick="calcular('/')">÷</button>
-
-        <div class="result" id="resultado"></div>
 
     </div>
 
 </main>
 
 
-<section class="container" id="sobre">
+<div class="calculator" id="calculator">
 
-    <h2>Sobre o NexoTools</h2>
+    <h2>🧮 Calculadora</h2>
 
-    <p>
-        O NexoTools é um projeto criado para reunir ferramentas
-        úteis, rápidas e gratuitas em um único lugar.
-    </p>
+    <input
+        type="number"
+        id="num1"
+        placeholder="Primeiro número"
+    >
+
+    <input
+        type="number"
+        id="num2"
+        placeholder="Segundo número"
+    >
+
+    <div class="calc-buttons">
+
+        <button onclick="calcular('+')">+</button>
+
+        <button onclick="calcular('-')">−</button>
+
+        <button onclick="calcular('*')">×</button>
+
+        <button onclick="calcular('/')">÷</button>
+
+    </div>
+
+    <div
+        class="result"
+        id="resultado">
+    </div>
+
+</div>
+
+
+<section class="about" id="sobre">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Sobre o NexoTools</h2>
+
+        </div>
+
+        <p>
+            O NexoTools reúne ferramentas úteis em um único lugar,
+            com uma experiência simples, rápida e gratuita.
+        </p>
+
+    </div>
 
 </section>
 
 
 <footer>
 
-    <p>© 2026 NexoTools — Todos os direitos reservados.</p>
+    <p>
+        © 2026 <strong>NexoTools</strong>.
+        Todos os direitos reservados.
+    </p>
 
 </footer>
 
@@ -360,6 +567,7 @@ function abrirCalculadora() {
     calculadora.scrollIntoView({
         behavior: "smooth"
     });
+
 }
 
 
@@ -388,14 +596,20 @@ function calcular(operacao) {
     if (operacao === "/") {
 
         if (n2 === 0) {
+
             resultado = "Não é possível dividir por zero.";
+
         } else {
+
             resultado = n1 / n2;
+
         }
+
     }
 
     document.getElementById("resultado").innerText =
         "Resultado: " + resultado;
+
 }
 
 
@@ -410,7 +624,9 @@ function porcentagem() {
     if (numero !== null && porcentagem !== null) {
 
         const resultado =
-            Number(numero) * Number(porcentagem) / 100;
+            Number(numero) *
+            Number(porcentagem) /
+            100;
 
         alert(
             porcentagem +
@@ -419,7 +635,9 @@ function porcentagem() {
             " = " +
             resultado
         );
+
     }
+
 }
 
 
@@ -431,21 +649,24 @@ function gerarNumero() {
     const maximo =
         Number(prompt("Número máximo:"));
 
-    if (minimo <= maximo) {
+    if (minimo > maximo) {
 
-        const numero =
-            Math.floor(
-                Math.random() *
-                (maximo - minimo + 1)
-            ) + minimo;
+        alert(
+            "O número mínimo precisa ser menor que o máximo."
+        );
 
-        alert("Número gerado: " + numero);
-
-    } else {
-
-        alert("O mínimo precisa ser menor que o máximo.");
+        return;
 
     }
+
+    const numero =
+        Math.floor(
+            Math.random() *
+            (maximo - minimo + 1)
+        ) + minimo;
+
+    alert("Número gerado: " + numero);
+
 }
 
 
@@ -456,17 +677,23 @@ function gerarSenha() {
 
     let senha = "";
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 14; i++) {
 
         const indice =
             Math.floor(
-                Math.random() * caracteres.length
+                Math.random() *
+                caracteres.length
             );
 
         senha += caracteres[indice];
+
     }
 
-    alert("Sua senha:\n\n" + senha);
+    alert(
+        "Senha gerada:\n\n" +
+        senha
+    );
+
 }
 
 
@@ -475,37 +702,48 @@ function contadorTexto() {
     const texto =
         prompt("Digite ou cole seu texto:");
 
-    if (texto !== null) {
-
-        const caracteres =
-            texto.length;
-
-        const palavras =
-            texto.trim() === ""
-            ? 0
-            : texto.trim().split(/\s+/).length;
-
-        alert(
-            "Palavras: " + palavras +
-            "\nCaracteres: " + caracteres
-        );
+    if (texto === null) {
+        return;
     }
+
+    const palavras =
+        texto.trim() === ""
+        ? 0
+        : texto.trim().split(/\s+/).length;
+
+    const caracteres =
+        texto.length;
+
+    alert(
+        "Palavras: " +
+        palavras +
+        "\nCaracteres: " +
+        caracteres
+    );
+
 }
 
 
 function rolarDado() {
 
     const numero =
-        Math.floor(Math.random() * 6) + 1;
+        Math.floor(
+            Math.random() * 6
+        ) + 1;
 
-    alert("🎲 Você tirou: " + numero);
+    alert(
+        "🎲 Você tirou: " +
+        numero
+    );
+
 }
 
 
 function buscarFerramenta() {
 
     const pesquisa =
-        document.getElementById("search")
+        document
+        .getElementById("search")
         .value
         .toLowerCase();
 
@@ -528,9 +766,11 @@ function buscarFerramenta() {
         }
 
     });
+
 }
 
 </script>
 
 </body>
 </html>
+```
