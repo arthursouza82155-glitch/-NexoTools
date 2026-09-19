@@ -1,13 +1,23 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="NexoTools - ferramentas online rápidas, gratuitas e fáceis de usar.">
 
 <title>NexoTools — Ferramentas Online</title>
 
 <style>
+
+/* =========================
+   CONFIGURAÇÕES
+========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -20,35 +30,105 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f6f7fb;
+
+    background: #f5f7fb;
+
     color: #172033;
+
+    transition: background .3s, color .3s;
 }
 
-/* HEADER */
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+body.dark {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark header {
+    background: rgba(15,23,42,.95);
+    border-color: #263247;
+}
+
+body.dark .tool,
+body.dark .tool-area {
+    background: #172033;
+    border-color: #263247;
+}
+
+body.dark .tool p,
+body.dark .section-title p,
+body.dark .about p {
+    color: #aab4c5;
+}
+
+body.dark .tool-area input,
+body.dark .tool-area textarea,
+body.dark .tool-area select {
+    background: #0f172a;
+    color: white;
+    border-color: #334155;
+}
+
+body.dark .result {
+    background: #0f172a;
+}
+
+body.dark .about {
+    background: #111827;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header {
+
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
+
     background: rgba(255,255,255,.94);
-    backdrop-filter: blur(12px);
+
+    backdrop-filter: blur(15px);
+
     border-bottom: 1px solid #e5e7eb;
 }
 
 .navbar {
+
     max-width: 1200px;
-    height: 70px;
+
+    height: 72px;
+
     margin: auto;
+
     padding: 0 24px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 }
 
 .logo {
-    font-size: 26px;
+
+    font-size: 27px;
+
     font-weight: 900;
+
+    color: #111827;
+}
+
+body.dark .logo {
+    color: white;
 }
 
 .logo span {
@@ -56,38 +136,84 @@ header {
 }
 
 .nav-links {
+
     display: flex;
+
     gap: 25px;
+
+    align-items: center;
 }
 
 .nav-links a {
+
     color: #667085;
+
     text-decoration: none;
+
     font-weight: 600;
+
+    transition: .2s;
 }
 
 .nav-links a:hover {
     color: #4f46e5;
 }
 
-/* HERO */
+.dark-button {
+
+    border: none;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    padding: 100px 20px;
+
+    padding: 110px 20px;
 
     text-align: center;
+
     color: white;
 
     background:
-        radial-gradient(circle at 80% 20%, #6366f1, transparent 30%),
-        linear-gradient(135deg, #111827, #1e293b);
+
+    radial-gradient(
+        circle at 80% 20%,
+        #6366f1,
+        transparent 30%
+    ),
+
+    linear-gradient(
+        135deg,
+        #111827,
+        #1e293b
+    );
 }
 
 .hero h1 {
+
     max-width: 900px;
+
     margin: auto;
 
     font-size: clamp(40px, 7vw, 70px);
+
     line-height: 1.05;
 }
 
@@ -96,113 +222,159 @@ header {
 }
 
 .hero p {
+
     max-width: 650px;
+
     margin: 25px auto;
 
     color: #d1d5db;
+
     font-size: 18px;
+
     line-height: 1.6;
 }
 
 .search {
-    width: min(650px, 95%);
+
+    width: min(680px, 95%);
+
     margin-top: 20px;
 
-    padding: 18px 22px;
+    padding: 19px 22px;
 
     border: none;
+
     border-radius: 14px;
 
     outline: none;
+
     font-size: 16px;
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
 }
 
-/* MAIN */
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
+
     max-width: 1200px;
+
     margin: auto;
-    padding: 70px 24px;
+
+    padding: 75px 24px;
 }
 
 .section-title {
+
     text-align: center;
-    margin-bottom: 40px;
+
+    margin-bottom: 45px;
 }
 
 .section-title h2 {
+
     font-size: 35px;
+
     margin-bottom: 10px;
 }
 
 .section-title p {
+
     color: #667085;
 }
 
-/* TOOLS */
+
+/* =========================
+   CARDS
+========================= */
 
 .tools {
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
     gap: 22px;
 }
 
 .tool {
+
     background: white;
 
-    padding: 27px;
+    padding: 28px;
 
     border: 1px solid #e5e7eb;
+
     border-radius: 20px;
 
     transition: .25s;
 
-    box-shadow: 0 5px 20px rgba(0,0,0,.03);
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.03);
 }
 
 .tool:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0,0,0,.09);
+
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.10);
+
     border-color: #c7d2fe;
 }
 
 .icon {
-    width: 55px;
-    height: 55px;
+
+    width: 58px;
+
+    height: 58px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
     background: #eef2ff;
 
-    font-size: 27px;
+    font-size: 28px;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .tool h3 {
+
     font-size: 20px;
+
     margin-bottom: 10px;
 }
 
 .tool p {
+
     color: #667085;
+
     line-height: 1.5;
+
     margin-bottom: 20px;
 }
 
 button {
+
     border: none;
+
     border-radius: 9px;
 
     padding: 11px 17px;
 
     background: #4f46e5;
+
     color: white;
 
     font-weight: bold;
@@ -213,140 +385,310 @@ button {
 }
 
 button:hover {
+
     background: #4338ca;
+
     transform: scale(1.03);
 }
 
-/* TOOL AREA */
+
+/* =========================
+   ÁREA DAS FERRAMENTAS
+========================= */
 
 .tool-area {
+
     max-width: 700px;
-    margin: 50px auto;
+
+    margin: 20px auto 70px;
 
     display: none;
 
     background: white;
 
     border: 1px solid #e5e7eb;
+
     border-radius: 20px;
 
     padding: 30px;
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.07);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.07);
 }
 
 .tool-area h2 {
-    margin-bottom: 20px;
+
+    margin-bottom: 22px;
 }
 
 .tool-area input,
 .tool-area textarea,
 .tool-area select {
+
     width: 100%;
 
-    padding: 13px;
+    padding: 14px;
 
     margin-bottom: 12px;
 
     border: 1px solid #d0d5dd;
+
     border-radius: 9px;
 
     font-size: 16px;
+
+    outline: none;
 }
 
 .tool-area textarea {
-    min-height: 150px;
+
+    min-height: 160px;
+
     resize: vertical;
 }
 
+.tool-area input:focus,
+.tool-area textarea:focus,
+.tool-area select:focus {
+
+    border-color: #4f46e5;
+}
+
 .result {
+
     margin-top: 20px;
 
-    padding: 15px;
+    padding: 17px;
 
     background: #f3f4f6;
 
     border-radius: 10px;
 
     font-weight: bold;
+
     line-height: 1.6;
+
+    word-break: break-word;
 }
 
 .close {
+
     float: right;
 
     background: #e5e7eb;
+
     color: #111827;
+
+    margin-bottom: 15px;
 }
 
 .close:hover {
+
     background: #d1d5db;
 }
 
-/* ABOUT */
+.copy-button {
+
+    margin-top: 10px;
+
+    background: #10b981;
+}
+
+.copy-button:hover {
+
+    background: #059669;
+}
+
+
+/* =========================
+   CRONÔMETRO
+========================= */
+
+.timer {
+
+    font-size: 52px;
+
+    font-weight: 900;
+
+    text-align: center;
+
+    margin: 25px 0;
+}
+
+
+/* =========================
+   SOBRE
+========================= */
 
 .about {
+
     background: white;
+
     text-align: center;
 }
 
 .about p {
+
     max-width: 700px;
+
     margin: auto;
 
     color: #667085;
+
     line-height: 1.7;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
+
     background: #111827;
 
     color: #9ca3af;
 
     text-align: center;
 
-    padding: 35px 20px;
+    padding: 40px 20px;
 }
 
 footer strong {
     color: white;
 }
 
-/* MOBILE */
+
+/* =========================
+   BOTÃO TOPO
+========================= */
+
+.top-button {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    z-index: 500;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px) {
 
-    .nav-links {
+    .nav-links a {
         display: none;
     }
 
     .hero {
-        padding: 75px 20px;
+        padding: 80px 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
     }
 
     .container {
-        padding: 50px 20px;
+        padding: 55px 20px;
+    }
+
+    .tool-area {
+        width: 92%;
     }
 
 }
+
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.tool {
+
+    animation: aparecer .5s ease;
+}
+
 </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
 <div class="navbar">
 
 <div class="logo">
+
 Nexo<span>Tools</span>
+
 </div>
 
+
 <nav class="nav-links">
-<a href="#ferramentas">Ferramentas</a>
-<a href="#sobre">Sobre</a>
+
+<a href="#ferramentas">
+Ferramentas
+</a>
+
+<a href="#sobre">
+Sobre
+</a>
+
+<button
+class="dark-button"
+onclick="modoEscuro()"
+title="Modo escuro">
+
+🌙
+
+</button>
+
 </nav>
 
 </div>
@@ -354,51 +696,97 @@ Nexo<span>Tools</span>
 </header>
 
 
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
 <h1>
-Ferramentas inteligentes
+
+Tudo o que você precisa,
+
 <span>em um só lugar.</span>
+
 </h1>
 
+
 <p>
-Ferramentas online rápidas, gratuitas e fáceis de usar.
+
+Ferramentas online rápidas,
+gratuitas e fáceis de usar.
+
 </p>
 
+
 <input
+
 class="search"
+
 id="search"
+
 type="text"
-placeholder="🔎 Procurar ferramenta..."
+
+placeholder="🔎 Procurar uma ferramenta..."
+
 onkeyup="buscar()"
+
 >
 
 </section>
 
 
-<main class="container" id="ferramentas">
+
+<!-- =========================
+     FERRAMENTAS
+========================= -->
+
+<main
+
+class="container"
+
+id="ferramentas">
+
 
 <div class="section-title">
 
-<h2>🛠️ Ferramentas</h2>
+<h2>
+
+🛠️ Ferramentas
+
+</h2>
+
 
 <p>
+
 Escolha uma ferramenta para começar.
+
 </p>
 
 </div>
 
 
+
 <div class="tools">
 
 
+
+<!-- CALCULADORA -->
+
 <div class="tool">
 
-<div class="icon">🧮</div>
+<div class="icon">
+🧮
+</div>
 
-<h3>Calculadora</h3>
+<h3>
+Calculadora
+</h3>
 
-<p>Faça cálculos rapidamente.</p>
+<p>
+Faça cálculos rapidamente.
+</p>
 
 <button onclick="abrir('calculadora')">
 Abrir
@@ -407,13 +795,22 @@ Abrir
 </div>
 
 
+
+<!-- PORCENTAGEM -->
+
 <div class="tool">
 
-<div class="icon">📊</div>
+<div class="icon">
+📊
+</div>
 
-<h3>Porcentagem</h3>
+<h3>
+Porcentagem
+</h3>
 
-<p>Calcule porcentagens facilmente.</p>
+<p>
+Calcule porcentagens facilmente.
+</p>
 
 <button onclick="abrir('porcentagem')">
 Abrir
@@ -422,13 +819,22 @@ Abrir
 </div>
 
 
+
+<!-- NÚMERO -->
+
 <div class="tool">
 
-<div class="icon">🔢</div>
+<div class="icon">
+🔢
+</div>
 
-<h3>Número aleatório</h3>
+<h3>
+Número aleatório
+</h3>
 
-<p>Gere números aleatórios.</p>
+<p>
+Gere números aleatórios.
+</p>
 
 <button onclick="abrir('numero')">
 Abrir
@@ -437,13 +843,22 @@ Abrir
 </div>
 
 
+
+<!-- SENHA -->
+
 <div class="tool">
 
-<div class="icon">🔐</div>
+<div class="icon">
+🔐
+</div>
 
-<h3>Gerador de senha</h3>
+<h3>
+Gerador de senha
+</h3>
 
-<p>Crie senhas aleatórias.</p>
+<p>
+Crie senhas aleatórias.
+</p>
 
 <button onclick="abrir('senha')">
 Abrir
@@ -452,13 +867,22 @@ Abrir
 </div>
 
 
+
+<!-- TEXTO -->
+
 <div class="tool">
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
-<h3>Contador de texto</h3>
+<h3>
+Contador de texto
+</h3>
 
-<p>Conte palavras e caracteres.</p>
+<p>
+Conte palavras e caracteres.
+</p>
 
 <button onclick="abrir('texto')">
 Abrir
@@ -467,13 +891,22 @@ Abrir
 </div>
 
 
+
+<!-- DADO -->
+
 <div class="tool">
 
-<div class="icon">🎲</div>
+<div class="icon">
+🎲
+</div>
 
-<h3>Rolador de dados</h3>
+<h3>
+Rolador de dados
+</h3>
 
-<p>Role um dado virtual.</p>
+<p>
+Role um dado virtual.
+</p>
 
 <button onclick="abrir('dado')">
 Abrir
@@ -482,13 +915,22 @@ Abrir
 </div>
 
 
+
+<!-- IDADE -->
+
 <div class="tool">
 
-<div class="icon">📅</div>
+<div class="icon">
+📅
+</div>
 
-<h3>Calculadora de idade</h3>
+<h3>
+Calculadora de idade
+</h3>
 
-<p>Descubra sua idade.</p>
+<p>
+Descubra sua idade.
+</p>
 
 <button onclick="abrir('idade')">
 Abrir
@@ -497,13 +939,22 @@ Abrir
 </div>
 
 
+
+<!-- PESO -->
+
 <div class="tool">
 
-<div class="icon">⚖️</div>
+<div class="icon">
+⚖️
+</div>
 
-<h3>Kg ↔ Libras</h3>
+<h3>
+Kg ↔ Libras
+</h3>
 
-<p>Converta peso rapidamente.</p>
+<p>
+Converta peso rapidamente.
+</p>
 
 <button onclick="abrir('peso')">
 Abrir
@@ -512,13 +963,22 @@ Abrir
 </div>
 
 
+
+<!-- TEMPERATURA -->
+
 <div class="tool">
 
-<div class="icon">🌡️</div>
+<div class="icon">
+🌡️
+</div>
 
-<h3>Temperatura</h3>
+<h3>
+Temperatura
+</h3>
 
-<p>Converta °C e °F.</p>
+<p>
+Converta Celsius e Fahrenheit.
+</p>
 
 <button onclick="abrir('temperatura')">
 Abrir
@@ -527,13 +987,22 @@ Abrir
 </div>
 
 
+
+<!-- CRONÔMETRO -->
+
 <div class="tool">
 
-<div class="icon">⏱️</div>
+<div class="icon">
+⏱️
+</div>
 
-<h3>Cronômetro</h3>
+<h3>
+Cronômetro
+</h3>
 
-<p>Controle seu tempo.</p>
+<p>
+Controle seu tempo.
+</p>
 
 <button onclick="abrir('cronometro')">
 Abrir
@@ -547,49 +1016,120 @@ Abrir
 </main>
 
 
-<!-- ÁREA DAS FERRAMENTAS -->
 
-<div class="tool-area" id="area">
+<!-- =========================
+     ÁREA DA FERRAMENTA
+========================= -->
 
-<button class="close" onclick="fechar()">
-Fechar
+<div
+
+class="tool-area"
+
+id="area">
+
+
+<button
+
+class="close"
+
+onclick="fechar()">
+
+✕ Fechar
+
 </button>
 
-<div id="conteudo"></div>
+
+<div id="conteudo">
+
+</div>
 
 </div>
 
 
-<section class="about" id="sobre">
+
+<!-- =========================
+     SOBRE
+========================= -->
+
+<section
+
+class="about"
+
+id="sobre">
+
 
 <div class="container">
 
+
 <div class="section-title">
 
-<h2>Sobre o NexoTools</h2>
+<h2>
+Sobre o NexoTools
+</h2>
 
 </div>
 
+
 <p>
-O NexoTools reúne ferramentas úteis em uma única plataforma,
-com foco em simplicidade, velocidade e facilidade de uso.
+
+O NexoTools reúne ferramentas úteis
+em uma única plataforma, com foco
+em simplicidade, velocidade e facilidade
+de uso.
+
 </p>
+
 
 </div>
 
 </section>
 
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
 <p>
-© 2026 <strong>NexoTools</strong> — Todos os direitos reservados.
+
+© 2026
+
+<strong>
+NexoTools
+</strong>
+
+— Todos os direitos reservados.
+
 </p>
 
 </footer>
 
 
+
+<!-- BOTÃO TOPO -->
+
+<button
+
+class="top-button"
+
+id="topButton"
+
+onclick="topo()">
+
+↑
+
+</button>
+
+
+
 <script>
+
+
+/* =========================
+   ELEMENTOS
+========================= */
 
 const area =
 document.getElementById("area");
@@ -598,14 +1138,26 @@ const conteudo =
 document.getElementById("conteudo");
 
 
+
+/* =========================
+   ABRIR FERRAMENTA
+========================= */
+
 function abrir(tipo) {
+
 
 area.style.display = "block";
 
+
 area.scrollIntoView({
+
 behavior: "smooth"
+
 });
 
+
+
+/* CALCULADORA */
 
 if(tipo === "calculadora") {
 
@@ -613,21 +1165,58 @@ conteudo.innerHTML = `
 
 <h2>🧮 Calculadora</h2>
 
-<input id="a" type="number" placeholder="Primeiro número">
+<input
 
-<input id="b" type="number" placeholder="Segundo número">
+id="a"
 
-<button onclick="calc('+')">+</button>
-<button onclick="calc('-')">−</button>
-<button onclick="calc('*')">×</button>
-<button onclick="calc('/')">÷</button>
+type="number"
 
-<div class="result" id="res"></div>
+placeholder="Primeiro número">
+
+
+<input
+
+id="b"
+
+type="number"
+
+placeholder="Segundo número">
+
+
+<button onclick="calc('+')">
++
+</button>
+
+<button onclick="calc('-')">
+−
+</button>
+
+<button onclick="calc('*')">
+×
+</button>
+
+<button onclick="calc('/')">
+÷
+</button>
+
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* PORCENTAGEM */
 
 if(tipo === "porcentagem") {
 
@@ -635,20 +1224,48 @@ conteudo.innerHTML = `
 
 <h2>📊 Calculadora de Porcentagem</h2>
 
-<input id="valor" type="number" placeholder="Valor">
+<input
 
-<input id="porc" type="number" placeholder="Porcentagem">
+id="valor"
+
+type="number"
+
+placeholder="Valor">
+
+
+<input
+
+id="porc"
+
+type="number"
+
+placeholder="Porcentagem">
+
 
 <button onclick="calcularPorcentagem()">
+
 Calcular
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* NÚMERO */
 
 if(tipo === "numero") {
 
@@ -656,20 +1273,48 @@ conteudo.innerHTML = `
 
 <h2>🔢 Número Aleatório</h2>
 
-<input id="min" type="number" placeholder="Mínimo">
+<input
 
-<input id="max" type="number" placeholder="Máximo">
+id="min"
+
+type="number"
+
+placeholder="Número mínimo">
+
+
+<input
+
+id="max"
+
+type="number"
+
+placeholder="Número máximo">
+
 
 <button onclick="numeroAleatorio()">
-Gerar
+
+Gerar número
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* SENHA */
 
 if(tipo === "senha") {
 
@@ -677,18 +1322,56 @@ conteudo.innerHTML = `
 
 <h2>🔐 Gerador de Senha</h2>
 
-<input id="tamanho" type="number" value="16" min="4" max="50">
+<input
+
+id="tamanho"
+
+type="number"
+
+value="16"
+
+min="4"
+
+max="50"
+
+placeholder="Tamanho">
+
 
 <button onclick="senha()">
+
 Gerar senha
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Sua senha aparecerá aqui.
+
+</div>
+
+
+<button
+
+class="copy-button"
+
+onclick="copiarResultado()">
+
+📋 Copiar
+
+</button>
 
 `;
 
 }
 
+
+
+/* TEXTO */
 
 if(tipo === "texto") {
 
@@ -696,18 +1379,39 @@ conteudo.innerHTML = `
 
 <h2>📝 Contador de Texto</h2>
 
-<textarea id="texto" placeholder="Digite seu texto..."></textarea>
+<textarea
+
+id="texto"
+
+placeholder="Digite ou cole seu texto...">
+
+</textarea>
+
 
 <button onclick="contarTexto()">
+
 Contar
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* DADO */
 
 if(tipo === "dado") {
 
@@ -716,15 +1420,29 @@ conteudo.innerHTML = `
 <h2>🎲 Rolador de Dados</h2>
 
 <button onclick="dado()">
-Rolar dado
+
+🎲 Rolar dado
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Clique para rolar.
+
+</div>
 
 `;
 
 }
 
+
+
+/* IDADE */
 
 if(tipo === "idade") {
 
@@ -732,18 +1450,37 @@ conteudo.innerHTML = `
 
 <h2>📅 Calculadora de Idade</h2>
 
-<input id="nascimento" type="date">
+<input
+
+id="nascimento"
+
+type="date">
+
 
 <button onclick="idade()">
+
 Calcular idade
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* PESO */
 
 if(tipo === "peso") {
 
@@ -751,18 +1488,39 @@ conteudo.innerHTML = `
 
 <h2>⚖️ Conversor de Peso</h2>
 
-<input id="kg" type="number" placeholder="Digite o peso em kg">
+<input
+
+id="kg"
+
+type="number"
+
+placeholder="Peso em kg">
+
 
 <button onclick="converterPeso()">
+
 Converter
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* TEMPERATURA */
 
 if(tipo === "temperatura") {
 
@@ -770,30 +1528,56 @@ conteudo.innerHTML = `
 
 <h2>🌡️ Conversor de Temperatura</h2>
 
-<input id="temp" type="number" placeholder="Temperatura">
+<input
+
+id="temp"
+
+type="number"
+
+placeholder="Temperatura">
+
 
 <select id="tipoTemp">
 
 <option value="cf">
-°C → °F
+
+Celsius → Fahrenheit
+
 </option>
 
 <option value="fc">
-°F → °C
+
+Fahrenheit → Celsius
+
 </option>
 
 </select>
 
+
 <button onclick="temperatura()">
+
 Converter
+
 </button>
 
-<div class="result" id="res"></div>
+
+<div
+
+class="result"
+
+id="res">
+
+Resultado aparecerá aqui.
+
+</div>
 
 `;
 
 }
 
+
+
+/* CRONÔMETRO */
 
 if(tipo === "cronometro") {
 
@@ -801,22 +1585,30 @@ conteudo.innerHTML = `
 
 <h2>⏱️ Cronômetro</h2>
 
+
 <div
-id="tempo"
-style="font-size:45px;font-weight:bold;margin:25px 0">
+
+class="timer"
+
+id="tempo">
+
 00:00:00
+
 </div>
 
+
 <button onclick="iniciar()">
-Iniciar
+▶ Iniciar
 </button>
+
 
 <button onclick="parar()">
-Parar
+⏸ Parar
 </button>
 
+
 <button onclick="zerar()">
-Zerar
+↻ Zerar
 </button>
 
 `;
@@ -826,206 +1618,415 @@ Zerar
 }
 
 
-/* CALCULADORA */
+
+/* =========================
+   CALCULADORA
+========================= */
 
 function calc(op) {
 
+
 let a =
-Number(document.getElementById("a").value);
+Number(
+document.getElementById("a").value
+);
+
 
 let b =
-Number(document.getElementById("b").value);
+Number(
+document.getElementById("b").value
+);
+
 
 let r;
 
-if(op === "+") r = a + b;
-if(op === "-") r = a - b;
-if(op === "*") r = a * b;
+
+if(op === "+")
+r = a + b;
+
+
+if(op === "-")
+r = a - b;
+
+
+if(op === "*")
+r = a * b;
+
 
 if(op === "/") {
 
 r =
 b === 0
+
 ? "Não é possível dividir por zero."
+
 : a / b;
 
 }
 
+
 document.getElementById("res").innerText =
+
 "Resultado: " + r;
 
 }
 
 
-/* PORCENTAGEM */
+
+/* =========================
+   PORCENTAGEM
+========================= */
 
 function calcularPorcentagem() {
 
+
 let valor =
-Number(document.getElementById("valor").value);
+Number(
+document.getElementById("valor").value
+);
+
 
 let porcentagem =
-Number(document.getElementById("porc").value);
+Number(
+document.getElementById("porc").value
+);
+
 
 let resultado =
 valor * porcentagem / 100;
 
+
 document.getElementById("res").innerText =
+
+porcentagem +
+"% de " +
+valor +
+" = " +
 resultado;
 
 }
 
 
-/* NÚMERO */
+
+/* =========================
+   NÚMERO ALEATÓRIO
+========================= */
 
 function numeroAleatorio() {
 
+
 let min =
-Number(document.getElementById("min").value);
+Number(
+document.getElementById("min").value
+);
+
 
 let max =
-Number(document.getElementById("max").value);
+Number(
+document.getElementById("max").value
+);
+
 
 if(min > max) {
 
 document.getElementById("res").innerText =
+
 "O mínimo deve ser menor que o máximo.";
 
 return;
 
 }
 
+
 let numero =
+
 Math.floor(
+
 Math.random() *
+
 (max - min + 1)
+
 ) + min;
 
+
 document.getElementById("res").innerText =
-"Número: " + numero;
+
+"🎯 Número: " + numero;
 
 }
 
 
-/* SENHA */
+
+/* =========================
+   SENHA
+========================= */
 
 function senha() {
 
+
 let tamanho =
-Number(document.getElementById("tamanho").value);
+Number(
+document.getElementById("tamanho").value
+);
+
+
+if(tamanho < 4)
+tamanho = 4;
+
+
+if(tamanho > 50)
+tamanho = 50;
+
 
 let caracteres =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
+
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+
+"abcdefghijklmnopqrstuvwxyz" +
+
+"0123456789" +
+
+"!@#$%&*";
+
 
 let resultado = "";
 
-for(let i = 0; i < tamanho; i++) {
+
+for(
+
+let i = 0;
+
+i < tamanho;
+
+i++
+
+) {
 
 resultado +=
+
 caracteres[
+
 Math.floor(
-Math.random() * caracteres.length
+
+Math.random() *
+
+caracteres.length
+
 )
+
 ];
 
 }
 
+
 document.getElementById("res").innerText =
+
 resultado;
 
 }
 
 
-/* TEXTO */
 
-function contarTexto() {
+/* =========================
+   COPIAR
+========================= */
+
+function copiarResultado() {
+
 
 let texto =
-document.getElementById("texto").value;
 
-let palavras =
-texto.trim() === ""
-? 0
-: texto.trim().split(/\s+/).length;
+document.getElementById("res").innerText;
 
-let caracteres =
-texto.length;
 
-document.getElementById("res").innerText =
-"Palavras: " +
-palavras +
-" | Caracteres: " +
-caracteres;
+navigator.clipboard.writeText(texto);
+
+
+alert("Resultado copiado!");
 
 }
 
 
-/* DADO */
+
+/* =========================
+   TEXTO
+========================= */
+
+function contarTexto() {
+
+
+let texto =
+
+document.getElementById("texto").value;
+
+
+let palavras =
+
+texto.trim() === ""
+
+? 0
+
+: texto.trim().split(/\s+/).length;
+
+
+let caracteres =
+
+texto.length;
+
+
+let caracteresSemEspacos =
+
+texto.replace(/\s/g, "").length;
+
+
+document.getElementById("res").innerText =
+
+"Palavras: " +
+palavras +
+
+"\nCaracteres: " +
+caracteres +
+
+"\nSem espaços: " +
+caracteresSemEspacos;
+
+}
+
+
+
+/* =========================
+   DADO
+========================= */
 
 function dado() {
 
+
 let numero =
+
 Math.floor(
+
 Math.random() * 6
+
 ) + 1;
 
+
 document.getElementById("res").innerText =
+
 "🎲 Você tirou: " + numero;
 
 }
 
 
-/* IDADE */
+
+/* =========================
+   IDADE
+========================= */
 
 function idade() {
 
+
+let valor =
+
+document.getElementById(
+"nascimento"
+).value;
+
+
+if(!valor) {
+
+document.getElementById("res").innerText =
+
+"Escolha uma data.";
+
+return;
+
+}
+
+
 let nascimento =
-new Date(
-document.getElementById("nascimento").value
-);
+new Date(valor);
+
 
 let hoje =
 new Date();
 
+
 let anos =
+
 hoje.getFullYear() -
+
 nascimento.getFullYear();
 
+
 let mes =
+
 hoje.getMonth() -
+
 nascimento.getMonth();
 
+
 if(
+
 mes < 0 ||
+
 (
+
 mes === 0 &&
-hoje.getDate() < nascimento.getDate()
+
+hoje.getDate() <
+nascimento.getDate()
+
 )
+
 ) {
 
 anos--;
 
 }
 
+
 document.getElementById("res").innerText =
-"Você tem aproximadamente " +
+
+"Você tem " +
 anos +
 " anos.";
 
 }
 
 
-/* PESO */
+
+/* =========================
+   PESO
+========================= */
 
 function converterPeso() {
 
-let kg =
-Number(document.getElementById("kg").value);
 
-let libras =
-kg * 2.20462;
+let kg =
+
+Number(
+document.getElementById("kg").value
+);
+
+
+if(kg < 0) {
 
 document.getElementById("res").innerText =
+
+"Digite um valor válido.";
+
+return;
+
+}
+
+
+let libras =
+
+kg * 2.2046226218;
+
+
+document.getElementById("res").innerText =
+
 kg.toFixed(2) +
 " kg = " +
 libras.toFixed(2) +
@@ -1034,35 +2035,57 @@ libras.toFixed(2) +
 }
 
 
-/* TEMPERATURA */
+
+/* =========================
+   TEMPERATURA
+========================= */
 
 function temperatura() {
 
+
 let valor =
-Number(document.getElementById("temp").value);
+
+Number(
+document.getElementById("temp").value
+);
+
 
 let tipo =
-document.getElementById("tipoTemp").value;
+
+document.getElementById(
+"tipoTemp"
+).value;
+
 
 let resultado;
 
+
 if(tipo === "cf") {
 
+
 resultado =
+
 (valor * 9 / 5) + 32;
 
+
 document.getElementById("res").innerText =
+
 resultado.toFixed(2) +
 " °F";
+
 
 }
 
 else {
 
+
 resultado =
+
 (valor - 32) * 5 / 9;
 
+
 document.getElementById("res").innerText =
+
 resultado.toFixed(2) +
 " °C";
 
@@ -1071,49 +2094,81 @@ resultado.toFixed(2) +
 }
 
 
-/* CRONÔMETRO */
+
+/* =========================
+   CRONÔMETRO
+========================= */
 
 let segundos = 0;
+
 let intervalo = null;
+
 
 function atualizarCronometro() {
 
+
 let horas =
-Math.floor(segundos / 3600);
+
+Math.floor(
+segundos / 3600
+);
+
 
 let minutos =
+
 Math.floor(
 (segundos % 3600) / 60
 );
 
+
 let seg =
+
 segundos % 60;
 
+
 document.getElementById("tempo").innerText =
+
 String(horas).padStart(2,"0") +
+
 ":" +
+
 String(minutos).padStart(2,"0") +
+
 ":" +
+
 String(seg).padStart(2,"0");
 
 }
 
+
 function iniciar() {
 
-if(intervalo !== null) return;
+
+if(intervalo !== null)
+return;
+
 
 intervalo =
-setInterval(function() {
+
+setInterval(
+
+function() {
 
 segundos++;
 
 atualizarCronometro();
 
-},1000);
+},
+
+1000
+
+);
 
 }
 
+
 function parar() {
+
 
 clearInterval(intervalo);
 
@@ -1121,7 +2176,9 @@ intervalo = null;
 
 }
 
+
 function zerar() {
+
 
 parar();
 
@@ -1132,7 +2189,10 @@ atualizarCronometro();
 }
 
 
-/* FECHAR */
+
+/* =========================
+   FECHAR
+========================= */
 
 function fechar() {
 
@@ -1141,33 +2201,135 @@ area.style.display = "none";
 }
 
 
-/* BUSCA */
+
+/* =========================
+   BUSCA
+========================= */
 
 function buscar() {
 
+
 let pesquisa =
+
 document
 .getElementById("search")
 .value
 .toLowerCase();
 
+
 let ferramentas =
+
 document.querySelectorAll(".tool");
 
-ferramentas.forEach(function(tool) {
+
+ferramentas.forEach(
+
+function(tool) {
+
 
 let texto =
+
 tool.innerText.toLowerCase();
+
 
 if(texto.includes(pesquisa)) {
 
 tool.style.display = "";
 
-} else {
+}
+
+else {
 
 tool.style.display = "none";
 
 }
+
+}
+
+);
+
+}
+
+
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+function modoEscuro() {
+
+
+document.body.classList.toggle("dark");
+
+
+let botao =
+
+document.querySelector(
+".dark-button"
+);
+
+
+if(
+document.body.classList.contains("dark")
+) {
+
+botao.innerText = "☀️";
+
+}
+
+else {
+
+botao.innerText = "🌙";
+
+}
+
+}
+
+
+
+/* =========================
+   BOTÃO TOPO
+========================= */
+
+window.addEventListener(
+
+"scroll",
+
+function() {
+
+
+let botao =
+
+document.getElementById(
+"topButton"
+);
+
+
+if(window.scrollY > 400) {
+
+botao.style.display = "flex";
+
+}
+
+else {
+
+botao.style.display = "none";
+
+}
+
+}
+
+);
+
+
+function topo() {
+
+
+window.scrollTo({
+
+top: 0,
+
+behavior: "smooth"
 
 });
 
@@ -1176,5 +2338,6 @@ tool.style.display = "none";
 </script>
 
 </body>
+
 </html>
 ```
