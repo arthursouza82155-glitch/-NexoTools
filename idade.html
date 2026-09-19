@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculadora de Idade | NexoTools</title>
+
+    <meta
+        name="description"
+        content="Calcule sua idade em anos, meses e dias com a Calculadora de Idade do NexoTools."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button
+                id="themeButton"
+                class="icon-button"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="index.html">Início</a>
+            <span>›</span>
+            <span>Calculadora de Idade</span>
+        </div>
+
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+
+                <span class="hero-badge">
+                    🎂 Calculadora
+                </span>
+
+                <h1>Calculadora de Idade</h1>
+
+                <p>
+                    Descubra sua idade de forma rápida usando sua data de nascimento.
+                </p>
+
+            </div>
+
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div class="form-group">
+
+                        <label for="birthDate">
+                            Data de nascimento
+                        </label>
+
+                        <input
+                            type="date"
+                            id="birthDate"
+                        >
+
+                    </div>
+
+
+                    <button
+                        id="calculateAge"
+                        class="btn btn-primary tool-button"
+                    >
+                        Calcular idade
+                    </button>
+
+
+                    <div
+                        id="ageResult"
+                        class="result"
+                    >
+                        Informe sua data de nascimento.
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary copy-result"
+                        data-target="ageResult"
+                    >
+                        📋 Copiar resultado
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-section">
+
+            <h2>Como funciona?</h2>
+
+            <p>
+                Informe sua data de nascimento e o NexoTools calculará
+                sua idade com base na data atual.
+            </p>
+
+            <p>
+                O resultado mostra sua idade em anos completos e também
+                informa aproximadamente quantos meses e dias se passaram
+                desde o seu último aniversário.
+            </p>
+
+        </section>
+
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a
+                    href="calculadora.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+                </a>
+
+
+                <a
+                    href="porcentagem.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">📊</div>
+
+                    <h3>Porcentagem</h3>
+
+                    <p>
+                        Calcule porcentagens facilmente.
+                    </p>
+                </a>
+
+
+                <a
+                    href="peso.html"
+                    class="tool-card"
+                >
+                    <div class="tool-icon">⚖️</div>
+
+                    <h3>Conversor de Peso</h3>
+
+                    <p>
+                        Converta kg e libras.
+                    </p>
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>NexoTools</h3>
+
+                <p>
+                    Ferramentas simples, rápidas e gratuitas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span class="current-year"></span>
+                NexoTools.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+const calculateAge = document.getElementById("calculateAge");
+
+calculateAge.addEventListener("click", function () {
+
+    const birthDateInput =
+        document.getElementById("birthDate").value;
+
+    const result =
+        document.getElementById("ageResult");
+
+
+    if (!birthDateInput) {
+
+        result.textContent =
+            "Selecione sua data de nascimento.";
+
+        result.className =
+            "result error";
+
+        return;
+    }
+
+
+    const birthDate =
+        new Date(birthDateInput + "T00:00:00");
+
+    const today =
+        new Date();
+
+
+    if (birthDate > today) {
+
+        result.textContent =
+            "A data de nascimento não pode estar no futuro.";
+
+        result.className =
+            "result error";
+
+        return;
+    }
+
+
+    let years =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+
+    let months =
+        today.getMonth() -
+        birthDate.getMonth();
+
+
+    let days =
+        today.getDate() -
+        birthDate.getDate();
+
+
+    if (days < 0) {
+
+        months--;
+
+        const previousMonth =
+            new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                0
+            );
+
+        days += previousMonth.getDate();
+    }
+
+
+    if (months < 0) {
+
+        years--;
+        months += 12;
+
+    }
+
+
+    result.innerHTML = `
+        <strong>${years} anos</strong><br>
+        ${months} meses e ${days} dias.
+    `;
+
+    result.className =
+        "result success";
+
+});
+
+</script>
+
+</body>
+</html>
