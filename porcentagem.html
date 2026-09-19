@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de Porcentagem | NexoTools</title>
+
+  <meta
+    name="description"
+    content="Calcule porcentagens online gratuitamente com a calculadora de porcentagem do NexoTools."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        Nexo<span>Tools</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          aria-label="Alternar modo escuro"
+        >
+          🌙
+        </button>
+
+        <button
+          class="menu-button"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- CONTEÚDO -->
+  <main class="tool-page">
+
+    <div class="container">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+
+        <a href="index.html">
+          NexoTools
+        </a>
+
+        /
+
+        Calculadora de Porcentagem
+
+      </div>
+
+
+      <!-- TÍTULO -->
+      <div class="tool-page-header">
+
+        <h1>📊 Calculadora de Porcentagem</h1>
+
+        <p>
+          Calcule porcentagens de maneira rápida e fácil.
+        </p>
+
+      </div>
+
+
+      <!-- FERRAMENTA -->
+      <div class="tool-container">
+
+        <div class="tool-panel">
+
+          <div class="form-group">
+
+            <label for="percentageValue">
+              Qual é a porcentagem?
+            </label>
+
+            <input
+              type="number"
+              id="percentageValue"
+              placeholder="Ex: 20"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="percentageNumber">
+              De qual número?
+            </label>
+
+            <input
+              type="number"
+              id="percentageNumber"
+              placeholder="Ex: 150"
+            >
+
+          </div>
+
+
+          <button
+            id="calculatePercentage"
+            class="btn btn-primary"
+          >
+            Calcular porcentagem
+          </button>
+
+
+          <div
+            id="percentageResult"
+            class="result"
+          >
+            O resultado aparecerá aqui.
+          </div>
+
+
+          <button
+            class="btn btn-secondary copy-result mt-20"
+            data-target="#percentageResult"
+          >
+            📋 Copiar resultado
+          </button>
+
+        </div>
+
+
+        <!-- EXPLICAÇÃO -->
+        <div class="info-box">
+
+          <h2>Como calcular?</h2>
+
+          <p>
+            Para descobrir uma porcentagem de um número,
+            multiplicamos a porcentagem pelo número e
+            dividimos o resultado por 100.
+          </p>
+
+          <p>
+            Por exemplo: 20% de 150 = 30.
+          </p>
+
+        </div>
+
+
+        <!-- OUTRAS FERRAMENTAS -->
+        <div class="related-tools">
+
+          <h2>Outras ferramentas</h2>
+
+          <div class="tools-grid">
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                🧮
+              </div>
+
+              <h3>Calculadora</h3>
+
+              <p>
+                Faça cálculos matemáticos rapidamente.
+              </p>
+
+              <a
+                href="calculadora.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+              <div class="tool-icon">
+                📐
+              </div>
+
+              <h3>Regra de Três</h3>
+
+              <p>
+                Resolva cálculos de regra de três.
+              </p>
+
+              <a
+                href="regra-de-tres.html"
+                class="tool-open"
+              >
+                Abrir ferramenta
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-content">
+
+      <p>
+        © <span class="current-year"></span> NexoTools.
+        Todos os direitos reservados.
+      </p>
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Início
+        </a>
+
+        <a href="index.html#sobre">
+          Sobre
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="script.js"></script>
+
+
+  <!-- CÓDIGO DA PORCENTAGEM -->
+  <script>
+
+    const percentageButton =
+      document.querySelector("#calculatePercentage");
+
+    if (percentageButton) {
+
+      percentageButton.addEventListener("click", () => {
+
+        const percentage =
+          Number(
+            document.querySelector("#percentageValue").value
+          );
+
+        const number =
+          Number(
+            document.querySelector("#percentageNumber").value
+          );
+
+        const result =
+          document.querySelector("#percentageResult");
+
+
+        if (
+          Number.isNaN(percentage) ||
+          Number.isNaN(number)
+        ) {
+
+          result.textContent =
+            "Digite valores válidos.";
+
+          result.className =
+            "result error";
+
+          return;
+
+        }
+
+
+        const calculation =
+          (percentage * number) / 100;
+
+
+        result.textContent =
+          `${percentage}% de ${number} = ${calculation}`;
+
+
+        result.className =
+          "result success";
+
+      });
+
+    }
+
+  </script>
+
+</body>
+
+</html>
