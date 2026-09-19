@@ -761,3 +761,67 @@ footer {
     font-size: 13px;
   }
 }
+/* =========================
+   TEMA ESCURO
+========================= */
+
+body.dark {
+  --bg: #0f1017;
+  --card: #181923;
+  --text: #f5f5f7;
+  --muted: #a1a1aa;
+  --border: #292a38;
+}
+
+body.dark header {
+  background: #14151d;
+}
+
+body.dark .tool-card,
+body.dark .tool-box,
+body.dark .stat-card,
+body.dark .search-box,
+body.dark .category,
+body.dark .form-control,
+body.dark .btn-secondary {
+  background: #181923;
+  color: var(--text);
+}
+
+body.dark .search-box,
+body.dark .form-control {
+  border-color: var(--border);
+}
+
+body.dark .category {
+  border-color: var(--border);
+}
+
+body.dark .nav-links a {
+  color: #ddd;
+}
+
+body.dark .result-box {
+  background: #202033;
+  border-color: #39395c;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+}
+
+.tool-section {
+  scroll-margin-top: 90px;
+}
