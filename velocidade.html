@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Calculadora de velocidade média online grátis - NexoTools">
+
+    <title>Velocidade Média | NexoTools</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button class="icon-button" id="themeButton" aria-label="Alternar tema">
+                🌙
+            </button>
+
+            <button class="menu-button" aria-label="Abrir menu">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+<section class="tool-page">
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span>›</span>
+        <span>Velocidade Média</span>
+    </div>
+
+
+    <div class="tool-page-header">
+
+        <div class="hero-badge">
+            🚗 Ferramenta gratuita
+        </div>
+
+        <h1>Calculadora de Velocidade Média</h1>
+
+        <p>
+            Calcule a velocidade média de uma viagem de forma rápida.
+        </p>
+
+    </div>
+
+
+    <div class="tool-container">
+
+        <div class="tool-panel">
+
+            <div class="form-group">
+
+                <label for="speedDistance">
+                    Distância percorrida
+                </label>
+
+                <input
+                    type="number"
+                    id="speedDistance"
+                    placeholder="Ex: 120"
+                    min="0"
+                    step="any"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="speedTime">
+                    Tempo
+                </label>
+
+                <input
+                    type="number"
+                    id="speedTime"
+                    placeholder="Ex: 2"
+                    min="0"
+                    step="any"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="speedTimeUnit">
+                    Unidade do tempo
+                </label>
+
+                <select id="speedTimeUnit">
+
+                    <option value="hours">
+                        Horas
+                    </option>
+
+                    <option value="minutes">
+                        Minutos
+                    </option>
+
+                    <option value="seconds">
+                        Segundos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                id="calculateSpeed"
+                class="btn btn-primary"
+                style="width: 100%;"
+            >
+                🚗 Calcular velocidade
+            </button>
+
+
+            <div
+                id="speedResult"
+                class="result"
+                style="margin-top: 20px;"
+            >
+                Digite os valores para calcular.
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h2>Como calcular?</h2>
+
+            <p>
+                A velocidade média é calculada dividindo a distância
+                pelo tempo.
+            </p>
+
+            <p>
+                <strong>Velocidade média = distância ÷ tempo</strong>
+            </p>
+
+            <p>
+                O resultado será apresentado em <strong>km/h</strong>.
+            </p>
+
+        </div>
+
+
+        <div class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a href="combustivel.html" class="tool-card">
+
+                    <div class="tool-icon">⛽</div>
+
+                    <h3>Consumo de Combustível</h3>
+
+                    <p>
+                        Calcule o consumo médio do veículo.
+                    </p>
+
+                </a>
+
+
+                <a href="distancia.html" class="tool-card">
+
+                    <div class="tool-icon">📏</div>
+
+                    <h3>Conversor de Distância</h3>
+
+                    <p>
+                        Converta quilômetros, milhas e outras unidades.
+                    </p>
+
+                </a>
+
+
+                <a href="calculadora.html" class="tool-card">
+
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+<div class="container">
+
+    <p>
+        © <span class="current-year"></span> NexoTools.
+        Todas as ferramentas são gratuitas.
+    </p>
+
+</div>
+
+</footer>
+
+
+<script>
+
+const distanceInput = document.getElementById("speedDistance");
+const timeInput = document.getElementById("speedTime");
+const timeUnit = document.getElementById("speedTimeUnit");
+const calculateButton = document.getElementById("calculateSpeed");
+const result = document.getElementById("speedResult");
+
+calculateButton.addEventListener("click", function () {
+
+    const distance = parseFloat(distanceInput.value);
+    const time = parseFloat(timeInput.value);
+
+    if (isNaN(distance) || isNaN(time)) {
+
+        result.className = "result error";
+
+        result.innerHTML =
+            "⚠️ Preencha todos os campos.";
+
+        return;
+    }
+
+    if (distance < 0 || time <= 0) {
+
+        result.className = "result error";
+
+        result.innerHTML =
+            "⚠️ Digite valores válidos.";
+
+        return;
+    }
+
+    let timeInHours = time;
+
+    if (timeUnit.value === "minutes") {
+        timeInHours = time / 60;
+    }
+
+    if (timeUnit.value === "seconds") {
+        timeInHours = time / 3600;
+    }
+
+    const speed = distance / timeInHours;
+
+    result.className = "result success";
+
+    result.innerHTML = `
+        🚗 Velocidade média:
+        <strong>${speed.toFixed(2)} km/h</strong>
+    `;
+
+});
+
+</script>
+
+</body>
+</html>
