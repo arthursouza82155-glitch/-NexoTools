@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contador de Palavras | NexoTools</title>
+
+    <meta
+        name="description"
+        content="Conte palavras, caracteres e linhas de um texto gratuitamente com o NexoTools."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            Nexo<span>Tools</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="index.html#ferramentas">Ferramentas</a>
+            <a href="index.html#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <button
+                id="themeButton"
+                class="icon-button"
+                aria-label="Alternar tema"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-button"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">Início</a>
+
+            <span>›</span>
+
+            <span>Contador de Palavras</span>
+
+        </div>
+
+
+        <section class="tool-page">
+
+            <div class="tool-page-header">
+
+                <span class="hero-badge">
+                    📝 Texto
+                </span>
+
+                <h1>Contador de Palavras</h1>
+
+                <p>
+                    Conte palavras, caracteres e linhas de qualquer texto.
+                </p>
+
+            </div>
+
+
+            <div class="tool-container">
+
+                <div class="tool-panel">
+
+                    <div class="form-group">
+
+                        <label for="textInput">
+                            Digite ou cole seu texto
+                        </label>
+
+                        <textarea
+                            id="textInput"
+                            rows="10"
+                            placeholder="Digite ou cole seu texto aqui..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        id="countText"
+                        class="btn btn-primary tool-button"
+                    >
+                        Contar texto
+                    </button>
+
+
+                    <div
+                        id="textResult"
+                        class="result"
+                    >
+                        Digite um texto para começar.
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary copy-result"
+                        data-target="textResult"
+                    >
+                        📋 Copiar resultado
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-section">
+
+            <h2>O que o contador calcula?</h2>
+
+            <p>
+                <strong>Palavras:</strong>
+                quantidade de palavras encontradas no texto.
+            </p>
+
+            <p>
+                <strong>Caracteres:</strong>
+                quantidade de caracteres, incluindo espaços.
+            </p>
+
+            <p>
+                <strong>Linhas:</strong>
+                quantidade de linhas existentes no texto.
+            </p>
+
+        </section>
+
+
+        <section class="related-tools">
+
+            <h2>Outras ferramentas</h2>
+
+            <div class="tools-grid">
+
+                <a
+                    href="calculadora.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">🧮</div>
+
+                    <h3>Calculadora</h3>
+
+                    <p>
+                        Faça cálculos rapidamente.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="porcentagem.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">📊</div>
+
+                    <h3>Porcentagem</h3>
+
+                    <p>
+                        Calcule porcentagens facilmente.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="idade.html"
+                    class="tool-card"
+                >
+
+                    <div class="tool-icon">🎂</div>
+
+                    <h3>Calculadora de Idade</h3>
+
+                    <p>
+                        Calcule sua idade.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>NexoTools</h3>
+
+                <p>
+                    Ferramentas simples, rápidas e gratuitas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span class="current-year"></span>
+                NexoTools.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+const countText =
+    document.getElementById("countText");
+
+
+countText.addEventListener("click", function () {
+
+    const text =
+        document.getElementById("textInput").value;
+
+    const result =
+        document.getElementById("textResult");
+
+
+    if (text.trim() === "") {
+
+        result.textContent =
+            "Digite algum texto para fazer a contagem.";
+
+        result.className =
+            "result error";
+
+        return;
+    }
+
+
+    const words =
+        text.trim().split(/\s+/).length;
+
+
+    const characters =
+        text.length;
+
+
+    const lines =
+        text.split(/\r?\n/).length;
+
+
+    result.innerHTML = `
+        <strong>Palavras: ${words}</strong><br>
+        Caracteres: ${characters}<br>
+        Linhas: ${lines}
+    `;
+
+    result.className =
+        "result success";
+
+});
+
+</script>
+
+</body>
+</html>
