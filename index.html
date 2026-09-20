@@ -1,105 +1,2023 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoTools — Ferramentas inteligentes</title>
 
-    <title>NexoTools</title>
+<style>
+:root{
+  --bg:#f5f7fb;
+  --surface:#ffffff;
+  --surface2:#f0f3f8;
+  --text:#111827;
+  --muted:#6b7280;
+  --primary:#635bff;
+  --primary2:#8b5cf6;
+  --border:#e5e7eb;
+  --shadow:0 10px 35px rgba(15,23,42,.08);
+  --radius:20px;
+}
 
-    <link rel="stylesheet" href="style.css">
+.dark{
+  --bg:#0b0d12;
+  --surface:#13161d;
+  --surface2:#1a1e27;
+  --text:#f8fafc;
+  --muted:#9ca3af;
+  --border:#252a35;
+  --shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.25s;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:250px;
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  padding:25px 17px;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index:20;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:5px 10px 30px;
+  font-weight:800;
+  font-size:22px;
+}
+
+.logo-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:white;
+  display:grid;
+  place-items:center;
+  box-shadow:0 8px 20px rgba(99,91,255,.25);
+}
+
+.nav-title{
+  font-size:11px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+  padding:10px;
+  letter-spacing:.08em;
+}
+
+.nav button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border-radius:12px;
+  margin:3px 0;
+  text-align:left;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:var(--surface2);
+  color:var(--text);
+}
+
+.sidebar-bottom{
+  position:absolute;
+  left:17px;
+  right:17px;
+  bottom:20px;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  padding:28px 35px 50px;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.search{
+  flex:1;
+  max-width:600px;
+  position:relative;
+}
+
+.search input{
+  width:100%;
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:14px 18px 14px 45px;
+  border-radius:14px;
+  outline:none;
+  box-shadow:0 4px 15px rgba(0,0,0,.03);
+}
+
+.search span{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+}
+
+.icon-btn{
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+}
+
+/* HERO */
+
+.hero{
+  background:
+    radial-gradient(circle at 80% 20%,rgba(139,92,246,.3),transparent 30%),
+    linear-gradient(135deg,#17172b,#27205a);
+  color:white;
+  border-radius:28px;
+  padding:45px;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:28px;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  border:45px solid rgba(255,255,255,.04);
+  right:-80px;
+  bottom:-100px;
+}
+
+.hero h1{
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.05;
+  max-width:700px;
+  letter-spacing:-.04em;
+}
+
+.hero p{
+  color:#c8c8dc;
+  margin-top:15px;
+  max-width:600px;
+  font-size:16px;
+}
+
+.hero-stats{
+  display:flex;
+  gap:12px;
+  margin-top:28px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  padding:10px 15px;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  font-size:13px;
+}
+
+/* CATEGORIES */
+
+.categories{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  margin-bottom:25px;
+}
+
+.category{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  padding:9px 15px;
+  border-radius:30px;
+  white-space:nowrap;
+}
+
+.category.active,
+.category:hover{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+/* SECTION */
+
+.section-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.section-header h2{
+  font-size:21px;
+}
+
+.section-header span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* TOOLS */
+
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:15px;
+}
+
+.tool-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  transition:.2s;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+
+.tool-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+  border-color:rgba(99,91,255,.35);
+}
+
+.tool-icon{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:var(--surface2);
+  font-size:22px;
+  margin-bottom:18px;
+}
+
+.tool-card h3{
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+.tool-card p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.open{
+  margin-top:16px;
+  color:var(--primary);
+  font-size:12px;
+  font-weight:700;
+}
+
+.favorite{
+  position:absolute;
+  right:15px;
+  top:15px;
+  border:0;
+  background:none;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.favorite.active{
+  color:#f59e0b;
+}
+
+/* MODAL */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:27px;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.modal-head h2{
+  font-size:22px;
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:7px;
+  color:var(--muted);
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+  border-radius:12px;
+  padding:12px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:12px 17px;
+  background:var(--primary);
+  color:white;
+  font-weight:700;
+  margin-top:5px;
+}
+
+.btn.secondary{
+  background:var(--surface2);
+  color:var(--text);
+}
+
+.result{
+  margin-top:18px;
+  padding:18px;
+  background:var(--surface2);
+  border-radius:14px;
+  font-weight:700;
+  word-break:break-word;
+}
+
+.tool-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:50px 20px;
+  display:none;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+  display:none;
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:18px;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    flex-wrap:wrap;
+  }
+
+  .search{
+    order:3;
+    max-width:none;
+    flex-basis:100%;
+  }
+
+  .hero{
+    padding:30px 24px;
+  }
+
+  .tools-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+
+  .tools-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">NexoTools</div>
+<div class="app">
 
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#ferramentas">Ferramentas</a>
-            <a href="#sobre">Sobre</a>
-        </nav>
-    </header>
+<!-- SIDEBAR -->
 
-    <main>
+<aside class="sidebar" id="sidebar">
 
-        <section class="hero" id="inicio">
-            <h1>Ferramentas simples.<br>Resultados rápidos.</h1>
+  <div class="logo">
+    <div class="logo-icon">N</div>
+    <span>NexoTools</span>
+  </div>
 
-            <p>
-                Encontre ferramentas úteis para facilitar suas tarefas do dia a dia.
-            </p>
+  <div class="nav-title">Menu</div>
 
-            <a href="#ferramentas" class="hero-button">
-                Explorar ferramentas
-            </a>
-        </section>
+  <div class="nav">
+    <button class="active" onclick="showAll()">⌂ &nbsp; Início</button>
+    <button onclick="filterTools('favorite')">★ &nbsp; Favoritos</button>
+    <button onclick="filterTools('recent')">◷ &nbsp; Recentes</button>
+  </div>
 
-        <section class="tools-section" id="ferramentas">
+  <div class="nav-title">Categorias</div>
 
-            <div class="section-header">
-                <div>
-                    <h2>Ferramentas</h2>
-                    <p>Escolha uma ferramenta para começar.</p>
-                </div>
+  <div class="nav">
+    <button onclick="filterTools('Matemática')">∑ &nbsp; Matemática</button>
+    <button onclick="filterTools('Conversores')">↔ &nbsp; Conversores</button>
+    <button onclick="filterTools('Texto')">Aa &nbsp; Texto</button>
+    <button onclick="filterTools('Produtividade')">✓ &nbsp; Produtividade</button>
+    <button onclick="filterTools('Geradores')">✦ &nbsp; Geradores</button>
+  </div>
 
-                <div class="tools-info">
-                    <div class="info-box">
-                        <strong>+16</strong>
-                        <span>ferramentas</span>
-                    </div>
+  <div class="sidebar-bottom">
+    <div class="nav">
+      <button onclick="toggleTheme()">◐ &nbsp; Alterar aparência</button>
+    </div>
+  </div>
 
-                    <div class="info-box">
-                        <strong>100%</strong>
-                        <span>gratuito</span>
-                    </div>
-                </div>
-            </div>
+</aside>
 
-            <div class="tools-grid">
+<!-- MAIN -->
 
-                <div class="tool-card">
-                    <h3>Calculadora</h3>
-                    <p>Faça cálculos rapidamente.</p>
-                    <button onclick="openTool('calculator')">Abrir</button>
-                </div>
+<main class="main">
 
-                <div class="tool-card">
-                    <h3>Gerador de senha</h3>
-                    <p>Crie uma senha aleatória.</p>
-                    <button onclick="openTool('password')">Abrir</button>
-                </div>
+  <div class="topbar">
 
-                <div class="tool-card">
-                    <h3>Contador de palavras</h3>
-                    <p>Conte palavras e caracteres.</p>
-                    <button onclick="openTool('counter')">Abrir</button>
-                </div>
+    <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
 
-                <div class="tool-card">
-                    <h3>Gerador de números</h3>
-                    <p>Gere números aleatórios.</p>
-                    <button onclick="openTool('random')">Abrir</button>
-                </div>
+    <div class="search">
+      <span>⌕</span>
+      <input
+        id="search"
+        type="text"
+        placeholder="Pesquisar uma ferramenta..."
+        oninput="searchTools()"
+      >
+    </div>
 
-            </div>
+    <div class="actions">
+      <button class="icon-btn" onclick="toggleTheme()" title="Tema">◐</button>
+    </div>
 
-        </section>
+  </div>
 
-        <section class="about" id="sobre">
-            <h2>Sobre o NexoTools</h2>
-            <p>
-                O NexoTools reúne ferramentas simples e úteis em um só lugar.
-            </p>
-        </section>
+  <!-- HERO -->
 
-    </main>
+  <section class="hero">
 
-    <footer>
-        <p>© 2026 NexoTools. Todos os direitos reservados.</p>
-    </footer>
+    <h1>Ferramentas inteligentes para simplificar seu dia.</h1>
 
-    <script src="script.js"></script>
+    <p>
+      Uma coleção moderna de ferramentas rápidas, práticas e gratuitas
+      em um só lugar.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">✦ 30 ferramentas</div>
+      <div class="stat">⚡ Rápido</div>
+      <div class="stat">✓ Gratuito</div>
+      <div class="stat">◐ Modo escuro</div>
+    </div>
+
+  </section>
+
+  <!-- CATEGORIES -->
+
+  <div class="categories">
+    <button class="category active" onclick="showAll()">Todas</button>
+    <button class="category" onclick="filterTools('Matemática')">Matemática</button>
+    <button class="category" onclick="filterTools('Conversores')">Conversores</button>
+    <button class="category" onclick="filterTools('Texto')">Texto</button>
+    <button class="category" onclick="filterTools('Produtividade')">Produtividade</button>
+    <button class="category" onclick="filterTools('Geradores')">Geradores</button>
+  </div>
+
+  <div class="section-header">
+    <h2 id="sectionTitle">Todas as ferramentas</h2>
+    <span id="toolCount">30 ferramentas</span>
+  </div>
+
+  <div class="tools-grid" id="toolsGrid"></div>
+
+  <div class="empty" id="empty">
+    Nenhuma ferramenta encontrada.
+  </div>
+
+</main>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal-bg" id="modalBg" onclick="closeOutside(event)">
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2 id="modalTitle">Ferramenta</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
+</div>
+
+
+<script>
+
+/* =========================
+   DADOS
+========================= */
+
+const tools = [
+
+{
+ id:"calculadora",
+ name:"Calculadora",
+ icon:"🧮",
+ category:"Matemática",
+ description:"Faça cálculos matemáticos rapidamente.",
+ type:"calculator"
+},
+
+{
+ id:"porcentagem",
+ name:"Porcentagem",
+ icon:"％",
+ category:"Matemática",
+ description:"Calcule porcentagens de forma simples.",
+ type:"percentage"
+},
+
+{
+ id:"desconto",
+ name:"Desconto",
+ icon:"🏷️",
+ category:"Matemática",
+ description:"Descubra o preço final após um desconto.",
+ type:"discount"
+},
+
+{
+ id:"juros",
+ name:"Juros simples",
+ icon:"💰",
+ category:"Matemática",
+ description:"Calcule juros simples e montante.",
+ type:"interest"
+},
+
+{
+ id:"regra3",
+ name:"Regra de três",
+ icon:"⅓",
+ category:"Matemática",
+ description:"Resolva regras de três rapidamente.",
+ type:"rule3"
+},
+
+{
+ id:"media",
+ name:"Calculadora de média",
+ icon:"📊",
+ category:"Matemática",
+ description:"Calcule a média de vários números.",
+ type:"average"
+},
+
+{
+ id:"idade",
+ name:"Calculadora de idade",
+ icon:"🎂",
+ category:"Matemática",
+ description:"Descubra sua idade em anos, meses e dias.",
+ type:"age"
+},
+
+{
+ id:"dias",
+ name:"Contador de dias",
+ icon:"📅",
+ category:"Produtividade",
+ description:"Veja quantos dias existem entre duas datas.",
+ type:"days"
+},
+
+{
+ id:"cronometro",
+ name:"Cronômetro",
+ icon:"⏱️",
+ category:"Produtividade",
+ description:"Cronômetro digital com controles.",
+ type:"stopwatch"
+},
+
+{
+ id:"timer",
+ name:"Temporizador",
+ icon:"⏳",
+ category:"Produtividade",
+ description:"Configure uma contagem regressiva.",
+ type:"timer"
+},
+
+{
+ id:"senha",
+ name:"Gerador de senhas",
+ icon:"🔐",
+ category:"Geradores",
+ description:"Crie senhas aleatórias.",
+ type:"password"
+},
+
+{
+ id:"numeros",
+ name:"Números aleatórios",
+ icon:"🎲",
+ category:"Geradores",
+ description:"Gere números aleatórios.",
+ type:"random"
+},
+
+{
+ id:"qrcode",
+ name:"QR Code",
+ icon:"▦",
+ category:"Geradores",
+ description:"Gere um QR Code a partir de um texto.",
+ type:"qrcode"
+},
+
+{
+ id:"palavras",
+ name:"Contador de palavras",
+ icon:"📝",
+ category:"Texto",
+ description:"Conte palavras, caracteres e linhas.",
+ type:"wordcount"
+},
+
+{
+ id:"maiusculas",
+ name:"Maiúsculas e minúsculas",
+ icon:"Aa",
+ category:"Texto",
+ description:"Transforme seu texto rapidamente.",
+ type:"case"
+},
+
+{
+ id:"espacos",
+ name:"Limpar espaços",
+ icon:"↔",
+ category:"Texto",
+ description:"Remova espaços extras do texto.",
+ type:"spaces"
+},
+
+{
+ id:"inverter",
+ name:"Inverter texto",
+ icon:"⇄",
+ category:"Texto",
+ description:"Inverta qualquer texto.",
+ type:"reverse"
+},
+
+{
+ id:"contagem",
+ name:"Contador de caracteres",
+ icon:"#",
+ category:"Texto",
+ description:"Conte os caracteres de um texto.",
+ type:"characters"
+},
+
+{
+ id:"temperatura",
+ name:"Temperatura",
+ icon:"🌡️",
+ category:"Conversores",
+ description:"Converta Celsius, Fahrenheit e Kelvin.",
+ type:"temperature"
+},
+
+{
+ id:"comprimento",
+ name:"Comprimento",
+ icon:"📏",
+ category:"Conversores",
+ description:"Converta metros, quilômetros, centímetros e mais.",
+ type:"length"
+},
+
+{
+ id:"peso",
+ name:"Peso",
+ icon:"⚖️",
+ category:"Conversores",
+ description:"Converta kg, g, mg e toneladas.",
+ type:"weight"
+},
+
+{
+ id:"velocidade",
+ name:"Velocidade",
+ icon:"🚀",
+ category:"Conversores",
+ description:"Converta km/h, m/s e mph.",
+ type:"speed"
+},
+
+{
+ id:"dados",
+ name:"Dados digitais",
+ icon:"💾",
+ category:"Conversores",
+ description:"Converta KB, MB, GB e TB.",
+ type:"data"
+},
+
+{
+ id:"tempo",
+ name:"Conversor de tempo",
+ icon:"🕐",
+ category:"Conversores",
+ description:"Converta segundos, minutos, horas e dias.",
+ type:"time"
+},
+
+{
+ id:"notas",
+ name:"Bloco de notas",
+ icon:"📒",
+ category:"Produtividade",
+ description:"Escreva e salve suas anotações neste navegador.",
+ type:"notes"
+},
+
+{
+ id:"tarefas",
+ name:"Lista de tarefas",
+ icon:"☑️",
+ category:"Produtividade",
+ description:"Organize suas tarefas.",
+ type:"tasks"
+},
+
+{
+ id:"sorteio",
+ name:"Sorteador de nomes",
+ icon:"🎯",
+ category:"Geradores",
+ description:"Escolha um nome aleatoriamente.",
+ type:"names"
+},
+
+{
+ id:"moeda",
+ name:"Cara ou coroa",
+ icon:"🪙",
+ category:"Geradores",
+ description:"Faça um sorteio entre duas opções.",
+ type:"coin"
+},
+
+{
+ id:"dado",
+ name:"Dado virtual",
+ icon:"🎲",
+ category:"Geradores",
+ description:"Jogue um dado de 1 a 6.",
+ type:"dice"
+},
+
+{
+ id:"senha2",
+ name:"Gerador de código",
+ icon:"🔢",
+ category:"Geradores",
+ description:"Gere códigos numéricos aleatórios.",
+ type:"code"
+}
+
+];
+
+
+/* =========================
+   ESTADO
+========================= */
+
+let favorites =
+JSON.parse(localStorage.getItem("nexoFavorites") || "[]");
+
+let recent =
+JSON.parse(localStorage.getItem("nexoRecent") || "[]");
+
+let currentTools = [...tools];
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderTools(list=tools){
+
+ currentTools=list;
+
+ const grid=document.getElementById("toolsGrid");
+ const empty=document.getElementById("empty");
+
+ grid.innerHTML="";
+
+ document.getElementById("toolCount").textContent=
+ list.length+" ferramenta"+(list.length!==1?"s":"");
+
+ if(!list.length){
+   empty.style.display="block";
+   return;
+ }
+
+ empty.style.display="none";
+
+ list.forEach(tool=>{
+
+   const card=document.createElement("div");
+   card.className="tool-card";
+
+   card.innerHTML=`
+
+     <button class="favorite ${favorites.includes(tool.id)?"active":""}"
+       onclick="toggleFavorite(event,'${tool.id}')">
+       ${favorites.includes(tool.id)?"★":"☆"}
+     </button>
+
+     <div class="tool-icon">${tool.icon}</div>
+
+     <h3>${tool.name}</h3>
+
+     <p>${tool.description}</p>
+
+     <div class="open">Abrir ferramenta →</div>
+   `;
+
+   card.onclick=()=>openTool(tool);
+
+   grid.appendChild(card);
+
+ });
+
+}
+
+
+/* =========================
+   FAVORITOS
+========================= */
+
+function toggleFavorite(e,id){
+
+ e.stopPropagation();
+
+ if(favorites.includes(id)){
+   favorites=favorites.filter(x=>x!==id);
+ }else{
+   favorites.push(id);
+ }
+
+ localStorage.setItem("nexoFavorites",JSON.stringify(favorites));
+
+ renderTools(currentTools);
+
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+function showAll(){
+
+ document.getElementById("sectionTitle").textContent=
+ "Todas as ferramentas";
+
+ renderTools(tools);
+
+}
+
+function filterTools(category){
+
+ let result=[];
+
+ if(category==="favorite"){
+   result=tools.filter(t=>favorites.includes(t.id));
+   document.getElementById("sectionTitle").textContent="Favoritos";
+ }
+
+ else if(category==="recent"){
+   result=recent.map(id=>tools.find(t=>t.id===id)).filter(Boolean);
+   document.getElementById("sectionTitle").textContent="Ferramentas recentes";
+ }
+
+ else{
+   result=tools.filter(t=>t.category===category);
+   document.getElementById("sectionTitle").textContent=category;
+ }
+
+ renderTools(result);
+
+}
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+function searchTools(){
+
+ const q=document.getElementById("search").value.toLowerCase();
+
+ const result=tools.filter(t=>
+   t.name.toLowerCase().includes(q) ||
+   t.description.toLowerCase().includes(q) ||
+   t.category.toLowerCase().includes(q)
+ );
+
+ document.getElementById("sectionTitle").textContent=
+ q ? "Resultados da pesquisa" : "Todas as ferramentas";
+
+ renderTools(result);
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openTool(tool){
+
+ recent=recent.filter(id=>id!==tool.id);
+ recent.unshift(tool.id);
+ recent=recent.slice(0,8);
+
+ localStorage.setItem("nexoRecent",JSON.stringify(recent));
+
+ document.getElementById("modalTitle").textContent=
+ tool.icon+"  "+tool.name;
+
+ document.getElementById("modalContent").innerHTML=
+ getToolHTML(tool.type);
+
+ document.getElementById("modalBg").classList.add("show");
+
+ initializeTool(tool.type);
+
+}
+
+function closeModal(){
+ document.getElementById("modalBg").classList.remove("show");
+}
+
+function closeOutside(e){
+ if(e.target.id==="modalBg") closeModal();
+}
+
+
+/* =========================
+   INTERFACE DAS FERRAMENTAS
+========================= */
+
+function getToolHTML(type){
+
+ const input=(id,placeholder)=>`
+   <div class="field">
+     <input id="${id}" type="number" placeholder="${placeholder}">
+   </div>
+ `;
+
+ switch(type){
+
+ case"calculator":
+ return`
+   <div class="field">
+     <input id="calc" type="text" placeholder="Ex.: 25 + 10 * 2">
+   </div>
+   <button class="btn" onclick="calculate()">Calcular</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"percentage":
+ return`
+   ${input("p1","Valor")}
+   ${input("p2","Porcentagem")}
+   <button class="btn" onclick="percentage()">Calcular</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"discount":
+ return`
+   ${input("price","Preço")}
+   ${input("discount","Desconto (%)")}
+   <button class="btn" onclick="discount()">Calcular</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"interest":
+ return`
+   ${input("capital","Capital")}
+   ${input("rate","Taxa (%)")}
+   ${input("months","Tempo")}
+   <button class="btn" onclick="interest()">Calcular</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"rule3":
+ return`
+   ${input("a","A")}
+   ${input("b","B")}
+   ${input("c","C")}
+   <button class="btn" onclick="rule3()">Resolver</button>
+   <div id="result" class="result">X aparecerá aqui.</div>
+ `;
+
+ case"average":
+ return`
+   <div class="field">
+    <input id="numbers" type="text" placeholder="Ex.: 7, 8.5, 9, 10">
+   </div>
+   <button class="btn" onclick="average()">Calcular média</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"age":
+ return`
+   <div class="field">
+    <label>Data de nascimento</label>
+    <input id="birth" type="date">
+   </div>
+   <button class="btn" onclick="age()">Calcular idade</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"days":
+ return`
+   <div class="field">
+    <label>Data inicial</label>
+    <input id="date1" type="date">
+   </div>
+   <div class="field">
+    <label>Data final</label>
+    <input id="date2" type="date">
+   </div>
+   <button class="btn" onclick="days()">Calcular</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"stopwatch":
+ return`
+   <div id="clock" class="result" style="font-size:35px;text-align:center">
+    00:00:00
+   </div>
+   <div class="tool-actions">
+    <button class="btn" onclick="startStopwatch()">Iniciar</button>
+    <button class="btn secondary" onclick="stopStopwatch()">Parar</button>
+    <button class="btn secondary" onclick="resetStopwatch()">Resetar</button>
+   </div>
+ `;
+
+ case"timer":
+ return`
+   ${input("timerMin","Minutos")}
+   ${input("timerSec","Segundos")}
+   <button class="btn" onclick="startTimer()">Iniciar</button>
+   <div id="timerDisplay" class="result">00:00</div>
+ `;
+
+ case"password":
+ return`
+   ${input("passLength","Quantidade de caracteres")}
+   <button class="btn" onclick="generatePassword()">Gerar senha</button>
+   <div id="result" class="result">Sua senha aparecerá aqui.</div>
+ `;
+
+ case"random":
+ return`
+   ${input("min","Mínimo")}
+   ${input("max","Máximo")}
+   <button class="btn" onclick="randomNumber()">Sortear</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"qrcode":
+ return`
+   <div class="field">
+    <input id="qrText" type="text" placeholder="Digite um texto ou link">
+   </div>
+   <button class="btn" onclick="generateQR()">Gerar QR Code</button>
+   <div id="qr" style="text-align:center;margin-top:20px"></div>
+ `;
+
+ case"wordcount":
+ return textArea("wordText","Digite ou cole seu texto...")+`
+   <button class="btn" onclick="wordCount()">Contar</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"case":
+ return textArea("caseText","Digite seu texto...")+`
+   <div class="tool-actions">
+    <button class="btn" onclick="changeCase('upper')">MAIÚSCULAS</button>
+    <button class="btn secondary" onclick="changeCase('lower')">minúsculas</button>
+    <button class="btn secondary" onclick="changeCase('title')">Título</button>
+   </div>
+   <div id="result" class="result"></div>
+ `;
+
+ case"spaces":
+ return textArea("spaceText","Digite seu texto...")+`
+   <button class="btn" onclick="cleanSpaces()">Limpar espaços</button>
+   <div id="result" class="result"></div>
+ `;
+
+ case"reverse":
+ return textArea("reverseText","Digite seu texto...")+`
+   <button class="btn" onclick="reverseText()">Inverter</button>
+   <div id="result" class="result"></div>
+ `;
+
+ case"characters":
+ return textArea("charText","Digite seu texto...")+`
+   <button class="btn" onclick="characters()">Contar</button>
+   <div id="result" class="result"></div>
+ `;
+
+ case"temperature":
+ return converter("tempValue","tempUnit",
+ ["Celsius","Fahrenheit","Kelvin"],
+ "convertTemperature()");
+
+ case"length":
+ return converter("lengthValue","lengthUnit",
+ ["Metro","Quilômetro","Centímetro","Milímetro"],
+ "convertLength()");
+
+ case"weight":
+ return converter("weightValue","weightUnit",
+ ["Quilograma","Grama","Miligrama","Tonelada"],
+ "convertWeight()");
+
+ case"speed":
+ return converter("speedValue","speedUnit",
+ ["km/h","m/s","mph"],
+ "convertSpeed()");
+
+ case"data":
+ return converter("dataValue","dataUnit",
+ ["KB","MB","GB","TB"],
+ "convertData()");
+
+ case"time":
+ return converter("timeValue","timeUnit",
+ ["Segundos","Minutos","Horas","Dias"],
+ "convertTime()");
+
+ case"notes":
+ return`
+   <textarea id="notesText" placeholder="Escreva suas anotações..."></textarea>
+   <div class="tool-actions">
+    <button class="btn" onclick="saveNotes()">Salvar</button>
+    <button class="btn secondary" onclick="clearNotes()">Limpar</button>
+   </div>
+   <div id="result" class="result"></div>
+ `;
+
+ case"tasks":
+ return`
+   <div class="field">
+    <input id="taskInput" placeholder="Nova tarefa...">
+   </div>
+   <button class="btn" onclick="addTask()">Adicionar</button>
+   <div id="taskList" style="margin-top:15px"></div>
+ `;
+
+ case"names":
+ return`
+   <textarea id="namesText" placeholder="Digite um nome por linha..."></textarea>
+   <button class="btn" onclick="drawName()">Sortear nome</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ case"coin":
+ return`
+   <button class="btn" onclick="coin()">Lançar moeda</button>
+   <div id="result" class="result" style="text-align:center;font-size:25px">
+    🪙
+   </div>
+ `;
+
+ case"dice":
+ return`
+   <button class="btn" onclick="dice()">Rolar dado</button>
+   <div id="result" class="result" style="text-align:center;font-size:40px">
+    🎲
+   </div>
+ `;
+
+ case"code":
+ return`
+   ${input("codeLength","Quantidade de números")}
+   <button class="btn" onclick="generateCode()">Gerar código</button>
+   <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+ }
+
+}
+
+
+function textArea(id,placeholder){
+ return`
+ <div class="field">
+  <textarea id="${id}" placeholder="${placeholder}"></textarea>
+ </div>`;
+}
+
+
+function converter(inputId,selectId,options,fn){
+
+ return`
+ <div class="field">
+  <input id="${inputId}" type="number" placeholder="Valor">
+ </div>
+
+ <div class="field">
+  <select id="${selectId}">
+   ${options.map(x=>`<option>${x}</option>`).join("")}
+  </select>
+ </div>
+
+ <button class="btn" onclick="${fn}">Converter</button>
+
+ <div id="result" class="result">Resultado aparecerá aqui.</div>
+ `;
+
+}
+
+
+/* =========================
+   FERRAMENTAS MATEMÁTICAS
+========================= */
+
+function calculate(){
+
+ const value=document.getElementById("calc").value;
+
+ if(!/^[0-9+\-*/().%\s]+$/.test(value)){
+   result("Expressão inválida.");
+   return;
+ }
+
+ try{
+   result(eval(value));
+ }catch{
+   result("Não foi possível calcular.");
+ }
+
+}
+
+function percentage(){
+ const a=Number(document.getElementById("p1").value);
+ const b=Number(document.getElementById("p2").value);
+ result(a*b/100);
+}
+
+function discount(){
+ const price=Number(document.getElementById("price").value);
+ const d=Number(document.getElementById("discount").value);
+ result("Preço final: R$ "+(price-(price*d/100)).toFixed(2));
+}
+
+function interest(){
+ const c=Number(document.getElementById("capital").value);
+ const r=Number(document.getElementById("rate").value);
+ const t=Number(document.getElementById("months").value);
+
+ const j=c*r/100*t;
+
+ result(`Juros: ${j.toFixed(2)} | Montante: ${(c+j).toFixed(2)}`);
+}
+
+function rule3(){
+ const a=Number(document.getElementById("a").value);
+ const b=Number(document.getElementById("b").value);
+ const c=Number(document.getElementById("c").value);
+
+ result("X = "+((b*c)/a));
+}
+
+function average(){
+
+ const nums=document.getElementById("numbers").value
+ .split(",")
+ .map(Number)
+ .filter(x=>!isNaN(x));
+
+ if(!nums.length){
+  result("Digite números válidos.");
+  return;
+ }
+
+ result(nums.reduce((a,b)=>a+b,0)/nums.length);
+}
+
+function age(){
+
+ const birth=new Date(document.getElementById("birth").value);
+
+ if(isNaN(birth)){
+  result("Escolha uma data.");
+  return;
+ }
+
+ const now=new Date();
+
+ let years=now.getFullYear()-birth.getFullYear();
+
+ const birthday=new Date(
+  now.getFullYear(),
+  birth.getMonth(),
+  birth.getDate()
+ );
+
+ if(now<birthday) years--;
+
+ result(years+" anos");
+}
+
+function days(){
+
+ const a=new Date(document.getElementById("date1").value);
+ const b=new Date(document.getElementById("date2").value);
+
+ const diff=Math.abs(b-a);
+ const total=Math.ceil(diff/(1000*60*60*24));
+
+ result(total+" dias");
+}
+
+
+/* =========================
+   CRONÔMETRO
+========================= */
+
+let stopwatchInterval=null;
+let stopwatchSeconds=0;
+
+function updateStopwatch(){
+
+ const h=String(Math.floor(stopwatchSeconds/3600)).padStart(2,"0");
+ const m=String(Math.floor((stopwatchSeconds%3600)/60)).padStart(2,"0");
+ const s=String(stopwatchSeconds%60).padStart(2,"0");
+
+ const el=document.getElementById("clock");
+
+ if(el) el.textContent=`${h}:${m}:${s}`;
+
+}
+
+function startStopwatch(){
+
+ if(stopwatchInterval)return;
+
+ stopwatchInterval=setInterval(()=>{
+   stopwatchSeconds++;
+   updateStopwatch();
+ },1000);
+
+}
+
+function stopStopwatch(){
+ clearInterval(stopwatchInterval);
+ stopwatchInterval=null;
+}
+
+function resetStopwatch(){
+
+ stopStopwatch();
+ stopwatchSeconds=0;
+ updateStopwatch();
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+let timerInterval=null;
+
+function startTimer(){
+
+ clearInterval(timerInterval);
+
+ let min=Number(document.getElementById("timerMin").value)||0;
+ let sec=Number(document.getElementById("timerSec").value)||0;
+
+ let total=min*60+sec;
+
+ if(total<=0)return;
+
+ function update(){
+
+   const m=String(Math.floor(total/60)).padStart(2,"0");
+   const s=String(total%60).padStart(2,"0");
+
+   const el=document.getElementById("timerDisplay");
+
+   if(el)el.textContent=`${m}:${s}`;
+
+   if(total<=0){
+     clearInterval(timerInterval);
+     return;
+   }
+
+   total--;
+
+ }
+
+ update();
+ timerInterval=setInterval(update,1000);
+
+}
+
+
+/* =========================
+   GERADORES
+========================= */
+
+function generatePassword(){
+
+ const length=Math.max(
+   4,
+   Number(document.getElementById("passLength").value)||12
+ );
+
+ const chars=
+ "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
+
+ let pass="";
+
+ for(let i=0;i<length;i++){
+   pass+=chars[Math.floor(Math.random()*chars.length)];
+ }
+
+ result(pass);
+
+}
+
+function randomNumber(){
+
+ const min=Number(document.getElementById("min").value);
+ const max=Number(document.getElementById("max").value);
+
+ result(Math.floor(Math.random()*(max-min+1))+min);
+
+}
+
+function generateQR(){
+
+ const text=document.getElementById("qrText").value;
+
+ if(!text){
+  document.getElementById("qr").innerHTML="Digite algo.";
+  return;
+ }
+
+ document.getElementById("qr").innerHTML=
+ `<img
+ src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(text)}"
+ alt="QR Code"
+ style="max-width:220px;border-radius:12px"
+ >`;
+
+}
+
+
+/* =========================
+   TEXTO
+========================= */
+
+function wordCount(){
+
+ const text=document.getElementById("wordText").value;
+
+ const words=text.trim()?text.trim().split(/\s+/).length:0;
+ const chars=text.length;
+ const lines=text?text.split("\n").length:0;
+
+ result(`Palavras: ${words}<br>Caracteres: ${chars}<br>Linhas: ${lines}`);
+
+}
+
+function changeCase(type){
+
+ let text=document.getElementById("caseText").value;
+
+ if(type==="upper")text=text.toUpperCase();
+
+ if(type==="lower")text=text.toLowerCase();
+
+ if(type==="title"){
+  text=text.toLowerCase().replace(/\b\w/g,x=>x.toUpperCase());
+ }
+
+ result(text);
+
+}
+
+function cleanSpaces(){
+
+ const text=document.getElementById("spaceText").value;
+
+ result(text.replace(/\s+/g," ").trim());
+
+}
+
+function reverseText(){
+
+ const text=document.getElementById("reverseText").value;
+
+ result(text.split("").reverse().join(""));
+
+}
+
+function characters(){
+
+ const text=document.getElementById("charText").value;
+
+ result(
+  `Com espaços: ${text.length}<br>
+   Sem espaços: ${text.replace(/\s/g,"").length}`
+ );
+
+}
+
+
+/* =========================
+   CONVERSORES
+========================= */
+
+function convertTemperature(){
+
+ const v=Number(document.getElementById("tempValue").value);
+ const u=document.getElementById("tempUnit").value;
+
+ let c;
+
+ if(u==="Celsius")c=v;
+ if(u==="Fahrenheit")c=(v-32)*5/9;
+ if(u==="Kelvin")c=v-273.15;
+
+ result(
+  `Celsius: ${c.toFixed(2)} °C<br>
+   Fahrenheit: ${(c*9/5+32).toFixed(2)} °F<br>
+   Kelvin: ${(c+273.15).toFixed(2)} K`
+ );
+
+}
+
+function convertLength(){
+
+ const v=Number(document.getElementById("lengthValue").value);
+ const u=document.getElementById("lengthUnit").value;
+
+ const factors={
+  "Metro":1,
+  "Quilômetro":1000,
+  "Centímetro":.01,
+  "Milímetro":.001
+ };
+
+ const m=v*factors[u];
+
+ result(
+ `Metros: ${m}<br>
+  Quilômetros: ${m/1000}<br>
+  Centímetros: ${m*100}<br>
+  Milímetros: ${m*1000}`
+ );
+
+}
+
+function convertWeight(){
+
+ const v=Number(document.getElementById("weightValue").value);
+ const u=document.getElementById("weightUnit").value;
+
+ const kg={
+  "Quilograma":v,
+  "Grama":v/1000,
+  "Miligrama":v/1000000,
+  "Tonelada":v*1000
+ };
+
+ result(
+ `Quilogramas: ${kg["Quilograma"]}<br>
+  Gramas: ${kg["Quilograma"]*1000}<br>
+  Miligramas: ${kg["Quilograma"]*1000000}<br>
+  Toneladas: ${kg["Quilograma"]/1000}`
+ );
+
+}
+
+function convertSpeed(){
+
+ const v=Number(document.getElementById("speedValue").value);
+ const u=document.getElementById("speedUnit").value;
+
+ let ms;
+
+ if(u==="km/h")ms=v/3.6;
+ if(u==="m/s")ms=v;
+ if(u==="mph")ms=v*0.44704;
+
+ result(
+ `km/h: ${(ms*3.6).toFixed(2)}<br>
+  m/s: ${ms.toFixed(2)}<br>
+  mph: ${(ms/0.44704).toFixed(2)}`
+ );
+
+}
+
+function convertData(){
+
+ const v=Number(document.getElementById("dataValue").value);
+ const u=document.getElementById("dataUnit").value;
+
+ const factors={
+  "KB":1,
+  "MB":1024,
+  "GB":1024**2,
+  "TB":1024**3
+ };
+
+ const kb=v*factors[u];
+
+ result(
+ `KB: ${kb.toFixed(2)}<br>
+ MB: ${(kb/1024).toFixed(2)}<br>
+ GB: ${(kb/1024**2).toFixed(2)}<br>
+ TB: ${(kb/1024**3).toFixed(2)}`
+ );
+
+}
+
+function convertTime(){
+
+ const v=Number(document.getElementById("timeValue").value);
+ const u=document.getElementById("timeUnit").value;
+
+ let sec=v;
+
+ if(u==="Minutos")sec=v*60;
+ if(u==="Horas")sec=v*3600;
+ if(u==="Dias")sec=v*86400;
+
+ result(
+ `Segundos: ${sec}<br>
+  Minutos: ${(sec/60).toFixed(2)}<br>
+  Horas: ${(sec/3600).toFixed(2)}<br>
+  Dias: ${(sec/86400).toFixed(2)}`
+ );
+
+}
+
+
+/* =========================
+   NOTAS
+========================= */
+
+function saveNotes(){
+
+ const text=document.getElementById("notesText").value;
+
+ localStorage.setItem("nexoNotes",text);
+
+ result("✓ Anotação salva neste navegador.");
+
+}
+
+function clearNotes(){
+
+ document.getElementById("notesText").value="";
+ localStorage.removeItem("nexoNotes");
+
+}
+
+
+/* =========================
+   TAREFAS
+========================= */
+
+let tasks=
+JSON.parse(localStorage.getItem("nexoTasks")||"[]");
+
+function renderTasks(){
+
+ const list=document.getElementById("taskList");
+
+ if(!list)return;
+
+ list.innerHTML="";
+
+ tasks.forEach((task,i)=>{
+
+  const div=document.createElement("div");
+
+  div.style.cssText=
+  "padding:12px;margin:7px 0;background:var(--surface2);border-radius:10px;display:flex;justify-content:space-between;gap:10px";
+
+  div.innerHTML=
+  `<span>${task}</span>
+   <button class="close" onclick="deleteTask(${i})">×</button>`;
+
+  list.appendChild(div);
+
+ });
+
+}
+
+function addTask(){
+
+ const input=document.getElementById("taskInput");
+
+ if(!input.value.trim())return;
+
+ tasks.push(input.value.trim());
+
+ localStorage.setItem("nexoTasks",JSON.stringify(tasks));
+
+ input.value="";
+
+ renderTasks();
+
+}
+
+function deleteTask(i){
+
+ tasks.splice(i,1);
+
+ localStorage.setItem("nexoTasks",JSON.stringify(tasks));
+
+ renderTasks();
+
+}
+
+
+/* =========================
+   SORTEIOS
+========================= */
+
+function drawName(){
+
+ const names=document.getElementById("namesText").value
+ .split("\n")
+ .map(x=>x.trim())
+ .filter(Boolean);
+
+ if(!names.length){
+  result("Digite pelo menos um nome.");
+  return;
+ }
+
+ result("🎯 "+names[Math.floor(Math.random()*names.length)]);
+
+}
+
+function coin(){
+
+ result(Math.random()<.5?"🪙 CARA":"🪙 COROA");
+
+}
+
+function dice(){
+
+ const n=Math.floor(Math.random()*6)+1;
+
+ result("🎲 "+n);
+
+}
+
+function generateCode(){
+
+ let length=Number(document.getElementById("codeLength").value)||6;
+
+ length=Math.min(Math.max(length,1),30);
+
+ let code="";
+
+ for(let i=0;i<length;i++){
+  code+=Math.floor(Math.random()*10);
+ }
+
+ result(code);
+
+}
+
+
+/* =========================
+   UTILIDADES
+========================= */
+
+function result(value){
+
+ const el=document.getElementById("result");
+
+ if(el)el.innerHTML=value;
+
+}
+
+function initializeTool(type){
+
+ if(type==="notes"){
+
+  const saved=localStorage.getItem("nexoNotes");
+
+  if(saved){
+   document.getElementById("notesText").value=saved;
+  }
+
+ }
+
+ if(type==="tasks"){
+  renderTasks();
+ }
+
+}
+
+
+/* =========================
+   TEMA
+========================= */
+
+function toggleTheme(){
+
+ document.body.classList.toggle("dark");
+
+ localStorage.setItem(
+  "nexoTheme",
+  document.body.classList.contains("dark")?"dark":"light"
+ );
+
+}
+
+if(localStorage.getItem("nexoTheme")==="dark"){
+ document.body.classList.add("dark");
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+function toggleSidebar(){
+
+ document.getElementById("sidebar").classList.toggle("open");
+
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+renderTools();
+
+</script>
 
 </body>
 </html>
