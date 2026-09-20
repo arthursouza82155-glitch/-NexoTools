@@ -1,3 +1,7 @@
+/* =========================================================
+   NEXOTOOLS — SCRIPT PRINCIPAL
+========================================================= */
+
 const tools = [
   ["calculadora","🧮","Calculadora","Faça cálculos rapidamente.","Matemática"],
   ["porcentagem","％","Porcentagem","Calcule porcentagens.","Matemática"],
@@ -46,32 +50,33 @@ let recent = JSON.parse(
 let currentList = tools;
 
 
-/* =========================
-   CARREGAR SITE
-========================= */
+/* =========================================================
+   RENDERIZAÇÃO
+========================================================= */
 
-function render(list = tools){
+function render(list = tools) {
 
   currentList = list;
 
   const grid = document.getElementById("toolsGrid");
   const empty = document.getElementById("empty");
+  const count = document.getElementById("toolCount");
 
-  if(!grid) return;
+  if (!grid) return;
 
   grid.innerHTML = "";
 
-  document.getElementById("toolCount").textContent =
-    `${list.length} ${list.length === 1 ? "ferramenta" : "ferramentas"}`;
-
-  if(list.length === 0){
-
-    empty.style.display = "block";
-    return;
-
+  if (count) {
+    count.textContent =
+      `${list.length} ${list.length === 1 ? "ferramenta" : "ferramentas"}`;
   }
 
-  empty.style.display = "none";
+  if (list.length === 0) {
+    if (empty) empty.style.display = "block";
+    return;
+  }
+
+  if (empty) empty.style.display = "none";
 
   list.forEach(tool => {
 
@@ -79,11 +84,11 @@ function render(list = tools){
 
     card.className = "tool";
 
-    const fav = favorites.includes(tool[0]);
+    const isFavorite = favorites.includes(tool[0]);
 
     card.innerHTML = `
-      <button class="favorite ${fav ? "active" : ""}">
-        ${fav ? "★" : "☆"}
+      <button class="favorite ${isFavorite ? "active" : ""}" type="button">
+        ${isFavorite ? "★" : "☆"}
       </button>
 
       <div class="tool-icon">${tool[1]}</div>
@@ -97,38 +102,42 @@ function render(list = tools){
       </div>
     `;
 
-    card.querySelector(".favorite").onclick = function(e){
+    const favoriteButton =
+      card.querySelector(".favorite");
 
-      e.stopPropagation();
+    favoriteButton.addEventListener("click", function(event) {
+
+      event.preventDefault();
+      event.stopPropagation();
 
       toggleFavorite(tool[0]);
 
-    };
+    });
 
-    card.onclick = function(){
+    card.addEventListener("click", function() {
 
       openTool(tool);
 
-    };
+    });
 
     grid.appendChild(card);
-
   });
-
 }
 
 
-/* =========================
+/* =========================================================
    FAVORITOS
-========================= */
+========================================================= */
 
-function toggleFavorite(id){
+function toggleFavorite(id) {
 
-  if(favorites.includes(id)){
+  if (favorites.includes(id)) {
 
-    favorites = favorites.filter(x => x !== id);
+    favorites = favorites.filter(
+      item => item !== id
+    );
 
-  }else{
+  } else {
 
     favorites.push(id);
 
@@ -140,99 +149,102 @@ function toggleFavorite(id){
   );
 
   render(currentList);
-
 }
 
 
-function showFavorites(){
+function showFavorites() {
 
   document.getElementById("sectionTitle").textContent =
     "Seus favoritos";
 
   render(
-    tools.filter(t => favorites.includes(t[0]))
+    tools.filter(
+      tool => favorites.includes(tool[0])
+    )
   );
-
 }
 
 
-function showRecent(){
+function showRecent() {
 
   const list = recent
-    .map(id => tools.find(t => t[0] === id))
+    .map(id => tools.find(tool => tool[0] === id))
     .filter(Boolean);
 
   document.getElementById("sectionTitle").textContent =
     "Ferramentas recentes";
 
   render(list);
-
 }
 
 
-/* =========================
+/* =========================================================
    CATEGORIAS
-========================= */
+========================================================= */
 
-function showHome(){
+function showHome() {
 
   document.getElementById("sectionTitle").textContent =
     "Todas as ferramentas";
 
   render(tools);
-
 }
 
 
-function filterCategory(category){
+function filterCategory(category) {
 
   document.getElementById("sectionTitle").textContent =
     category;
 
   render(
-    tools.filter(t => t[4] === category)
+    tools.filter(
+      tool => tool[4] === category
+    )
   );
-
 }
 
 
-/* =========================
+/* =========================================================
    PESQUISA
-========================= */
+========================================================= */
 
-function searchTools(){
+function searchTools() {
 
-  const input = document.getElementById("searchInput");
+  const input =
+    document.getElementById("searchInput");
 
-  const query = input.value.toLowerCase().trim();
+  if (!input) return;
 
-  if(!query){
+  const query =
+    input.value.toLowerCase().trim();
+
+  if (!query) {
 
     showHome();
-
     return;
 
   }
 
-  const result = tools.filter(tool =>
-    tool[2].toLowerCase().includes(query) ||
-    tool[3].toLowerCase().includes(query) ||
-    tool[4].toLowerCase().includes(query)
-  );
+  const resultList =
+    tools.filter(tool =>
+      tool[1].toLowerCase().includes(query) ||
+      tool[2].toLowerCase().includes(query) ||
+      tool[3].toLowerCase().includes(query) ||
+      tool[4].toLowerCase().includes(query)
+    );
 
   document.getElementById("sectionTitle").textContent =
     "Resultados da pesquisa";
 
-  render(result);
-
+  render(resultList);
 }
 
 
-/* =========================
-   ABRIR FERRAMENTA
-========================= */
+/* =========================================================
+   MODAL
+========================================================= */
 
-function openTool(tool){
+function openTool(tool) {
 
   recent = [
     tool[0],
@@ -244,114 +256,121 @@ function openTool(tool){
     JSON.stringify(recent)
   );
 
-  const modal = document.getElementById("modal");
+  const modal =
+    document.getElementById("modal");
 
   const content =
     document.getElementById("modalContent");
 
+  if (!modal || !content) return;
+
   content.innerHTML = `
     <h2>${tool[1]} ${tool[2]}</h2>
+
+    <p style="margin-bottom:20px;opacity:.7;">
+      ${tool[3]}
+    </p>
+
     ${createTool(tool[0])}
   `;
 
   modal.classList.add("show");
 
   setupTool(tool[0]);
+}
+
+
+function closeTool() {
+
+  const modal =
+    document.getElementById("modal");
+
+  if (modal) {
+    modal.classList.remove("show");
+  }
+}
+
+
+/* Fechar clicando fora */
+
+const modalElement =
+  document.getElementById("modal");
+
+if (modalElement) {
+
+  modalElement.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === modalElement) {
+        closeTool();
+      }
+
+    }
+  );
 
 }
 
 
-function closeTool(){
+/* ESC fecha o modal */
 
-  document
-    .getElementById("modal")
-    .classList.remove("show");
+document.addEventListener(
+  "keydown",
+  function(event) {
 
-}
-
-
-document.getElementById("modal").addEventListener(
-  "click",
-  function(e){
-
-    if(e.target === this){
-
+    if (event.key === "Escape") {
       closeTool();
-
     }
 
   }
 );
 
 
-/* =========================
+/* =========================================================
    CAMPOS
-========================= */
+========================================================= */
 
-function field(
-  id,
-  placeholder,
-  type = "number"
-){
+function field(id, placeholder, type = "number") {
 
   return `
     <div class="field">
-
       <input
         id="${id}"
         type="${type}"
         placeholder="${placeholder}"
       >
-
     </div>
   `;
-
 }
 
 
-function textarea(
-  id,
-  placeholder
-){
+function textarea(id, placeholder) {
 
   return `
     <div class="field">
-
       <textarea
         id="${id}"
         placeholder="${placeholder}"
       ></textarea>
-
     </div>
   `;
-
 }
 
 
-/* =========================
+/* =========================================================
    INTERFACES
-========================= */
+========================================================= */
 
-function createTool(id){
+function createTool(id) {
 
-  switch(id){
+  switch (id) {
 
     case "calculadora":
-
       return `
-        ${field(
-          "calc",
-          "Ex.: 25 + 10 * 2",
-          "text"
-        )}
-
-        <button
-          class="tool-button"
-          onclick="calculate()"
-        >
+        ${field("calc", "Ex.: 25 + 10 * 2", "text")}
+        <button class="tool-button" onclick="calculate()">
           Calcular
         </button>
-
         <div id="result" class="result">
           Resultado
         </div>
@@ -359,15 +378,11 @@ function createTool(id){
 
 
     case "porcentagem":
-
       return `
-        ${field("p1","Valor")}
-        ${field("p2","Porcentagem")}
+        ${field("p1", "Valor")}
+        ${field("p2", "Porcentagem")}
 
-        <button
-          class="tool-button"
-          onclick="percentage()"
-        >
+        <button class="tool-button" onclick="percentage()">
           Calcular
         </button>
 
@@ -378,15 +393,11 @@ function createTool(id){
 
 
     case "desconto":
-
       return `
-        ${field("price","Preço")}
-        ${field("discount","Desconto (%)")}
+        ${field("price", "Preço")}
+        ${field("discount", "Desconto (%)")}
 
-        <button
-          class="tool-button"
-          onclick="discount()"
-        >
+        <button class="tool-button" onclick="discount()">
           Calcular
         </button>
 
@@ -397,16 +408,12 @@ function createTool(id){
 
 
     case "juros":
-
       return `
-        ${field("capital","Capital")}
-        ${field("rate","Taxa (%)")}
-        ${field("months","Tempo")}
+        ${field("capital", "Capital")}
+        ${field("rate", "Taxa (%)")}
+        ${field("months", "Tempo em meses")}
 
-        <button
-          class="tool-button"
-          onclick="interest()"
-        >
+        <button class="tool-button" onclick="interest()">
           Calcular
         </button>
 
@@ -417,16 +424,12 @@ function createTool(id){
 
 
     case "regra":
-
       return `
-        ${field("ra","A")}
-        ${field("rb","B")}
-        ${field("rc","C")}
+        ${field("ra", "A")}
+        ${field("rb", "B")}
+        ${field("rc", "C")}
 
-        <button
-          class="tool-button"
-          onclick="ruleOfThree()"
-        >
+        <button class="tool-button" onclick="ruleOfThree()">
           Resolver
         </button>
 
@@ -437,18 +440,10 @@ function createTool(id){
 
 
     case "media":
-
       return `
-        ${field(
-          "numbers",
-          "Ex.: 7, 8, 9, 10",
-          "text"
-        )}
+        ${field("numbers", "Ex.: 7, 8, 9, 10", "text")}
 
-        <button
-          class="tool-button"
-          onclick="average()"
-        >
+        <button class="tool-button" onclick="average()">
           Calcular média
         </button>
 
@@ -459,18 +454,10 @@ function createTool(id){
 
 
     case "idade":
-
       return `
-        ${field(
-          "birth",
-          "",
-          "date"
-        )}
+        ${field("birth", "", "date")}
 
-        <button
-          class="tool-button"
-          onclick="calculateAge()"
-        >
+        <button class="tool-button" onclick="calculateAge()">
           Calcular idade
         </button>
 
@@ -481,93 +468,52 @@ function createTool(id){
 
 
     case "temperatura":
-
       return converter(
         "temperatura",
-        [
-          "Celsius",
-          "Fahrenheit",
-          "Kelvin"
-        ]
+        ["Celsius", "Fahrenheit", "Kelvin"]
       );
 
 
     case "comprimento":
-
       return converter(
         "comprimento",
-        [
-          "Metro",
-          "Quilômetro",
-          "Centímetro",
-          "Milímetro"
-        ]
+        ["Metro", "Quilômetro", "Centímetro", "Milímetro"]
       );
 
 
     case "peso":
-
       return converter(
         "peso",
-        [
-          "Quilograma",
-          "Grama",
-          "Miligrama",
-          "Tonelada"
-        ]
+        ["Quilograma", "Grama", "Miligrama", "Tonelada"]
       );
 
 
     case "velocidade":
-
       return converter(
         "velocidade",
-        [
-          "km/h",
-          "m/s",
-          "mph"
-        ]
+        ["km/h", "m/s", "mph"]
       );
 
 
     case "dados":
-
       return converter(
         "dados",
-        [
-          "KB",
-          "MB",
-          "GB",
-          "TB"
-        ]
+        ["KB", "MB", "GB", "TB"]
       );
 
 
     case "tempo":
-
       return converter(
         "tempo",
-        [
-          "Segundos",
-          "Minutos",
-          "Horas",
-          "Dias"
-        ]
+        ["Segundos", "Minutos", "Horas", "Dias"]
       );
 
 
     case "palavras":
-
       return `
-        ${textarea(
-          "textTool",
-          "Digite seu texto..."
-        )}
+        ${textarea("textTool", "Digite seu texto...")}
 
-        <button
-          class="tool-button"
-          onclick="countWords()"
-        >
+        <button class="tool-button" onclick="countWords()">
           Contar
         </button>
 
@@ -578,24 +524,14 @@ function createTool(id){
 
 
     case "maiusculas":
-
       return `
-        ${textarea(
-          "textTool",
-          "Digite seu texto..."
-        )}
+        ${textarea("textTool", "Digite seu texto...")}
 
-        <button
-          class="tool-button"
-          onclick="toUpper()"
-        >
+        <button class="tool-button" onclick="toUpper()">
           MAIÚSCULAS
         </button>
 
-        <button
-          class="tool-button"
-          onclick="toLower()"
-        >
+        <button class="tool-button" onclick="toLower()">
           minúsculas
         </button>
 
@@ -604,17 +540,10 @@ function createTool(id){
 
 
     case "espacos":
-
       return `
-        ${textarea(
-          "textTool",
-          "Digite seu texto..."
-        )}
+        ${textarea("textTool", "Digite seu texto...")}
 
-        <button
-          class="tool-button"
-          onclick="cleanSpaces()"
-        >
+        <button class="tool-button" onclick="cleanSpaces()">
           Limpar espaços
         </button>
 
@@ -623,17 +552,10 @@ function createTool(id){
 
 
     case "inverter":
-
       return `
-        ${textarea(
-          "textTool",
-          "Digite seu texto..."
-        )}
+        ${textarea("textTool", "Digite seu texto...")}
 
-        <button
-          class="tool-button"
-          onclick="reverseText()"
-        >
+        <button class="tool-button" onclick="reverseText()">
           Inverter
         </button>
 
@@ -642,17 +564,10 @@ function createTool(id){
 
 
     case "caracteres":
-
       return `
-        ${textarea(
-          "textTool",
-          "Digite seu texto..."
-        )}
+        ${textarea("textTool", "Digite seu texto...")}
 
-        <button
-          class="tool-button"
-          onclick="countCharacters()"
-        >
+        <button class="tool-button" onclick="countCharacters()">
           Contar
         </button>
 
@@ -660,154 +575,7 @@ function createTool(id){
       `;
 
 
-    case "senha":
-
-      return `
-        ${field(
-          "passwordLength",
-          "Quantidade de caracteres"
-        )}
-
-        <button
-          class="tool-button"
-          onclick="generatePassword()"
-        >
-          Gerar senha
-        </button>
-
-        <div id="result" class="result">
-          Sua senha aparecerá aqui.
-        </div>
-      `;
-
-
-    case "numero":
-
-      return `
-        ${field("randomMin","Mínimo")}
-        ${field("randomMax","Máximo")}
-
-        <button
-          class="tool-button"
-          onclick="randomNumber()"
-        >
-          Sortear
-        </button>
-
-        <div id="result" class="result">
-          Resultado
-        </div>
-      `;
-
-
-    case "nomes":
-
-      return `
-        ${textarea(
-          "names",
-          "Digite um nome por linha..."
-        )}
-
-        <button
-          class="tool-button"
-          onclick="drawName()"
-        >
-          Sortear nome
-        </button>
-
-        <div id="result" class="result">
-          Resultado
-        </div>
-      `;
-
-
-    case "moeda":
-
-      return `
-        <button
-          class="tool-button"
-          onclick="flipCoin()"
-        >
-          Lançar moeda
-        </button>
-
-        <div
-          id="result"
-          class="result"
-          style="font-size:30px;text-align:center"
-        >
-          🪙
-        </div>
-      `;
-
-
-    case "dado":
-
-      return `
-        <button
-          class="tool-button"
-          onclick="rollDice()"
-        >
-          Rolar dado
-        </button>
-
-        <div
-          id="result"
-          class="result"
-          style="font-size:35px;text-align:center"
-        >
-          🎲
-        </div>
-      `;
-
-
-    case "codigo":
-
-      return `
-        ${field(
-          "codeLength",
-          "Quantidade de números"
-        )}
-
-        <button
-          class="tool-button"
-          onclick="generateCode()"
-        >
-          Gerar código
-        </button>
-
-        <div id="result" class="result">
-          Resultado
-        </div>
-      `;
-
-
-    case "qrcode":
-
-      return `
-        ${field(
-          "qrText",
-          "Texto ou link",
-          "text"
-        )}
-
-        <button
-          class="tool-button"
-          onclick="generateQR()"
-        >
-          Gerar QR Code
-        </button>
-
-        <div
-          id="qrResult"
-          class="result"
-          style="text-align:center"
-        ></div>
-      `;
-
-
     case "cronometro":
-
       return `
         <div
           id="stopwatch"
@@ -817,39 +585,26 @@ function createTool(id){
           00:00:00
         </div>
 
-        <button
-          class="tool-button"
-          onclick="startStopwatch()"
-        >
+        <button class="tool-button" onclick="startStopwatch()">
           Iniciar
         </button>
 
-        <button
-          class="tool-button"
-          onclick="stopStopwatch()"
-        >
+        <button class="tool-button" onclick="stopStopwatch()">
           Parar
         </button>
 
-        <button
-          class="tool-button"
-          onclick="resetStopwatch()"
-        >
+        <button class="tool-button" onclick="resetStopwatch()">
           Resetar
         </button>
       `;
 
 
     case "timer":
-
       return `
-        ${field("timerMinutes","Minutos")}
-        ${field("timerSeconds","Segundos")}
+        ${field("timerMinutes", "Minutos")}
+        ${field("timerSeconds", "Segundos")}
 
-        <button
-          class="tool-button"
-          onclick="startTimer()"
-        >
+        <button class="tool-button" onclick="startTimer()">
           Iniciar
         </button>
 
@@ -864,24 +619,11 @@ function createTool(id){
 
 
     case "dias":
-
       return `
-        ${field(
-          "dateStart",
-          "",
-          "date"
-        )}
+        ${field("dateStart", "", "date")}
+        ${field("dateEnd", "", "date")}
 
-        ${field(
-          "dateEnd",
-          "",
-          "date"
-        )}
-
-        <button
-          class="tool-button"
-          onclick="calculateDays()"
-        >
+        <button class="tool-button" onclick="calculateDays()">
           Calcular
         </button>
 
@@ -892,24 +634,14 @@ function createTool(id){
 
 
     case "notas":
-
       return `
-        ${textarea(
-          "notes",
-          "Escreva suas anotações..."
-        )}
+        ${textarea("notes", "Escreva suas anotações...")}
 
-        <button
-          class="tool-button"
-          onclick="saveNotes()"
-        >
+        <button class="tool-button" onclick="saveNotes()">
           Salvar
         </button>
 
-        <button
-          class="tool-button"
-          onclick="clearNotes()"
-        >
+        <button class="tool-button" onclick="clearNotes()">
           Limpar
         </button>
 
@@ -918,51 +650,142 @@ function createTool(id){
 
 
     case "tarefas":
-
       return `
-        ${field(
-          "task",
-          "Nova tarefa",
-          "text"
-        )}
+        ${field("task", "Nova tarefa", "text")}
 
-        <button
-          class="tool-button"
-          onclick="addTask()"
-        >
+        <button class="tool-button" onclick="addTask()">
           Adicionar
         </button>
 
         <div id="taskList" class="result"></div>
       `;
 
-  }
 
+    case "senha":
+      return `
+        ${field("passwordLength", "Quantidade de caracteres")}
+
+        <button class="tool-button" onclick="generatePassword()">
+          Gerar senha
+        </button>
+
+        <div id="result" class="result">
+          Sua senha aparecerá aqui.
+        </div>
+      `;
+
+
+    case "numero":
+      return `
+        ${field("randomMin", "Mínimo")}
+        ${field("randomMax", "Máximo")}
+
+        <button class="tool-button" onclick="randomNumber()">
+          Sortear
+        </button>
+
+        <div id="result" class="result">
+          Resultado
+        </div>
+      `;
+
+
+    case "nomes":
+      return `
+        ${textarea("names", "Digite um nome por linha...")}
+
+        <button class="tool-button" onclick="drawName()">
+          Sortear nome
+        </button>
+
+        <div id="result" class="result">
+          Resultado
+        </div>
+      `;
+
+
+    case "moeda":
+      return `
+        <button class="tool-button" onclick="flipCoin()">
+          Lançar moeda
+        </button>
+
+        <div
+          id="result"
+          class="result"
+          style="font-size:30px;text-align:center"
+        >
+          🪙
+        </div>
+      `;
+
+
+    case "dado":
+      return `
+        <button class="tool-button" onclick="rollDice()">
+          Rolar dado
+        </button>
+
+        <div
+          id="result"
+          class="result"
+          style="font-size:35px;text-align:center"
+        >
+          🎲
+        </div>
+      `;
+
+
+    case "codigo":
+      return `
+        ${field("codeLength", "Quantidade de números")}
+
+        <button class="tool-button" onclick="generateCode()">
+          Gerar código
+        </button>
+
+        <div id="result" class="result">
+          Resultado
+        </div>
+      `;
+
+
+    case "qrcode":
+      return `
+        ${field("qrText", "Texto ou link", "text")}
+
+        <button class="tool-button" onclick="generateQR()">
+          Gerar QR Code
+        </button>
+
+        <div
+          id="qrResult"
+          class="result"
+          style="text-align:center"
+        ></div>
+      `;
+
+    default:
+      return `<p>Ferramenta não encontrada.</p>`;
+  }
 }
 
 
-/* =========================
+/* =========================================================
    CONVERSORES
-========================= */
+========================================================= */
 
-function converter(id, options){
+function converter(id, options) {
 
   return `
-    ${field(
-      "convertValue",
-      "Valor"
-    )}
+    ${field("convertValue", "Valor")}
 
     <div class="field">
-
       <select id="convertUnit">
-
         ${options.map(
-          x => `<option>${x}</option>`
+          option => `<option>${option}</option>`
         ).join("")}
-
       </select>
-
     </div>
 
     <button
@@ -976,41 +799,70 @@ function converter(id, options){
       Resultado
     </div>
   `;
-
 }
 
 
-/* =========================
-   MATEMÁTICA
-========================= */
+/* =========================================================
+   RESULTADO
+========================================================= */
 
-function calculate(){
+function result(value) {
+
+  const element =
+    document.getElementById("result");
+
+  if (!element) return;
+
+  element.innerHTML = value;
+}
+
+
+/* =========================================================
+   MATEMÁTICA
+========================================================= */
+
+function calculate() {
+
+  const input =
+    document.getElementById("calc");
+
+  if (!input) return;
 
   const expression =
-    document.getElementById("calc").value;
+    input.value.trim();
 
-  if(!/^[0-9+\-*/().%\s]+$/.test(expression)){
-
-    result("Expressão inválida.");
-
+  if (!expression) {
+    result("Digite uma expressão.");
     return;
-
   }
 
-  try{
+  if (!/^[0-9+\-*/().%\s]+$/.test(expression)) {
+    result("Expressão inválida.");
+    return;
+  }
 
-    result(eval(expression));
+  try {
 
-  }catch{
+    const value = Function(
+      `"use strict"; return (${expression})`
+    )();
+
+    if (!Number.isFinite(value)) {
+      result("Resultado inválido.");
+      return;
+    }
+
+    result("Resultado: <strong>" + value + "</strong>");
+
+  } catch {
 
     result("Não foi possível calcular.");
 
   }
-
 }
 
 
-function percentage(){
+function percentage() {
 
   const value =
     Number(document.getElementById("p1").value);
@@ -1018,33 +870,42 @@ function percentage(){
   const percent =
     Number(document.getElementById("p2").value);
 
-  result(
-    (value * percent / 100).toFixed(2)
-  );
+  if (!Number.isFinite(value) || !Number.isFinite(percent)) {
+    result("Digite valores válidos.");
+    return;
+  }
 
+  result(
+    `${percent}% de ${value} = <strong>${(
+      value * percent / 100
+    ).toFixed(2)}</strong>`
+  );
 }
 
 
-function discount(){
+function discount() {
 
   const price =
     Number(document.getElementById("price").value);
 
-  const discount =
+  const discountValue =
     Number(document.getElementById("discount").value);
 
+  if (!Number.isFinite(price) || !Number.isFinite(discountValue)) {
+    result("Digite valores válidos.");
+    return;
+  }
+
   const finalPrice =
-    price - price * discount / 100;
+    price - price * discountValue / 100;
 
   result(
-    "Preço final: R$ " +
-    finalPrice.toFixed(2)
+    `Preço final: <strong>R$ ${finalPrice.toFixed(2)}</strong>`
   );
-
 }
 
 
-function interest(){
+function interest() {
 
   const capital =
     Number(document.getElementById("capital").value);
@@ -1055,121 +916,129 @@ function interest(){
   const months =
     Number(document.getElementById("months").value);
 
-  const interest =
+  if (
+    !Number.isFinite(capital) ||
+    !Number.isFinite(rate) ||
+    !Number.isFinite(months)
+  ) {
+    result("Preencha todos os campos.");
+    return;
+  }
+
+  const interestValue =
     capital * rate / 100 * months;
 
-  result(`
-    Juros: R$ ${interest.toFixed(2)}
-    <br>
-    Montante: R$ ${(capital + interest).toFixed(2)}
-  `);
+  const total =
+    capital + interestValue;
 
+  result(`
+    Juros: <strong>R$ ${interestValue.toFixed(2)}</strong>
+    <br>
+    Montante: <strong>R$ ${total.toFixed(2)}</strong>
+  `);
 }
 
 
-function ruleOfThree(){
+function ruleOfThree() {
 
-  const a =
-    Number(document.getElementById("ra").value);
+  const a = Number(
+    document.getElementById("ra").value
+  );
 
-  const b =
-    Number(document.getElementById("rb").value);
+  const b = Number(
+    document.getElementById("rb").value
+  );
 
-  const c =
-    Number(document.getElementById("rc").value);
+  const c = Number(
+    document.getElementById("rc").value
+  );
 
-  if(a === 0){
+  if (!Number.isFinite(a) ||
+      !Number.isFinite(b) ||
+      !Number.isFinite(c)) {
 
-    result("A não pode ser zero.");
-
+    result("Preencha todos os campos.");
     return;
+  }
 
+  if (a === 0) {
+    result("A não pode ser zero.");
+    return;
   }
 
   result(
-    "X = " + (b * c / a).toFixed(2)
+    `X = <strong>${(b * c / a).toFixed(2)}</strong>`
   );
-
 }
 
 
-function average(){
+function average() {
+
+  const input =
+    document.getElementById("numbers");
 
   const numbers =
-    document
-      .getElementById("numbers")
-      .value
+    input.value
       .split(",")
       .map(Number)
-      .filter(n => !isNaN(n));
+      .filter(Number.isFinite);
 
-  if(!numbers.length){
-
+  if (!numbers.length) {
     result("Digite números válidos.");
-
     return;
-
   }
 
   const avg =
     numbers.reduce(
-      (a,b) => a+b,
+      (sum, number) => sum + number,
       0
     ) / numbers.length;
 
   result(
-    "Média: " + avg.toFixed(2)
+    `Média: <strong>${avg.toFixed(2)}</strong>`
   );
-
 }
 
 
-function calculateAge(){
+function calculateAge() {
 
-  const birth =
-    new Date(
-      document.getElementById("birth").value
-    );
+  const value =
+    document.getElementById("birth").value;
 
-  if(isNaN(birth)){
-
+  if (!value) {
     result("Escolha uma data.");
-
     return;
-
   }
 
+  const birth = new Date(value + "T00:00:00");
   const today = new Date();
 
   let age =
     today.getFullYear() -
     birth.getFullYear();
 
-  const birthday =
+  const birthdayThisYear =
     new Date(
       today.getFullYear(),
       birth.getMonth(),
       birth.getDate()
     );
 
-  if(today < birthday){
-
+  if (today < birthdayThisYear) {
     age--;
-
   }
 
   result(
-    "Você tem " + age + " anos."
+    `Você tem <strong>${age} anos</strong>.`
   );
-
 }
 
 
-/* =========================
+/* =========================================================
    TEXTO
-========================= */
+========================================================= */
 
-function countWords(){
+function countWords() {
 
   const text =
     document.getElementById("textTool").value;
@@ -1180,15 +1049,14 @@ function countWords(){
       : 0;
 
   result(`
-    Palavras: ${words}
+    Palavras: <strong>${words}</strong>
     <br>
-    Caracteres: ${text.length}
+    Caracteres: <strong>${text.length}</strong>
   `);
-
 }
 
 
-function toUpper(){
+function toUpper() {
 
   result(
     document
@@ -1196,11 +1064,10 @@ function toUpper(){
       .value
       .toUpperCase()
   );
-
 }
 
 
-function toLower(){
+function toLower() {
 
   result(
     document
@@ -1208,24 +1075,22 @@ function toLower(){
       .value
       .toLowerCase()
   );
-
 }
 
 
-function cleanSpaces(){
+function cleanSpaces() {
 
   result(
     document
       .getElementById("textTool")
       .value
-      .replace(/\s+/g," ")
+      .replace(/\s+/g, " ")
       .trim()
   );
-
 }
 
 
-function reverseText(){
+function reverseText() {
 
   result(
     document
@@ -1235,44 +1100,45 @@ function reverseText(){
       .reverse()
       .join("")
   );
-
 }
 
 
-function countCharacters(){
+function countCharacters() {
 
   const text =
     document.getElementById("textTool").value;
 
   result(`
-    Com espaços: ${text.length}
+    Com espaços: <strong>${text.length}</strong>
     <br>
-    Sem espaços: ${text.replace(/\s/g,"").length}
+    Sem espaços: <strong>${text.replace(/\s/g, "").length}</strong>
   `);
-
 }
 
 
-/* =========================
+/* =========================================================
    GERADORES
-========================= */
+========================================================= */
 
-function generatePassword(){
+function generatePassword() {
+
+  const lengthInput =
+    Number(
+      document.getElementById("passwordLength").value
+    );
+
+  const length =
+    Math.min(
+      Math.max(lengthInput || 12, 4),
+      100
+    );
 
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
 
-  const length =
-    Math.max(
-      4,
-      Number(
-        document.getElementById("passwordLength").value
-      ) || 12
-    );
-
   let password = "";
 
-  for(let i=0;i<length;i++){
+  for (let i = 0; i < length; i++) {
 
     password +=
       chars[
@@ -1283,12 +1149,13 @@ function generatePassword(){
 
   }
 
-  result(password);
-
+  result(
+    `<strong>${escapeHTML(password)}</strong>`
+  );
 }
 
 
-function randomNumber(){
+function randomNumber() {
 
   const min =
     Number(
@@ -1300,306 +1167,296 @@ function randomNumber(){
       document.getElementById("randomMax").value
     );
 
-  if(max < min){
+  if (!Number.isFinite(min) ||
+      !Number.isFinite(max)) {
 
-    result("O máximo precisa ser maior.");
-
+    result("Digite o mínimo e o máximo.");
     return;
-
   }
 
-  result(
-    Math.floor(
-      Math.random() * (max-min+1)
-    ) + min
-  );
+  if (max < min) {
+    result("O máximo precisa ser maior que o mínimo.");
+    return;
+  }
 
+  const number =
+    Math.floor(
+      Math.random() * (max - min + 1)
+    ) + min;
+
+  result(
+    `Número sorteado: <strong>${number}</strong>`
+  );
 }
 
 
-function drawName(){
+function drawName() {
 
   const names =
     document
       .getElementById("names")
       .value
       .split("\n")
-      .map(n => n.trim())
+      .map(name => name.trim())
       .filter(Boolean);
 
-  if(!names.length){
-
+  if (!names.length) {
     result("Digite pelo menos um nome.");
-
     return;
-
   }
 
-  result(
-    "🎯 " +
+  const selected =
     names[
       Math.floor(
-        Math.random()*names.length
+        Math.random() * names.length
       )
-    ]
-  );
-
-}
-
-
-function flipCoin(){
+    ];
 
   result(
-    Math.random() < .5
-      ? "🪙 CARA"
-      : "🪙 COROA"
+    `🎯 <strong>${escapeHTML(selected)}</strong>`
   );
-
 }
 
 
-function rollDice(){
+function flipCoin() {
+
+  result(
+    Math.random() < 0.5
+      ? "🪙 <strong>CARA</strong>"
+      : "🪙 <strong>COROA</strong>"
+  );
+}
+
+
+function rollDice() {
 
   const number =
-    Math.floor(
-      Math.random()*6
-    ) + 1;
+    Math.floor(Math.random() * 6) + 1;
 
-  result("🎲 " + number);
-
+  result(
+    `🎲 <strong>${number}</strong>`
+  );
 }
 
 
-function generateCode(){
+function generateCode() {
+
+  const input =
+    Number(
+      document.getElementById("codeLength").value
+    );
 
   const length =
     Math.min(
-      Math.max(
-        Number(
-          document.getElementById("codeLength").value
-        ) || 6,
-        1
-      ),
+      Math.max(input || 6, 1),
       30
     );
 
   let code = "";
 
-  for(let i=0;i<length;i++){
+  for (let i = 0; i < length; i++) {
 
     code +=
-      Math.floor(
-        Math.random()*10
-      );
+      Math.floor(Math.random() * 10);
 
   }
 
-  result(code);
-
+  result(
+    `<strong>${code}</strong>`
+  );
 }
 
 
-/* =========================
+/* =========================================================
    QR CODE
-========================= */
+========================================================= */
 
-function generateQR(){
+function generateQR() {
+
+  const input =
+    document.getElementById("qrText");
+
+  const output =
+    document.getElementById("qrResult");
+
+  if (!input || !output) return;
 
   const text =
-    document.getElementById("qrText").value;
+    input.value.trim();
 
-  if(!text){
+  if (!text) {
 
-    document.getElementById("qrResult").innerHTML =
+    output.innerHTML =
       "Digite um texto ou link.";
 
     return;
-
   }
 
-  document.getElementById("qrResult").innerHTML = `
-
+  output.innerHTML = `
     <img
       src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(text)}"
       alt="QR Code"
-      style="max-width:220px;border-radius:12px"
+      style="width:220px;height:220px;max-width:100%;border-radius:12px;"
     >
-
   `;
-
 }
 
 
-/* =========================
+/* =========================================================
    CRONÔMETRO
-========================= */
+========================================================= */
 
 let stopwatchSeconds = 0;
 let stopwatchInterval = null;
 
-function updateStopwatch(){
-
-  const h =
-    String(
-      Math.floor(stopwatchSeconds / 3600)
-    ).padStart(2,"0");
-
-  const m =
-    String(
-      Math.floor(
-        (stopwatchSeconds % 3600) / 60
-      )
-    ).padStart(2,"0");
-
-  const s =
-    String(
-      stopwatchSeconds % 60
-    ).padStart(2,"0");
+function updateStopwatch() {
 
   const display =
     document.getElementById("stopwatch");
 
-  if(display){
+  if (!display) return;
 
-    display.textContent =
-      `${h}:${m}:${s}`;
+  const hours =
+    Math.floor(stopwatchSeconds / 3600);
 
-  }
+  const minutes =
+    Math.floor(
+      (stopwatchSeconds % 3600) / 60
+    );
 
+  const seconds =
+    stopwatchSeconds % 60;
+
+  display.textContent =
+    `${String(hours).padStart(2,"0")}:` +
+    `${String(minutes).padStart(2,"0")}:` +
+    `${String(seconds).padStart(2,"0")}`;
 }
 
 
-function startStopwatch(){
+function startStopwatch() {
 
-  if(stopwatchInterval) return;
+  if (stopwatchInterval !== null) return;
 
   stopwatchInterval =
-    setInterval(() => {
+    setInterval(function() {
 
       stopwatchSeconds++;
-
       updateStopwatch();
 
-    },1000);
-
+    }, 1000);
 }
 
 
-function stopStopwatch(){
+function stopStopwatch() {
 
   clearInterval(stopwatchInterval);
 
   stopwatchInterval = null;
-
 }
 
 
-function resetStopwatch(){
+function resetStopwatch() {
 
   stopStopwatch();
 
   stopwatchSeconds = 0;
 
   updateStopwatch();
-
 }
 
 
-/* =========================
-   TIMER
-========================= */
+/* =========================================================
+   TEMPORIZADOR
+========================================================= */
 
 let timerInterval = null;
 
-function startTimer(){
+function startTimer() {
 
   clearInterval(timerInterval);
 
-  let total =
+  const minutes =
     Number(
       document.getElementById("timerMinutes").value
-    ) * 60;
+    ) || 0;
 
-  total +=
+  const seconds =
     Number(
       document.getElementById("timerSeconds").value
-    );
+    ) || 0;
 
-  if(total <= 0){
+  let total =
+    minutes * 60 + seconds;
+
+  if (total <= 0) {
 
     result("Defina um tempo.");
-
     return;
-
   }
 
   const display =
     document.getElementById("timerDisplay");
 
-  function update(){
+  function updateTimer() {
 
-    const minutes =
-      String(
-        Math.floor(total / 60)
-      ).padStart(2,"0");
+    const min =
+      Math.floor(total / 60);
 
-    const seconds =
-      String(
-        total % 60
-      ).padStart(2,"0");
+    const sec =
+      total % 60;
 
     display.textContent =
-      `${minutes}:${seconds}`;
+      `${String(min).padStart(2,"0")}:` +
+      `${String(sec).padStart(2,"0")}`;
 
-    if(total <= 0){
+    if (total <= 0) {
 
       clearInterval(timerInterval);
 
-      display.textContent =
-        "00:00";
+      timerInterval = null;
+
+      display.textContent = "00:00";
 
       return;
-
     }
 
     total--;
-
   }
 
-  update();
+  updateTimer();
 
   timerInterval =
-    setInterval(update,1000);
-
+    setInterval(updateTimer, 1000);
 }
 
 
-/* =========================
+/* =========================================================
    DATAS
-========================= */
+========================================================= */
 
-function calculateDays(){
+function calculateDays() {
 
-  const start =
-    new Date(
-      document.getElementById("dateStart").value
-    );
+  const startValue =
+    document.getElementById("dateStart").value;
 
-  const end =
-    new Date(
-      document.getElementById("dateEnd").value
-    );
+  const endValue =
+    document.getElementById("dateEnd").value;
 
-  if(isNaN(start) || isNaN(end)){
+  if (!startValue || !endValue) {
 
     result("Escolha as duas datas.");
-
     return;
-
   }
 
+  const start =
+    new Date(startValue + "T00:00:00");
+
+  const end =
+    new Date(endValue + "T00:00:00");
+
   const difference =
-    Math.abs(end-start);
+    Math.abs(end - start);
 
   const days =
     Math.round(
@@ -1607,70 +1464,72 @@ function calculateDays(){
     );
 
   result(
-    days + (days === 1 ? " dia" : " dias")
+    `<strong>${days}</strong> ${
+      days === 1 ? "dia" : "dias"
+    }`
   );
-
 }
 
 
-/* =========================
+/* =========================================================
    NOTAS
-========================= */
+========================================================= */
 
-function setupTool(id){
+function setupTool(id) {
 
-  if(id === "notas"){
+  if (id === "notas") {
 
     const saved =
       localStorage.getItem("nexoNotes");
 
-    if(saved){
+    const notes =
+      document.getElementById("notes");
 
-      document.getElementById("notes").value =
-        saved;
-
+    if (saved && notes) {
+      notes.value = saved;
     }
-
   }
 
-  if(id === "tarefas"){
-
+  if (id === "tarefas") {
     renderTasks();
-
   }
-
 }
 
 
-function saveNotes(){
+function saveNotes() {
 
-  const text =
-    document.getElementById("notes").value;
+  const notes =
+    document.getElementById("notes");
+
+  if (!notes) return;
 
   localStorage.setItem(
     "nexoNotes",
-    text
+    notes.value
   );
 
-  result("✓ Anotação salva.");
-
+  result("✓ Anotação salva!");
 }
 
 
-function clearNotes(){
+function clearNotes() {
 
-  document.getElementById("notes").value = "";
+  const notes =
+    document.getElementById("notes");
+
+  if (!notes) return;
+
+  notes.value = "";
 
   localStorage.removeItem("nexoNotes");
 
   result("Anotação apagada.");
-
 }
 
 
-/* =========================
+/* =========================================================
    TAREFAS
-========================= */
+========================================================= */
 
 let tasks =
   JSON.parse(
@@ -1678,19 +1537,23 @@ let tasks =
   );
 
 
-function addTask(){
+function addTask() {
 
   const input =
     document.getElementById("task");
 
-  const value =
+  if (!input) return;
+
+  const text =
     input.value.trim();
 
-  if(!value) return;
+  if (!text) {
+    return;
+  }
 
   tasks.push({
-    text:value,
-    done:false
+    text: text,
+    done: false
   });
 
   input.value = "";
@@ -1698,102 +1561,98 @@ function addTask(){
   saveTasks();
 
   renderTasks();
-
 }
 
 
-function renderTasks(){
+function renderTasks() {
 
   const list =
     document.getElementById("taskList");
 
-  if(!list) return;
+  if (!list) return;
 
-  if(!tasks.length){
+  if (!tasks.length) {
 
     list.innerHTML =
       "Nenhuma tarefa ainda.";
 
     return;
-
   }
 
   list.innerHTML = "";
 
-  tasks.forEach((task,index)=>{
+  tasks.forEach(function(task, index) {
 
     const item =
       document.createElement("div");
 
-    item.style.cssText =
-      "display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)";
-
-    item.innerHTML = `
-
-      <span
-        style="
-          cursor:pointer;
-          text-decoration:${task.done ? "line-through" : "none"};
-          opacity:${task.done ? ".5" : "1"};
-        "
-      >
-        ${escapeHTML(task.text)}
-      </span>
-
-      <button
-        class="tool-button"
-        style="padding:6px 10px"
-      >
-        ×
-      </button>
-
+    item.style.cssText = `
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid var(--border);
     `;
 
-    item.querySelector("span").onclick =
-      function(){
+    const text =
+      document.createElement("span");
 
-        tasks[index].done =
-          !tasks[index].done;
+    text.textContent = task.text;
 
-        saveTasks();
+    text.style.cssText = `
+      cursor:pointer;
+      text-decoration:${task.done ? "line-through" : "none"};
+      opacity:${task.done ? ".5" : "1"};
+      flex:1;
+    `;
 
-        renderTasks();
+    text.onclick = function() {
 
-      };
+      tasks[index].done =
+        !tasks[index].done;
 
-    item.querySelector("button").onclick =
-      function(){
+      saveTasks();
+      renderTasks();
+    };
 
-        tasks.splice(index,1);
+    const remove =
+      document.createElement("button");
 
-        saveTasks();
+    remove.textContent = "×";
+    remove.className = "tool-button";
+    remove.style.padding = "6px 10px";
 
-        renderTasks();
+    remove.onclick = function() {
 
-      };
+      tasks.splice(index, 1);
+
+      saveTasks();
+      renderTasks();
+    };
+
+    item.appendChild(text);
+    item.appendChild(remove);
 
     list.appendChild(item);
-
   });
-
 }
 
 
-function saveTasks(){
+function saveTasks() {
 
   localStorage.setItem(
     "nexoTasks",
     JSON.stringify(tasks)
   );
-
 }
 
 
-/* =========================
+/* =========================================================
    CONVERSORES
-========================= */
+========================================================= */
 
-function convertValue(type){
+function convertValue(type) {
 
   const value =
     Number(
@@ -1803,181 +1662,189 @@ function convertValue(type){
   const unit =
     document.getElementById("convertUnit").value;
 
-  if(isNaN(value)){
+  if (!Number.isFinite(value)) {
 
-    result("Digite um valor.");
-
+    result("Digite um valor válido.");
     return;
-
   }
 
 
-  if(type === "temperatura"){
+  /* TEMPERATURA */
 
-    let celsius;
+  if (type === "temperatura") {
 
-    if(unit === "Celsius")
-      celsius = value;
+    let celsius = value;
 
-    if(unit === "Fahrenheit")
-      celsius = (value-32)*5/9;
+    if (unit === "Fahrenheit") {
+      celsius = (value - 32) * 5 / 9;
+    }
 
-    if(unit === "Kelvin")
-      celsius = value-273.15;
+    if (unit === "Kelvin") {
+      celsius = value - 273.15;
+    }
 
     result(`
-      Celsius: ${celsius.toFixed(2)} °C
+      Celsius: <strong>${celsius.toFixed(2)} °C</strong>
       <br>
-      Fahrenheit: ${(celsius*9/5+32).toFixed(2)} °F
+      Fahrenheit: <strong>${(celsius * 9 / 5 + 32).toFixed(2)} °F</strong>
       <br>
-      Kelvin: ${(celsius+273.15).toFixed(2)} K
+      Kelvin: <strong>${(celsius + 273.15).toFixed(2)} K</strong>
     `);
 
     return;
-
   }
 
 
-  if(type === "comprimento"){
+  /* COMPRIMENTO */
+
+  if (type === "comprimento") {
 
     const factors = {
-      "Metro":1,
-      "Quilômetro":1000,
-      "Centímetro":0.01,
-      "Milímetro":0.001
+      "Metro": 1,
+      "Quilômetro": 1000,
+      "Centímetro": 0.01,
+      "Milímetro": 0.001
     };
 
     const meters =
       value * factors[unit];
 
     result(`
-      Metro: ${meters}
+      Metro: <strong>${meters.toFixed(4)} m</strong>
       <br>
-      Quilômetro: ${(meters/1000).toFixed(4)}
+      Quilômetro: <strong>${(meters / 1000).toFixed(4)} km</strong>
       <br>
-      Centímetro: ${(meters*100).toFixed(2)}
+      Centímetro: <strong>${(meters * 100).toFixed(2)} cm</strong>
       <br>
-      Milímetro: ${(meters*1000).toFixed(2)}
+      Milímetro: <strong>${(meters * 1000).toFixed(2)} mm</strong>
     `);
 
     return;
-
   }
 
 
-  if(type === "peso"){
+  /* PESO */
+
+  if (type === "peso") {
 
     const factors = {
-      "Quilograma":1,
-      "Grama":0.001,
-      "Miligrama":0.000001,
-      "Tonelada":1000
+      "Quilograma": 1,
+      "Grama": 0.001,
+      "Miligrama": 0.000001,
+      "Tonelada": 1000
     };
 
     const kg =
       value * factors[unit];
 
     result(`
-      Quilogramas: ${kg}
+      Quilogramas: <strong>${kg.toFixed(4)} kg</strong>
       <br>
-      Gramas: ${(kg*1000).toFixed(2)}
+      Gramas: <strong>${(kg * 1000).toFixed(2)} g</strong>
       <br>
-      Miligramas: ${(kg*1000000).toFixed(2)}
+      Miligramas: <strong>${(kg * 1000000).toFixed(2)} mg</strong>
       <br>
-      Toneladas: ${(kg/1000).toFixed(6)}
+      Toneladas: <strong>${(kg / 1000).toFixed(6)} t</strong>
     `);
 
     return;
-
   }
 
 
-  if(type === "velocidade"){
+  /* VELOCIDADE */
+
+  if (type === "velocidade") {
 
     let ms;
 
-    if(unit === "km/h")
-      ms = value/3.6;
+    if (unit === "km/h") {
+      ms = value / 3.6;
+    }
 
-    if(unit === "m/s")
+    if (unit === "m/s") {
       ms = value;
+    }
 
-    if(unit === "mph")
-      ms = value*0.44704;
+    if (unit === "mph") {
+      ms = value * 0.44704;
+    }
 
     result(`
-      km/h: ${(ms*3.6).toFixed(2)}
+      km/h: <strong>${(ms * 3.6).toFixed(2)}</strong>
       <br>
-      m/s: ${ms.toFixed(2)}
+      m/s: <strong>${ms.toFixed(2)}</strong>
       <br>
-      mph: ${(ms/0.44704).toFixed(2)}
+      mph: <strong>${(ms / 0.44704).toFixed(2)}</strong>
     `);
 
     return;
-
   }
 
 
-  if(type === "dados"){
+  /* DADOS */
+
+  if (type === "dados") {
 
     const factors = {
-      "KB":1,
-      "MB":1024,
-      "GB":1024**2,
-      "TB":1024**3
+      "KB": 1,
+      "MB": 1024,
+      "GB": 1024 ** 2,
+      "TB": 1024 ** 3
     };
 
     const kb =
-      value*factors[unit];
+      value * factors[unit];
 
     result(`
-      KB: ${kb.toFixed(2)}
+      KB: <strong>${kb.toFixed(2)}</strong>
       <br>
-      MB: ${(kb/1024).toFixed(2)}
+      MB: <strong>${(kb / 1024).toFixed(2)}</strong>
       <br>
-      GB: ${(kb/1024**2).toFixed(2)}
+      GB: <strong>${(kb / 1024 ** 2).toFixed(2)}</strong>
       <br>
-      TB: ${(kb/1024**3).toFixed(2)}
+      TB: <strong>${(kb / 1024 ** 3).toFixed(2)}</strong>
     `);
 
     return;
-
   }
 
 
-  if(type === "tempo"){
+  /* TEMPO */
+
+  if (type === "tempo") {
 
     let seconds = value;
 
-    if(unit === "Minutos")
-      seconds = value*60;
+    if (unit === "Minutos") {
+      seconds = value * 60;
+    }
 
-    if(unit === "Horas")
-      seconds = value*3600;
+    if (unit === "Horas") {
+      seconds = value * 3600;
+    }
 
-    if(unit === "Dias")
-      seconds = value*86400;
+    if (unit === "Dias") {
+      seconds = value * 86400;
+    }
 
     result(`
-      Segundos: ${seconds}
+      Segundos: <strong>${seconds.toFixed(2)}</strong>
       <br>
-      Minutos: ${(seconds/60).toFixed(2)}
+      Minutos: <strong>${(seconds / 60).toFixed(2)}</strong>
       <br>
-      Horas: ${(seconds/3600).toFixed(2)}
+      Horas: <strong>${(seconds / 3600).toFixed(2)}</strong>
       <br>
-      Dias: ${(seconds/86400).toFixed(2)}
+      Dias: <strong>${(seconds / 86400).toFixed(2)}</strong>
     `);
-
   }
-
 }
 
 
-/* =========================
+/* =========================================================
    TEMA
-========================= */
+========================================================= */
 
-function toggleTheme(){
+function toggleTheme() {
 
   document.body.classList.toggle("dark");
 
@@ -1987,52 +1854,55 @@ function toggleTheme(){
       ? "dark"
       : "light"
   );
-
 }
 
 
-if(
-  localStorage.getItem("nexoTheme")
-  === "dark"
-){
+if (
+  localStorage.getItem("nexoTheme") === "dark"
+) {
 
   document.body.classList.add("dark");
 
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   MENU MOBILE
+========================================================= */
 
-function toggleSidebar(){
+function toggleSidebar() {
 
-  document
-    .querySelector(".sidebar")
-    .classList.toggle("open");
+  const sidebar =
+    document.querySelector(".sidebar");
 
+  if (!sidebar) return;
+
+  sidebar.classList.toggle("open");
 }
 
 
-/* =========================
-   AUXILIARES
-========================= */
+/* =========================================================
+   SCROLL
+========================================================= */
 
-function result(value){
+function scrollToTools() {
 
-  const element =
-    document.getElementById("result");
+  const section =
+    document.getElementById("toolsSection");
 
-  if(element){
+  if (!section) return;
 
-    element.innerHTML = value;
-
-  }
-
+  section.scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
 
-function escapeHTML(text){
+/* =========================================================
+   AUXILIAR
+========================================================= */
+
+function escapeHTML(text) {
 
   const div =
     document.createElement("div");
@@ -2040,12 +1910,11 @@ function escapeHTML(text){
   div.textContent = text;
 
   return div.innerHTML;
-
 }
 
 
-/* =========================
+/* =========================================================
    INICIALIZAÇÃO
-========================= */
+========================================================= */
 
 render();
