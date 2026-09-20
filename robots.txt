@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arthursouza82155-glitch.github.io/NexoTools/sitemap.xml
